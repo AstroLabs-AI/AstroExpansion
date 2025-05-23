@@ -4,7 +4,6 @@ Batch generation script for all AstroExpansion textures
 Generates all missing textures and places them in the correct resource directories
 """
 
-import os
 import sys
 import json
 from pathlib import Path
@@ -17,20 +16,21 @@ def main():
     mod_root = generator_dir.parent
     assets_dir = mod_root / "src/main/resources/assets/astroexpansion/textures"
     
-    # Load configuration
-    config_path = generator_dir / "texture_config.json"
-    with open(config_path, 'r') as f:
-        config = json.load(f)
-    
     # Choose generator based on command line argument
     use_advanced = "--advanced" in sys.argv
+    
+    # Load configuration (currently unused but may be needed for advanced generator)
+    config_path = generator_dir / "texture_config.json"
+    if config_path.exists() and use_advanced:
+        with open(config_path, 'r') as f:
+            _ = json.load(f)  # Load config if needed by advanced generator
     generator_class = AdvancedTextureGenerator if use_advanced else TextureGenerator
     
     print(f"Using {'advanced' if use_advanced else 'basic'} texture generator")
     print(f"Output directory: {assets_dir}")
     
     # Create generator instance
-    generator = generator_class(assets_dir, config)
+    generator = generator_class(str(assets_dir))
     
     # Generate all textures
     print("\nGenerating textures...")
@@ -63,7 +63,8 @@ def main():
 if __name__ == "__main__":
     # Check if PIL is installed
     try:
-        import PIL
+        from PIL import Image
+        _ = Image  # Verify PIL import works
     except ImportError:
         print("Error: Pillow is not installed!")
         print("Please run: pip install -r requirements.txt")

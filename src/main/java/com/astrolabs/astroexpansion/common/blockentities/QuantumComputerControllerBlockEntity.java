@@ -6,6 +6,8 @@ import com.astrolabs.astroexpansion.common.menu.QuantumComputerMenu;
 import com.astrolabs.astroexpansion.common.multiblock.MultiblockControllerBase;
 import com.astrolabs.astroexpansion.common.multiblock.patterns.QuantumComputerPattern;
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
+import com.astrolabs.astroexpansion.common.registry.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -120,16 +122,63 @@ public class QuantumComputerControllerBlockEntity extends MultiblockControllerBa
     
     private void completeProcessing() {
         // Process research items and generate research points
+        int pointsGenerated = 0;
         for (int i = 0; i < 4; i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (!stack.isEmpty()) {
-                // TODO: Calculate research points based on item
-                currentResearchPoints += 100; // Placeholder value
+                // Calculate research points based on item
+                int points = calculateResearchPoints(stack);
+                pointsGenerated += points;
                 itemHandler.extractItem(i, 1, false);
             }
         }
         
-        // TODO: Store research points in player capability or research system
+        if (pointsGenerated > 0) {
+            currentResearchPoints += pointsGenerated;
+            
+            // Find nearest player to give research points to
+            if (level != null && !level.isClientSide) {
+                final int finalPointsGenerated = pointsGenerated; // Make it final for lambda
+                BlockPos pos = getBlockPos();
+                level.getEntitiesOfClass(net.minecraft.world.entity.player.Player.class, 
+                    new net.minecraft.world.phys.AABB(pos).inflate(10))
+                    .stream()
+                    .findFirst()
+                    .ifPresent(player -> {
+                        player.getCapability(com.astrolabs.astroexpansion.common.capabilities.ResearchCapabilityProvider.RESEARCH_CAPABILITY)
+                            .ifPresent(research -> {
+                                research.addResearchPoints(finalPointsGenerated);
+                                player.sendSystemMessage(
+                                    net.minecraft.network.chat.Component.literal("+" + finalPointsGenerated + " Research Points")
+                                        .withStyle(net.minecraft.ChatFormatting.GREEN));
+                            });
+                    });
+            }
+        }
+    }
+    
+    private int calculateResearchPoints(ItemStack stack) {
+        // Calculate points based on item rarity and type
+        net.minecraft.world.item.Item item = stack.getItem();
+        
+        // Advanced components give more points
+        if (item == ModItems.QUANTUM_PROCESSOR.get()) return 500;
+        if (item == ModItems.FUSION_CORE.get()) return 400;
+        if (item == ModItems.ADVANCED_PROCESSOR.get()) return 200;
+        if (item == ModItems.PROCESSOR.get()) return 100;
+        if (item == ModItems.CIRCUIT_BOARD.get()) return 50;
+        
+        // Rare materials
+        if (item == ModItems.URANIUM_INGOT.get()) return 150;
+        if (item == ModItems.TITANIUM_INGOT.get()) return 75;
+        if (item == ModItems.LITHIUM_INGOT.get()) return 50;
+        
+        // Energy items
+        if (item == ModItems.ENERGY_CORE.get()) return 100;
+        if (item == ModItems.PLASMA_INJECTOR.get()) return 250;
+        
+        // Default for any other item
+        return 25;
     }
     
     @Override

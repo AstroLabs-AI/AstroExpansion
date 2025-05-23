@@ -1,0 +1,38 @@
+{
+  "machine_running": {
+    "subtitle": "subtitles.astroexpansion.machine_running",
+    "sounds": [
+      {
+        "name": "astroexpansion:machine_running",
+        "stream": true
+      }
+    ]
+  },
+  "generator_running": {
+    "subtitle": "subtitles.astroexpansion.generator_running",
+    "sounds": [
+      {
+        "name": "astroexpansion:generator_running",
+        "stream": true
+      }
+    ]
+  },
+  "washer_running": {
+    "subtitle": "subtitles.astroexpansion.washer_running",
+    "sounds": [
+      {
+        "name": "astroexpansion:washer_running",
+        "stream": true
+      }
+    ]
+  },
+  "rocket_launch": {
+    "subtitle": "subtitles.astroexpansion.rocket_launch",
+    "sounds": [
+      {
+        "name": "astroexpansion:rocket_launch",
+        "stream": false
+      }
+    ]
+  }
+}

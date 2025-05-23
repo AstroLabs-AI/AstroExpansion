@@ -23,17 +23,30 @@ public class SpaceSuitArmorItem extends ArmorItem {
     }
     
     @Override
-    public void onArmorTick(ItemStack stack, Level level, Player player) {
-        if (!level.isClientSide && hasFullSuit(player)) {
-            // Provide oxygen (water breathing effect)
-            player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 60, 0, false, false));
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        
+        if (!level.isClientSide && entity instanceof Player player) {
+            // Check if this is worn as armor
+            boolean isWorn = false;
+            for (ItemStack armorStack : player.getArmorSlots()) {
+                if (armorStack == stack) {
+                    isWorn = true;
+                    break;
+                }
+            }
             
-            // Provide protection from vacuum (resistance)
-            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 1, false, false));
-            
-            // Slow falling in space
-            if (player.getY() > 300) { // Above build height = "in space"
-                player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 60, 0, false, false));
+            if (isWorn && hasFullSuit(player)) {
+                // Provide oxygen (water breathing effect)
+                player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 60, 0, false, false));
+                
+                // Provide protection from vacuum (resistance)
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 1, false, false));
+                
+                // Slow falling in space
+                if (player.getY() > 300) { // Above build height = "in space"
+                    player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 60, 0, false, false));
+                }
             }
         }
     }

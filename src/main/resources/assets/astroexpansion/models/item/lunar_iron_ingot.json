@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "astroexpansion:item/lunar_iron_ingot"
+  }
+}

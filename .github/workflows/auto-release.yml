@@ -1,0 +1,217 @@
+name: Auto Build, Push & Release
+
+on:
+  push:
+    branches: [ main, forge-1.20.1 ]
+    paths:
+      - 'src/**'
+      - 'build.gradle'
+      - 'gradle.properties'
+      - '!*.md'
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Create a new release'
+        required: false
+        type: boolean
+        default: false
+      version_bump:
+        description: 'Version bump type'
+        required: false
+        type: choice
+        default: 'patch'
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Get current version
+      id: get_version
+      run: |
+        CURRENT_VERSION=$(grep "mod_version=" gradle.properties | cut -d'=' -f2)
+        echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+        echo "Current version: $CURRENT_VERSION"
+    
+    - name: Calculate next version
+      id: next_version
+      run: |
+        CURRENT="${{ steps.get_version.outputs.current_version }}"
+        IFS='.' read -ra VERSION_PARTS <<< "$CURRENT"
+        MAJOR="${VERSION_PARTS[0]}"
+        MINOR="${VERSION_PARTS[1]}"
+        PATCH="${VERSION_PARTS[2]}"
+        
+        # Auto-increment patch version for automatic builds
+        # Or use manual version bump if specified
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]] && [[ "${{ inputs.create_release }}" == "true" ]]; then
+          case "${{ inputs.version_bump }}" in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+        else
+          # For automatic builds, only increment if there are actual code changes
+          CHANGES=$(git diff HEAD^ HEAD --name-only | grep -E "^src/|^build.gradle|^gradle.properties" | wc -l)
+          if [ "$CHANGES" -gt 0 ]; then
+            PATCH=$((PATCH + 1))
+          fi
+        fi
+        
+        NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+        echo "New version: $NEW_VERSION"
+        
+        # Determine if we should create a release
+        if [[ "${{ inputs.create_release }}" == "true" ]] || [[ "$NEW_VERSION" != "$CURRENT" ]]; then
+          echo "should_release=true" >> $GITHUB_OUTPUT
+        else
+          echo "should_release=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Update version in gradle.properties
+      if: steps.next_version.outputs.should_release == 'true'
+      run: |
+        sed -i "s/mod_version=.*/mod_version=${{ steps.next_version.outputs.new_version }}/" gradle.properties
+        cat gradle.properties
+    
+    - name: Build with Gradle
+      run: ./gradlew clean build
+    
+    - name: Generate changelog
+      id: changelog
+      if: steps.next_version.outputs.should_release == 'true'
+      run: |
+        # Get commits since last tag
+        LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+        if [ -z "$LAST_TAG" ]; then
+          COMMITS=$(git log --pretty=format:"- %s (%an)" --no-merges)
+        else
+          COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%an)" --no-merges)
+        fi
+        
+        # Create changelog
+        cat > CHANGELOG.md << EOF
+        # AstroExpansion v${{ steps.next_version.outputs.new_version }}
+        
+        ## What's Changed
+        ${COMMITS}
+        
+        ## Installation
+        1. Install Minecraft Forge 1.20.1 (version 47.2.0 or newer)
+        2. Download \`astroexpansion-${{ steps.next_version.outputs.new_version }}-mc1.20.1.jar\` from the assets below
+        3. Place it in your \`.minecraft/mods\` folder
+        
+        ## Requirements
+        - Minecraft 1.20.1
+        - Forge 47.2.0+
+        - Java 17+
+        
+        ---
+        *This release was automatically generated from commit $(git rev-parse --short HEAD)*
+        EOF
+        
+        echo "Generated changelog:"
+        cat CHANGELOG.md
+    
+    - name: Commit version bump
+      if: steps.next_version.outputs.should_release == 'true'
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        
+        # Check if there are changes to commit
+        if git diff --quiet gradle.properties; then
+          echo "No version changes to commit"
+        else
+          git add gradle.properties
+          git commit -m "Bump version to ${{ steps.next_version.outputs.new_version }} [skip ci]"
+          
+          # Create release notes file
+          cp CHANGELOG.md RELEASE_NOTES_v${{ steps.next_version.outputs.new_version }}.md
+          git add RELEASE_NOTES_v${{ steps.next_version.outputs.new_version }}.md
+          git commit -m "Add release notes for v${{ steps.next_version.outputs.new_version }} [skip ci]"
+        fi
+    
+    - name: Push changes
+      if: steps.next_version.outputs.should_release == 'true'
+      run: |
+        git push origin HEAD:${{ github.ref_name }}
+    
+    - name: Create and push tag
+      if: steps.next_version.outputs.should_release == 'true'
+      run: |
+        git tag -a v${{ steps.next_version.outputs.new_version }} -m "Version ${{ steps.next_version.outputs.new_version }}"
+        git push origin v${{ steps.next_version.outputs.new_version }}
+    
+    - name: Create GitHub Release
+      if: steps.next_version.outputs.should_release == 'true'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v${{ steps.next_version.outputs.new_version }}
+        name: AstroExpansion v${{ steps.next_version.outputs.new_version }}
+        body_path: CHANGELOG.md
+        files: |
+          build/libs/astroexpansion-${{ steps.next_version.outputs.new_version }}-mc1.20.1.jar
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: mod-artifacts
+        path: |
+          build/libs/*.jar
+          !build/libs/*-sources.jar
+        if-no-files-found: error
+        retention-days: 30
+    
+    - name: Summary
+      run: |
+        echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [[ "${{ steps.next_version.outputs.should_release }}" == "true" ]]; then
+          echo "✅ **New version released:** v${{ steps.next_version.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "📦 **Download:** [astroexpansion-${{ steps.next_version.outputs.new_version }}-mc1.20.1.jar](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.next_version.outputs.new_version }})" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "✅ **Build successful** (no version change)" >> $GITHUB_STEP_SUMMARY
+          echo "📦 **Current version:** v${{ steps.get_version.outputs.current_version }}" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+        echo "- Build artifacts have been uploaded and will be retained for 30 days" >> $GITHUB_STEP_SUMMARY

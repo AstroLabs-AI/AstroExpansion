@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,6 +43,9 @@ public class AstroExpansion {
         
         // Register ourselves for server and other game events
         MinecraftForge.EVENT_BUS.register(this);
+        
+        // Register config
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, com.astrolabs.astroexpansion.common.config.Config.SPEC, "astroexpansion-common.toml");
     }
     
     private void commonSetup(final FMLCommonSetupEvent event) {

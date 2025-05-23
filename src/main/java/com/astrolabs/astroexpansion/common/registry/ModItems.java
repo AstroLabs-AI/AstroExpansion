@@ -49,6 +49,8 @@ public class ModItems {
         () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ADVANCED_PROCESSOR = ITEMS.register("advanced_processor",
         () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> QUANTUM_PROCESSOR = ITEMS.register("quantum_processor",
+        () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TITANIUM_PLATE = ITEMS.register("titanium_plate",
         () -> new Item(new Item.Properties()));
     

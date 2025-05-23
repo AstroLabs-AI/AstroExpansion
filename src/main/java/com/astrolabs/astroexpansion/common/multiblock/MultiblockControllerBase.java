@@ -26,6 +26,7 @@ public abstract class MultiblockControllerBase extends BlockEntity implements IM
         return formed;
     }
     
+    
     @Override
     public void checkFormation() {
         if (level == null || level.isClientSide) return;

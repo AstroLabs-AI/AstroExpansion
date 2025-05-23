@@ -4,7 +4,37 @@ This directory contains automated workflows for the AstroExpansion project.
 
 ## Workflows
 
-### 1. Build and Release (`build.yml`)
+### 1. Auto Build, Push & Release (`auto-release.yml`) 🚀 **NEW!**
+**Triggers:**
+- Push to `main` or `forge-1.20.1` branches (auto-increments version)
+- Manual workflow dispatch with version control
+
+**Features:**
+- **Automatic version bumping** (patch version on code changes)
+- **Automatic changelog generation** from commits
+- **Auto-push changes** back to repository
+- **Auto-create GitHub releases** with built JAR
+- **Manual version control** (major/minor/patch)
+
+**Actions:**
+- Detects code changes and increments version
+- Builds the mod
+- Generates changelog from commits
+- Creates and pushes version tag
+- Creates GitHub release with artifacts
+- Uploads build artifacts for 30 days
+
+### 2. Development Builds (`dev-builds.yml`) 🔨 **NEW!**
+**Triggers:**
+- Push to any branch except main/forge-1.20.1
+- Pull requests
+
+**Features:**
+- Builds and tests on feature branches
+- Comments on PRs with build status
+- Uploads dev artifacts (7 day retention)
+
+### 3. Build and Release (`build.yml`)
 **Triggers:**
 - Push to `forge-1.20.1` or `main` branches
 - Pull requests to these branches
@@ -32,7 +62,33 @@ This directory contains automated workflows for the AstroExpansion project.
 
 ## Usage
 
-### Automatic Releases (Recommended)
+### 🎯 Fully Automatic Releases (NEW - Recommended!)
+
+Simply push your changes to `main` or `forge-1.20.1`:
+```bash
+git add .
+git commit -m "Add new feature"
+git push
+```
+
+The workflow will automatically:
+1. Build the mod
+2. Increment the patch version (e.g., 1.0.1 → 1.0.2)
+3. Generate a changelog from commits
+4. Create a new release with the JAR file
+5. Push the version update back to the repository
+
+### 🎮 Manual Version Control (NEW)
+
+For major or minor version bumps:
+1. Go to Actions → "Auto Build, Push & Release"
+2. Click "Run workflow"
+3. Select options:
+   - Create release: ✅
+   - Version bump type: major/minor/patch
+4. Click "Run workflow"
+
+### Traditional Releases
 
 1. **Create a new release via Actions:**
    ```

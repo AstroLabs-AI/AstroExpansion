@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astroexpansion:block/rocket_engine"
+    }
+  }
+}

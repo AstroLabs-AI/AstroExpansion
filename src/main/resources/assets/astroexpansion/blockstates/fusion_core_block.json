@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astroexpansion:block/fusion_core_block"
+    }
+  }
+}

@@ -8,10 +8,14 @@ import com.astrolabs.astroexpansion.common.multiblock.patterns.RocketAssemblyPat
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
 import com.astrolabs.astroexpansion.common.registry.ModBlocks;
 import com.astrolabs.astroexpansion.common.registry.ModFluids;
+import com.astrolabs.astroexpansion.common.registry.ModItems;
+import com.astrolabs.astroexpansion.common.registry.ModSounds;
+import com.astrolabs.astroexpansion.common.registry.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -203,17 +207,76 @@ public class RocketAssemblyControllerBlockEntity extends MultiblockControllerBas
     }
     
     public void launchRocket() {
-        if (canLaunch()) {
-            // Consume fuel
-            fuelTank.drain(16000, IFluidHandler.FluidAction.EXECUTE);
-            oxygenTank.drain(16000, IFluidHandler.FluidAction.EXECUTE);
+        if (canLaunch() && level != null && !level.isClientSide) {
+            // Find the player who triggered the launch (within 10 blocks)
+            BlockPos pos = getBlockPos();
+            level.getEntitiesOfClass(net.minecraft.world.entity.player.Player.class, 
+                new net.minecraft.world.phys.AABB(pos).inflate(10))
+                .stream()
+                .findFirst()
+                .ifPresent(player -> {
+                    // Consume fuel
+                    fuelTank.drain(16000, IFluidHandler.FluidAction.EXECUTE);
+                    oxygenTank.drain(16000, IFluidHandler.FluidAction.EXECUTE);
+                    
+                    // Reset rocket
+                    rocketBuilt = false;
+                    
+                    // Launch sequence
+                    if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+                        // Play launch sound
+                        level.playSound(null, pos, ModSounds.ROCKET_LAUNCH.get(), 
+                            net.minecraft.sounds.SoundSource.BLOCKS, 2.0F, 1.0F);
+                        
+                        // Create particle effects
+                        for (int i = 0; i < 100; i++) {
+                            double x = pos.getX() + 0.5 + (level.random.nextDouble() - 0.5) * 3;
+                            double y = pos.getY() + level.random.nextDouble() * 2;
+                            double z = pos.getZ() + 0.5 + (level.random.nextDouble() - 0.5) * 3;
+                            ((net.minecraft.server.level.ServerLevel)level).sendParticles(
+                                net.minecraft.core.particles.ParticleTypes.FLAME,
+                                x, y, z, 1, 0, 0.1, 0, 0.1);
+                        }
+                        
+                        // Teleport to space dimension
+                        net.minecraft.server.level.ServerLevel spaceDim = serverPlayer.server.getLevel(ModDimensions.SPACE_KEY);
+                        if (spaceDim != null) {
+                            // Give player space suit if not wearing one
+                            ensurePlayerHasSpaceSuit(serverPlayer);
+                            
+                            // Teleport using custom teleporter
+                            serverPlayer.changeDimension(spaceDim, new com.astrolabs.astroexpansion.common.world.dimension.SpaceTeleporter(true));
+                            
+                            // Send success message
+                            serverPlayer.sendSystemMessage(
+                                net.minecraft.network.chat.Component.literal("Launching to space station!")
+                                    .withStyle(net.minecraft.ChatFormatting.GREEN));
+                        }
+                    }
+                    
+                    setChanged();
+                });
+        }
+    }
+    
+    private void ensurePlayerHasSpaceSuit(net.minecraft.server.level.ServerPlayer player) {
+        // Check if player is wearing space suit
+        boolean hasHelmet = player.getInventory().armor.get(3).is(ModItems.SPACE_HELMET.get());
+        boolean hasChestplate = player.getInventory().armor.get(2).is(ModItems.SPACE_CHESTPLATE.get());
+        boolean hasLeggings = player.getInventory().armor.get(1).is(ModItems.SPACE_LEGGINGS.get());
+        boolean hasBoots = player.getInventory().armor.get(0).is(ModItems.SPACE_BOOTS.get());
+        
+        if (!hasHelmet || !hasChestplate || !hasLeggings || !hasBoots) {
+            // Give warning
+            player.sendSystemMessage(
+                net.minecraft.network.chat.Component.literal("Warning: Space suit equipped automatically!")
+                    .withStyle(net.minecraft.ChatFormatting.YELLOW));
             
-            // Reset rocket
-            rocketBuilt = false;
-            
-            // TODO: Trigger rocket launch animation and teleport player to space dimension
-            
-            setChanged();
+            // Auto-equip space suit
+            if (!hasHelmet) player.getInventory().armor.set(3, new net.minecraft.world.item.ItemStack(ModItems.SPACE_HELMET.get()));
+            if (!hasChestplate) player.getInventory().armor.set(2, new net.minecraft.world.item.ItemStack(ModItems.SPACE_CHESTPLATE.get()));
+            if (!hasLeggings) player.getInventory().armor.set(1, new net.minecraft.world.item.ItemStack(ModItems.SPACE_LEGGINGS.get()));
+            if (!hasBoots) player.getInventory().armor.set(0, new net.minecraft.world.item.ItemStack(ModItems.SPACE_BOOTS.get()));
         }
     }
     

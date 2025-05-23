@@ -1,0 +1,55 @@
+# Release Configuration for AstroExpansion
+
+# Version naming scheme
+version_pattern: "MAJOR.MINOR.PATCH"
+
+# Auto-release triggers
+auto_release:
+  # Create a release when these files change
+  trigger_paths:
+    - "src/**/*.java"
+    - "src/main/resources/**"
+    - "build.gradle"
+    - "gradle.properties"
+  
+  # Skip release for these commit messages
+  skip_messages:
+    - "[skip release]"
+    - "[skip ci]"
+    - "WIP:"
+    - "Draft:"
+
+# Release categories for changelog
+changelog:
+  categories:
+    - title: "🚀 Features"
+      labels:
+        - "feature"
+        - "enhancement"
+    - title: "🐛 Bug Fixes"
+      labels:
+        - "bug"
+        - "fix"
+    - title: "📚 Documentation"
+      labels:
+        - "documentation"
+        - "docs"
+    - title: "🔧 Maintenance"
+      labels:
+        - "chore"
+        - "maintenance"
+    - title: "⬆️ Dependencies"
+      labels:
+        - "dependencies"
+
+# Release name template
+release_name_template: "AstroExpansion v{VERSION}"
+
+# Asset naming
+assets:
+  jar_name_pattern: "astroexpansion-{VERSION}-mc1.20.1.jar"
+  
+# Notification settings
+notifications:
+  discord_webhook: "" # Add webhook URL if desired
+  create_discussion: false
