@@ -1,0 +1,11 @@
+{
+  "type": "astroexpansion:moon",
+  "generator": {
+    "type": "astroexpansion:moon",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "minecraft:plains"
+    },
+    "seed": 0
+  }
+}

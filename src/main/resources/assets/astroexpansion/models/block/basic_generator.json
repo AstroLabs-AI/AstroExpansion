@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "astroexpansion:block/machine_top",
+    "front": "astroexpansion:block/basic_generator",
+    "side": "astroexpansion:block/basic_generator"
+  }
+}

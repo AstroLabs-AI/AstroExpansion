@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches: [ forge-1.20.1, main ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ forge-1.20.1, main ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+    
+    - name: Build with Gradle
+      run: ./gradlew build
+    
+    - name: List build outputs
+      run: ls -la build/libs/
+    
+    # Only create release on tag push
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/v')
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # Get the JAR file
+        JAR_FILE=$(find build/libs -name "*.jar" -not -name "*-sources.jar" | head -1)
+        
+        # Check if release notes exist
+        VERSION="${GITHUB_REF#refs/tags/}"
+        NOTES_FILE="RELEASE_NOTES_${VERSION}.md"
+        
+        if [ -f "$NOTES_FILE" ]; then
+          BODY=$(cat "$NOTES_FILE")
+        else
+          BODY="# AstroExpansion ${VERSION}
+
+This release was automatically generated.
+
+## Installation
+1. Install Minecraft Forge 1.20.1 (version 47.2.0 or newer)
+2. Download the JAR file below
+3. Place it in your .minecraft/mods folder
+
+## Requirements
+- Minecraft 1.20.1
+- Forge 47.2.0+
+- Java 17+"
+        fi
+        
+        # Create release using GitHub CLI
+        gh release create "${VERSION}" \
+          --title "AstroExpansion ${VERSION}" \
+          --notes "$BODY" \
+          "$JAR_FILE#astroexpansion-${VERSION}-mc1.20.1.jar"

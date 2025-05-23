@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HTH",
+    "PCP",
+    "HTH"
+  ],
+  "key": {
+    "H": {
+      "item": "astroexpansion:station_hull"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:docking_port"
+  }
+}

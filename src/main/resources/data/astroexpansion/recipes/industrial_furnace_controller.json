@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CPC",
+    "FEF",
+    "CPC"
+  ],
+  "key": {
+    "C": {
+      "item": "astroexpansion:furnace_casing"
+    },
+    "P": {
+      "item": "astroexpansion:processor"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:industrial_furnace_controller"
+  }
+}

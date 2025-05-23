@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCR",
+    "CHC",
+    "TTT"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "H": {
+      "item": "astroexpansion:storage_housing"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:storage_drive_1k"
+  }
+}

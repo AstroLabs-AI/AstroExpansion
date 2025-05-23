@@ -1,0 +1,148 @@
+{
+  "creativetab.astroexpansion": "Astro Expansion",
+  
+  "item.astroexpansion.raw_titanium": "Raw Titanium",
+  "item.astroexpansion.raw_lithium": "Raw Lithium",
+  "item.astroexpansion.raw_uranium": "Raw Uranium",
+  
+  "item.astroexpansion.titanium_ingot": "Titanium Ingot",
+  "item.astroexpansion.lithium_ingot": "Lithium Ingot",
+  "item.astroexpansion.uranium_ingot": "Uranium Ingot",
+  
+  "item.astroexpansion.titanium_dust": "Titanium Dust",
+  "item.astroexpansion.lithium_dust": "Lithium Dust",
+  "item.astroexpansion.uranium_dust": "Uranium Dust",
+  
+  "item.astroexpansion.circuit_board": "Circuit Board",
+  "item.astroexpansion.processor": "Processor",
+  "item.astroexpansion.energy_core": "Energy Core",
+  "item.astroexpansion.advanced_processor": "Advanced Processor",
+  "item.astroexpansion.titanium_plate": "Titanium Plate",
+  "item.astroexpansion.wrench": "Wrench",
+  
+  "block.astroexpansion.titanium_ore": "Titanium Ore",
+  "block.astroexpansion.deepslate_titanium_ore": "Deepslate Titanium Ore",
+  "block.astroexpansion.lithium_ore": "Lithium Ore",
+  "block.astroexpansion.deepslate_lithium_ore": "Deepslate Lithium Ore",
+  "block.astroexpansion.uranium_ore": "Uranium Ore",
+  "block.astroexpansion.deepslate_uranium_ore": "Deepslate Uranium Ore",
+  
+  "block.astroexpansion.titanium_block": "Block of Titanium",
+  "block.astroexpansion.lithium_block": "Block of Lithium",
+  "block.astroexpansion.uranium_block": "Block of Uranium",
+  
+  "block.astroexpansion.basic_generator": "Basic Generator",
+  "block.astroexpansion.material_processor": "Material Processor",
+  "block.astroexpansion.ore_washer": "Ore Washer",
+  "block.astroexpansion.energy_conduit": "Energy Conduit",
+  "block.astroexpansion.energy_storage": "Energy Storage",
+  
+  "block.astroexpansion.storage_core": "Storage Core",
+  "block.astroexpansion.storage_terminal": "Storage Terminal",
+  
+  "item.astroexpansion.storage_drive_1k": "1k Storage Drive",
+  "item.astroexpansion.storage_drive_4k": "4k Storage Drive",
+  "item.astroexpansion.storage_drive_16k": "16k Storage Drive",
+  "item.astroexpansion.storage_drive_64k": "64k Storage Drive",
+  "item.astroexpansion.storage_housing": "Storage Housing",
+  "item.astroexpansion.storage_processor": "Storage Processor",
+  
+  "block.astroexpansion.drone_dock": "Drone Dock",
+  "block.astroexpansion.component_assembler": "Component Assembler",
+  "block.astroexpansion.import_bus": "Import Bus",
+  "block.astroexpansion.export_bus": "Export Bus",
+  
+  "block.astroexpansion.furnace_casing": "Furnace Casing",
+  "block.astroexpansion.industrial_furnace_controller": "Industrial Furnace Controller",
+  
+  "block.astroexpansion.fusion_reactor_casing": "Fusion Reactor Casing",
+  "block.astroexpansion.fusion_reactor_controller": "Fusion Reactor Controller",
+  "block.astroexpansion.fusion_coil": "Fusion Coil",
+  "block.astroexpansion.fusion_core_block": "Fusion Core Block",
+  
+  "block.astroexpansion.quantum_computer_controller": "Quantum Computer Controller",
+  "block.astroexpansion.quantum_casing": "Quantum Casing",
+  "block.astroexpansion.quantum_processor": "Quantum Processor",
+  "block.astroexpansion.quantum_core": "Quantum Core",
+  "block.astroexpansion.research_terminal": "Research Terminal",
+  
+  "block.astroexpansion.fuel_refinery_controller": "Fuel Refinery Controller",
+  "block.astroexpansion.refinery_casing": "Refinery Casing",
+  "block.astroexpansion.distillation_column": "Distillation Column",
+  
+  "block.astroexpansion.rocket_assembly_controller": "Rocket Assembly Controller",
+  "block.astroexpansion.launch_pad": "Launch Pad",
+  "block.astroexpansion.assembly_frame": "Assembly Frame",
+  "block.astroexpansion.rocket_engine": "Rocket Engine",
+  "block.astroexpansion.rocket_fuel_tank": "Rocket Fuel Tank",
+  "block.astroexpansion.rocket_hull": "Rocket Hull",
+  "block.astroexpansion.rocket_nose_cone": "Rocket Nose Cone",
+  
+  "block.astroexpansion.fluid_tank": "Fluid Tank",
+  "block.astroexpansion.fluid_pipe": "Fluid Pipe",
+  
+  "fluid.astroexpansion.rocket_fuel": "Rocket Fuel",
+  "fluid.astroexpansion.liquid_oxygen": "Liquid Oxygen",
+  "fluid.astroexpansion.deuterium": "Deuterium",
+  "fluid.astroexpansion.tritium": "Tritium",
+  "fluid.astroexpansion.coolant": "Coolant",
+  "fluid.astroexpansion.crude_oil": "Crude Oil",
+  
+  "item.astroexpansion.mining_drone": "Mining Drone",
+  "item.astroexpansion.construction_drone": "Construction Drone",
+  "item.astroexpansion.farming_drone": "Farming Drone",
+  "item.astroexpansion.combat_drone": "Combat Drone",
+  "item.astroexpansion.logistics_drone": "Logistics Drone",
+  "item.astroexpansion.drone_core": "Drone Core",
+  "item.astroexpansion.drone_shell": "Drone Shell",
+  
+  "item.astroexpansion.fusion_core": "Fusion Core",
+  "item.astroexpansion.plasma_injector": "Plasma Injector",
+  "item.astroexpansion.deuterium_cell": "Deuterium Cell",
+  "item.astroexpansion.tritium_cell": "Tritium Cell",
+  "item.astroexpansion.empty_fuel_cell": "Empty Fuel Cell",
+  "item.astroexpansion.research_data_basic": "Basic Research Data",
+  "item.astroexpansion.research_data_advanced": "Advanced Research Data",
+  "item.astroexpansion.research_data_quantum": "Quantum Research Data",
+  "item.astroexpansion.research_data_fusion": "Fusion Research Data",
+  "item.astroexpansion.research_data_space": "Space Research Data",
+  
+  "item.astroexpansion.space_helmet": "Space Helmet",
+  "item.astroexpansion.space_chestplate": "Space Chestplate",
+  "item.astroexpansion.space_leggings": "Space Leggings",
+  "item.astroexpansion.space_boots": "Space Boots",
+  "item.astroexpansion.oxygen_tank": "Oxygen Tank",
+  "item.astroexpansion.oxygen_canister": "Oxygen Canister",
+  
+  "entity.astroexpansion.mining_drone": "Mining Drone",
+  "entity.astroexpansion.construction_drone": "Construction Drone",
+  "entity.astroexpansion.farming_drone": "Farming Drone",
+  "entity.astroexpansion.combat_drone": "Combat Drone",
+  "entity.astroexpansion.logistics_drone": "Logistics Drone",
+  "entity.astroexpansion.lunar_rover": "Lunar Rover",
+  
+  "block.astroexpansion.station_hull": "Station Hull",
+  "block.astroexpansion.station_glass": "Station Glass",
+  "block.astroexpansion.solar_panel": "Solar Panel",
+  "block.astroexpansion.docking_port": "Docking Port",
+  "block.astroexpansion.oxygen_generator": "Oxygen Generator",
+  "block.astroexpansion.life_support_system": "Life Support System",
+  
+  "block.astroexpansion.moon_stone": "Moon Stone",
+  "block.astroexpansion.moon_dust": "Moon Dust",
+  "block.astroexpansion.helium3_ore": "Helium-3 Ore",
+  
+  "item.astroexpansion.lunar_rover": "Lunar Rover",
+  "item.astroexpansion.helium3_crystal": "Helium-3 Crystal",
+  "item.astroexpansion.moon_dust_item": "Moon Dust",
+  
+  "block.astroexpansion.space_teleporter": "Space Teleporter",
+  "block.astroexpansion.moon_teleporter": "Moon Teleporter",
+  "block.astroexpansion.earth_teleporter": "Earth Teleporter",
+  
+  "astroexpansion.energy": "%s FE",
+  "astroexpansion.energy.stored": "Energy: %s / %s FE",
+  "astroexpansion.progress": "Progress: %s%%",
+  "astroexpansion.storage.items": "Items: %s / %s",
+  "astroexpansion.storage.types": "Types: %s / 63"
+}

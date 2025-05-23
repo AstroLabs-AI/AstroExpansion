@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RLR",
+    "CPC",
+    "RLR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "L": {
+      "item": "astroexpansion:lithium_ingot"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "P": {
+      "item": "astroexpansion:processor"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:storage_processor"
+  }
+}

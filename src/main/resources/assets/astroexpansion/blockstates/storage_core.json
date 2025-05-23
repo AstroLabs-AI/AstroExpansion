@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "formed=true,powered=true": {
+      "model": "astroexpansion:block/storage_core_active"
+    },
+    "formed=true,powered=false": {
+      "model": "astroexpansion:block/storage_core"
+    },
+    "formed=false,powered=true": {
+      "model": "astroexpansion:block/storage_core"
+    },
+    "formed=false,powered=false": {
+      "model": "astroexpansion:block/storage_core"
+    }
+  }
+}

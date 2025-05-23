@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "LPL",
+    "TCT"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "P": {
+      "item": "astroexpansion:processor"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:solar_panel"
+  }
+}

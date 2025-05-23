@@ -1,0 +1,17 @@
+{
+  "type": "astroexpansion:washing",
+  "input": {
+    "item": "astroexpansion:raw_titanium"
+  },
+  "output": {
+    "item": "astroexpansion:raw_titanium",
+    "count": 1
+  },
+  "secondary_output": {
+    "item": "astroexpansion:raw_titanium",
+    "count": 1,
+    "chance": 0.1
+  },
+  "process_time": 100,
+  "energy_cost": 500
+}

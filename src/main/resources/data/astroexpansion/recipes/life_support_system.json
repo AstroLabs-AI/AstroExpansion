@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HOH",
+    "PQP",
+    "HEH"
+  ],
+  "key": {
+    "H": {
+      "item": "astroexpansion:station_hull"
+    },
+    "O": {
+      "item": "astroexpansion:oxygen_generator"
+    },
+    "P": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_core"
+    },
+    "E": {
+      "item": "astroexpansion:energy_storage"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:life_support_system"
+  }
+}

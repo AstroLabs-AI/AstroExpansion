@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "title": {
+      "translate": "advancements.astroexpansion.root.title"
+    },
+    "description": {
+      "translate": "advancements.astroexpansion.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "get_titanium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "astroexpansion:raw_titanium"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HEH",
+    "SRS",
+    "HQH"
+  ],
+  "key": {
+    "H": {
+      "item": "astroexpansion:helium3_crystal"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "S": {
+      "item": "astroexpansion:space_research_data"
+    },
+    "R": {
+      "item": "astroexpansion:lunar_rover"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:moon_teleporter"
+  }
+}

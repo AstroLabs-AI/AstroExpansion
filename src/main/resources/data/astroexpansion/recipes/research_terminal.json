@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "PCP",
+    "TTT"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "astroexpansion:processor"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:research_terminal"
+  }
+}

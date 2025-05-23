@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TFT",
+    "PEP",
+    "TCT"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "F": {
+      "item": "astroexpansion:fluid_tank"
+    },
+    "P": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:oxygen_generator"
+  }
+}

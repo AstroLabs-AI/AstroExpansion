@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TET",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:station_hull",
+    "count": 8
+  }
+}

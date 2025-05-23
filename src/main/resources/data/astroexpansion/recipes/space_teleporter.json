@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QEQ",
+    "SRS",
+    "QFQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "astroexpansion:quantum_core"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "S": {
+      "item": "astroexpansion:space_research_data"
+    },
+    "R": {
+      "item": "astroexpansion:rocket_nose_cone"
+    },
+    "F": {
+      "item": "astroexpansion:fusion_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:space_teleporter"
+  }
+}

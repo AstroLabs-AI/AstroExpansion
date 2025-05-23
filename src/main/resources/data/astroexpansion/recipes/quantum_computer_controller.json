@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QPQ",
+    "PCP",
+    "QPQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "P": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "C": {
+      "item": "astroexpansion:quantum_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:quantum_computer_controller"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "RPR",
+    "CCC"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "P": {
+      "item": "astroexpansion:processor"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:advanced_processor"
+  }
+}

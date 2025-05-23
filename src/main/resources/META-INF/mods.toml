@@ -1,0 +1,40 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="astroexpansion"
+version="${mod_version}"
+displayName="Astro Expansion"
+updateJSONURL=""
+displayURL=""
+logoFile="astroexpansion.png"
+credits="Created by AstroLabs"
+authors="AstroLabs Team"
+displayTest="MATCH_VERSION"
+
+description='''
+Astro Expansion transforms Minecraft into a space-age sandbox with advanced technology, energy systems, and automation. Progress from mining exotic ores to building complex machines and energy networks!
+
+Features:
+- New ores: Titanium, Lithium, and Uranium
+- Energy generation and storage systems
+- Material processing machines
+- Ore washing for increased yields
+- Energy conduits for power distribution
+- And much more to come!
+'''
+
+[[dependencies.astroexpansion]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.astroexpansion]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"

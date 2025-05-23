@@ -1,0 +1,12 @@
+{
+  "type": "astroexpansion:processing",
+  "input": {
+    "item": "astroexpansion:raw_titanium"
+  },
+  "output": {
+    "item": "astroexpansion:titanium_dust",
+    "count": 2
+  },
+  "process_time": 200,
+  "energy_cost": 1000
+}

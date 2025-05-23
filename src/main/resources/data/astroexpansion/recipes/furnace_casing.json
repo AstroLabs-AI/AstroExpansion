@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TBT",
+    "BCB",
+    "TBT"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "B": {
+      "item": "minecraft:bricks"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:furnace_casing",
+    "count": 4
+  }
+}

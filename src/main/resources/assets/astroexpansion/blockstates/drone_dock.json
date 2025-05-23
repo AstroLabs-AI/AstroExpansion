@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "charging=false": { "model": "astroexpansion:block/drone_dock" },
+    "charging=true": { "model": "astroexpansion:block/drone_dock" }
+  }
+}

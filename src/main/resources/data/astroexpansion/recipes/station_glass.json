@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GTG",
+    "TGT",
+    "GTG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:station_glass",
+    "count": 4
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "astroexpansion:block/export_bus" }
+  }
+}

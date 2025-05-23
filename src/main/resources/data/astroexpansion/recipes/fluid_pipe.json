@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "   ",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:fluid_pipe",
+    "count": 8
+  }
+}

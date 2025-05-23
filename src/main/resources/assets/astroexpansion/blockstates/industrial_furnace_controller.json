@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astroexpansion:block/industrial_furnace_controller"
+    }
+  }
+}

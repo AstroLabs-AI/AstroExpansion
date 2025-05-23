@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "astroexpansion:block/storage_terminal",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "astroexpansion:block/storage_terminal",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astroexpansion:block/storage_terminal",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "astroexpansion:block/storage_terminal",
+      "y": 90
+    }
+  }
+}

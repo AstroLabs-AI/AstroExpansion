@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "astroexpansion:item/storage_drive_64k"
+  }
+}

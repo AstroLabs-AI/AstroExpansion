@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TDT",
+    "PCP",
+    "TET"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "D": {
+      "item": "astroexpansion:distillation_column"
+    },
+    "P": {
+      "item": "astroexpansion:processor"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:fuel_refinery_controller"
+  }
+}

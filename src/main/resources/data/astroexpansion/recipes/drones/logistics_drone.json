@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "TCT",
+    " M "
+  ],
+  "key": {
+    "P": {
+      "item": "astroexpansion:storage_processor"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "M": {
+      "item": "minecraft:minecart"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:logistics_drone"
+  }
+}

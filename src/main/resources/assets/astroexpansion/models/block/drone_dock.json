@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "astroexpansion:block/drone_dock_top",
+    "bottom": "astroexpansion:block/drone_dock_bottom",
+    "side": "astroexpansion:block/drone_dock_side"
+  }
+}

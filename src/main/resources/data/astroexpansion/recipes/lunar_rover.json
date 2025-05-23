@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WGW",
+    "TET",
+    "W W"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:iron_block"
+    },
+    "G": {
+      "item": "astroexpansion:station_glass"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_block"
+    },
+    "E": {
+      "item": "astroexpansion:energy_storage"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:lunar_rover"
+  }
+}

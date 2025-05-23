@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "TDT",
+    " M "
+  ],
+  "key": {
+    "P": {
+      "item": "astroexpansion:storage_processor"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "M": {
+      "item": "minecraft:minecart"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:mining_drone"
+  }
+}

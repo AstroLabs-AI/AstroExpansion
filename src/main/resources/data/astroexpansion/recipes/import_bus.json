@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "IPI",
+    " I "
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "astroexpansion:storage_processor"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:import_bus"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PFP",
+    "CEC"
+  ],
+  "key": {
+    "P": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "F": {
+      "item": "astroexpansion:fusion_core"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:fusion_reactor_controller"
+  }
+}

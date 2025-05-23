@@ -1,0 +1,71 @@
+name: Publish to Mod Platforms
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to publish'
+        required: true
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download release assets
+      uses: dsaltares/fetch-gh-release-asset@master
+      with:
+        version: ${{ github.event.release.tag_name || github.event.inputs.release_tag }}
+        regex: true
+        file: ".*\\.jar"
+        target: "release/"
+    
+    - name: Get mod info
+      id: mod_info
+      run: |
+        MC_VERSION=$(grep "minecraft_version=" gradle.properties | cut -d'=' -f2)
+        FORGE_VERSION=$(grep "forge_version=" gradle.properties | cut -d'=' -f2)
+        echo "MC_VERSION=$MC_VERSION" >> $GITHUB_OUTPUT
+        echo "FORGE_VERSION=$FORGE_VERSION" >> $GITHUB_OUTPUT
+        echo "Found JAR: $(ls release/*.jar)"
+    
+    # CurseForge Upload
+    # Uncomment and add your API token as a secret when ready
+    # - name: Upload to CurseForge  
+    #   uses: itsmeow/curseforge-upload@v3
+    #   with:
+    #     token: ${{ secrets.CURSEFORGE_API_TOKEN }}
+    #     project_id: YOUR_PROJECT_ID
+    #     game_endpoint: minecraft
+    #     file_path: release/*.jar
+    #     changelog: See [GitHub Release](https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }})
+    #     changelog_type: markdown
+    #     display_name: ${{ github.event.release.name }}
+    #     game_versions: |
+    #       Minecraft ${{ steps.mod_info.outputs.MC_VERSION }}
+    #       Forge
+    #       Java 17
+    #     release_type: release
+    
+    # Modrinth Upload
+    # Uncomment and add your API token as a secret when ready
+    # - name: Upload to Modrinth
+    #   uses: Kir-Antipov/mc-publish@v3.3
+    #   with:
+    #     modrinth-id: YOUR_PROJECT_ID
+    #     modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+    #     files: release/*.jar
+    #     name: ${{ github.event.release.name }}
+    #     version: ${{ github.event.release.tag_name }}
+    #     changelog: See [GitHub Release](https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }})
+    #     game-versions: |
+    #       1.20.1
+    #     loaders: |
+    #       forge
+    #     java: |
+    #       17
