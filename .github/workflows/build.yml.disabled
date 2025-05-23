@@ -1,3 +1,6 @@
+# This workflow has been disabled in favor of auto-release.yml
+# To re-enable, rename this file back to build.yml
+
 name: Build and Release
 
 on:

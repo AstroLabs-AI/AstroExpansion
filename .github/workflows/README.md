@@ -2,9 +2,9 @@
 
 This directory contains automated workflows for the AstroExpansion project.
 
-## Workflows
+## Active Workflows
 
-### 1. Auto Build, Push & Release (`auto-release.yml`) 🚀 **NEW!**
+### 1. Auto Build, Push & Release (`auto-release.yml`) 🚀 **PRIMARY**
 **Triggers:**
 - Push to `main` or `forge-1.20.1` branches (auto-increments version)
 - Manual workflow dispatch with version control
@@ -34,7 +34,17 @@ This directory contains automated workflows for the AstroExpansion project.
 - Comments on PRs with build status
 - Uploads dev artifacts (7 day retention)
 
-### 3. Build and Release (`build.yml`)
+### 3. CI Build (`ci.yml`) 🔧 **NEW!**
+**Triggers:**
+- All pushes and pull requests (build verification only)
+
+**Features:**
+- Quick build verification
+- Test execution
+- Artifact upload (7 days)
+- No version changes or releases
+
+### 4. Create Release (`release.yml`) 📦 **MANUAL ONLY**
 **Triggers:**
 - Push to `forge-1.20.1` or `main` branches
 - Pull requests to these branches
@@ -59,6 +69,23 @@ This directory contains automated workflows for the AstroExpansion project.
 - Builds the mod
 - Creates and pushes git tag
 - Creates GitHub release with JAR attachment
+
+### 5. Publish (`publish.yml`) 📢
+**Triggers:**
+- When a release is published
+- Manual workflow dispatch
+
+**Features:**
+- Publishes to mod hosting platforms
+- Announces releases
+
+## Disabled Workflows
+
+The following workflows have been disabled to prevent duplication:
+- `build.yml.disabled` - Replaced by `auto-release.yml`
+- `build-simple.yml.disabled` - Replaced by `ci.yml`
+
+To re-enable a workflow, remove the `.disabled` extension.
 
 ## Usage
 

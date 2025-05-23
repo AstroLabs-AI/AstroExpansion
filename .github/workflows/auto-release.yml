@@ -8,6 +8,8 @@ on:
       - 'build.gradle'
       - 'gradle.properties'
       - '!*.md'
+  pull_request:
+    branches: [ main, forge-1.20.1 ]
   workflow_dispatch:
     inputs:
       create_release:
@@ -95,7 +97,10 @@ jobs:
         echo "New version: $NEW_VERSION"
         
         # Determine if we should create a release
-        if [[ "${{ inputs.create_release }}" == "true" ]] || [[ "$NEW_VERSION" != "$CURRENT" ]]; then
+        # Don't create releases for pull requests
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          echo "should_release=false" >> $GITHUB_OUTPUT
+        elif [[ "${{ inputs.create_release }}" == "true" ]] || [[ "$NEW_VERSION" != "$CURRENT" ]]; then
           echo "should_release=true" >> $GITHUB_OUTPUT
         else
           echo "should_release=false" >> $GITHUB_OUTPUT
