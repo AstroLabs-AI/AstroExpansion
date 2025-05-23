@@ -77,7 +77,7 @@ public class EnergyStorage implements IEnergyHandler {
     }
     
     public void readFromNBT(CompoundTag nbt) {
-        this.energy = nbt.getInt("Energy");
+        this.energy = nbt.getIntOr("Energy", 0);
     }
 
     public void writeToNBT(CompoundTag nbt) {

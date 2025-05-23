@@ -58,6 +58,20 @@ public class AECreativeTabs {
                         output.accept(AEItems.SOLAR_PANEL_ITEM.get());
                         output.accept(AEItems.ENERGY_CONDUIT_ITEM.get());
                         output.accept(AEItems.RESEARCH_CONSOLE_ITEM.get());
+                        
+                        // Phase 2 Machines
+                        output.accept(AEItems.BATTERY_BANK_ITEM.get());
+                        output.accept(AEItems.WIRELESS_ENERGY_NODE_ITEM.get());
+                        output.accept(AEItems.TELEPORTER_ITEM.get());
+                        output.accept(AEItems.FORCE_FIELD_GENERATOR_ITEM.get());
+                        output.accept(AEItems.OXYGEN_GENERATOR_ITEM.get());
+                        output.accept(AEItems.ROCKET_ITEM.get());
+                        
+                        // Space Suit Armor
+                        output.accept(AEItems.SPACE_SUIT_HELMET.get());
+                        output.accept(AEItems.SPACE_SUIT_CHESTPLATE.get());
+                        output.accept(AEItems.SPACE_SUIT_LEGGINGS.get());
+                        output.accept(AEItems.SPACE_SUIT_BOOTS.get());
                     })
                     .build());
 }

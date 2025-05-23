@@ -64,6 +64,8 @@ com.astrolabs.astroexpansion/
 - `src/main/resources/META-INF/neoforge.mods.toml`: Mod manifest
 - `src/main/resources/assets/astroexpansion/lang/en_us.json`: Localization
 - `ASTRO_EXPANSION_PLAN.md`: Detailed development roadmap
+- `minecraft-neoforge-1-21-5-release-porting-primer.md`: Detailed minecraft 1.21.5 porting and modding api changes history
+
 
 ## Current Implementation Status
 

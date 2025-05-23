@@ -90,6 +90,111 @@ public class AERecipeProvider extends RecipeProvider {
                 .define('D', Items.DIAMOND)
                 .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
                 .save(recipeOutput);
+        
+        // Phase 2 machine recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEBlocks.BATTERY_BANK.get())
+                .pattern("TET")
+                .pattern("ECE")
+                .pattern("TET")
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .define('E', AEItems.ENERGY_CORE.get())
+                .define('C', AEItems.CIRCUIT_BOARD.get())
+                .unlockedBy(getHasName(AEItems.ENERGY_CORE.get()), has(AEItems.ENERGY_CORE.get()))
+                .save(recipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEBlocks.FORCE_FIELD_GENERATOR.get())
+                .pattern("DPD")
+                .pattern("PEP")
+                .pattern("TBT")
+                .define('D', Items.DIAMOND_BLOCK)
+                .define('P', AEItems.ADVANCED_PROCESSOR.get())
+                .define('E', AEItems.ENERGY_CORE.get())
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .define('B', AEBlocks.BATTERY_BANK.get())
+                .unlockedBy(getHasName(AEItems.ADVANCED_PROCESSOR.get()), has(AEItems.ADVANCED_PROCESSOR.get()))
+                .save(recipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEBlocks.OXYGEN_GENERATOR.get())
+                .pattern("ISI")
+                .pattern("GPG")
+                .pattern("ICI")
+                .define('I', Items.IRON_INGOT)
+                .define('S', Items.SUGAR_CANE)
+                .define('G', Items.GLASS_PANE)
+                .define('P', AEItems.PROCESSOR.get())
+                .define('C', AEItems.CIRCUIT_BOARD.get())
+                .unlockedBy(getHasName(AEItems.PROCESSOR.get()), has(AEItems.PROCESSOR.get()))
+                .save(recipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEBlocks.TELEPORTER.get())
+                .pattern("EPE")
+                .pattern("DUD")
+                .pattern("TBT")
+                .define('E', Items.ENDER_PEARL)
+                .define('P', AEItems.ADVANCED_PROCESSOR.get())
+                .define('D', Items.DIAMOND_BLOCK)
+                .define('U', AEItems.URANIUM_INGOT.get())
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .define('B', AEBlocks.BATTERY_BANK.get())
+                .unlockedBy(getHasName(AEItems.URANIUM_INGOT.get()), has(AEItems.URANIUM_INGOT.get()))
+                .save(recipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEBlocks.WIRELESS_ENERGY_NODE.get())
+                .pattern("TRT")
+                .pattern("RER")
+                .pattern("TRT")
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .define('R', Items.REDSTONE_BLOCK)
+                .define('E', AEItems.ENERGY_CORE.get())
+                .unlockedBy(getHasName(AEItems.ENERGY_CORE.get()), has(AEItems.ENERGY_CORE.get()))
+                .save(recipeOutput);
+        
+        // Advanced Processor recipe
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEItems.ADVANCED_PROCESSOR.get())
+                .pattern("GPG")
+                .pattern("PDP")
+                .pattern("GPG")
+                .define('G', Items.GOLD_INGOT)
+                .define('P', AEItems.PROCESSOR.get())
+                .define('D', Items.DIAMOND)
+                .unlockedBy(getHasName(AEItems.PROCESSOR.get()), has(AEItems.PROCESSOR.get()))
+                .save(recipeOutput);
+        
+        // Space Suit Armor recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEItems.SPACE_SUIT_HELMET.get())
+                .pattern("TTT")
+                .pattern("TGT")
+                .pattern("   ")
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .define('G', Items.GLASS)
+                .unlockedBy(getHasName(AEItems.TITANIUM_INGOT.get()), has(AEItems.TITANIUM_INGOT.get()))
+                .save(recipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEItems.SPACE_SUIT_CHESTPLATE.get())
+                .pattern("T T")
+                .pattern("TET")
+                .pattern("TCT")
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .define('E', AEItems.ENERGY_CORE.get())
+                .define('C', AEItems.CIRCUIT_BOARD.get())
+                .unlockedBy(getHasName(AEItems.TITANIUM_INGOT.get()), has(AEItems.TITANIUM_INGOT.get()))
+                .save(recipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEItems.SPACE_SUIT_LEGGINGS.get())
+                .pattern("TTT")
+                .pattern("T T")
+                .pattern("T T")
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .unlockedBy(getHasName(AEItems.TITANIUM_INGOT.get()), has(AEItems.TITANIUM_INGOT.get()))
+                .save(recipeOutput);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AEItems.SPACE_SUIT_BOOTS.get())
+                .pattern("   ")
+                .pattern("T T")
+                .pattern("T T")
+                .define('T', AEItems.TITANIUM_INGOT.get())
+                .unlockedBy(getHasName(AEItems.TITANIUM_INGOT.get()), has(AEItems.TITANIUM_INGOT.get()))
+                .save(recipeOutput);
     }
     
     protected void oreSmelting(RecipeOutput recipeOutput, ItemLike input, ItemLike output, float experience, int cookingTime) {

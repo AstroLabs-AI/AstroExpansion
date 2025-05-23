@@ -2,12 +2,19 @@ package com.astrolabs.astroexpansion.common.registry;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.blocks.BasicGeneratorBlock;
+import com.astrolabs.astroexpansion.common.blocks.BatteryBankBlock;
 import com.astrolabs.astroexpansion.common.blocks.ComponentAssemblerBlock;
 import com.astrolabs.astroexpansion.common.blocks.ElectricFurnaceBlock;
 import com.astrolabs.astroexpansion.common.blocks.EnergyConduitBlock;
+import com.astrolabs.astroexpansion.common.blocks.ForceFieldBlock;
+import com.astrolabs.astroexpansion.common.blocks.ForceFieldGeneratorBlock;
 import com.astrolabs.astroexpansion.common.blocks.MaterialProcessorBlock;
+import com.astrolabs.astroexpansion.common.blocks.OxygenGeneratorBlock;
 import com.astrolabs.astroexpansion.common.blocks.ResearchConsoleBlock;
+import com.astrolabs.astroexpansion.common.blocks.RocketBlock;
 import com.astrolabs.astroexpansion.common.blocks.SolarPanelBlock;
+import com.astrolabs.astroexpansion.common.blocks.TeleporterBlock;
+import com.astrolabs.astroexpansion.common.blocks.WirelessEnergyNodeBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -119,4 +126,65 @@ public class AEBlocks {
                     .sound(SoundType.METAL)
                     .noOcclusion()
                     .lightLevel(state -> state.getValue(ElectricFurnaceBlock.LIT) ? 13 : 0)));
+    
+    public static final DeferredBlock<Block> BATTERY_BANK = BLOCKS.register("battery_bank",
+            () -> new BatteryBankBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+    
+    public static final DeferredBlock<Block> WIRELESS_ENERGY_NODE = BLOCKS.register("wireless_energy_node",
+            () -> new WirelessEnergyNodeBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .requiresCorrectToolForDrops()
+                    .strength(4.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+    
+    // Advanced Tech
+    public static final DeferredBlock<Block> TELEPORTER = BLOCKS.register("teleporter",
+            () -> new TeleporterBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .requiresCorrectToolForDrops()
+                    .strength(6.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+    
+    public static final DeferredBlock<Block> FORCE_FIELD_GENERATOR = BLOCKS.register("force_field_generator",
+            () -> new ForceFieldGeneratorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_CYAN)
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+    
+    public static final DeferredBlock<Block> FORCE_FIELD = BLOCKS.register("force_field",
+            () -> new ForceFieldBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE)
+                    .noCollission()
+                    .strength(-1.0F, 3600000.0F)
+                    .noLootTable()
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isViewBlocking((state, level, pos) -> false)
+                    .isSuffocating((state, level, pos) -> false)));
+    
+    // Space Age
+    public static final DeferredBlock<Block> OXYGEN_GENERATOR = BLOCKS.register("oxygen_generator",
+            () -> new OxygenGeneratorBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .requiresCorrectToolForDrops()
+                    .strength(4.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
+    
+    public static final DeferredBlock<Block> ROCKET = BLOCKS.register("rocket",
+            () -> new RocketBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .requiresCorrectToolForDrops()
+                    .strength(6.0F)
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
 }

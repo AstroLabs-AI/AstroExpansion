@@ -29,5 +29,17 @@
   "block.astroexpansion.energy_conduit": "Energy Conduit",
   "block.astroexpansion.research_console": "Research Console",
   "block.astroexpansion.solar_panel": "Solar Panel",
-  "block.astroexpansion.electric_furnace": "Electric Furnace"
+  "block.astroexpansion.electric_furnace": "Electric Furnace",
+  "block.astroexpansion.battery_bank": "Battery Bank",
+  "block.astroexpansion.wireless_energy_node": "Wireless Energy Node",
+  "block.astroexpansion.teleporter": "Teleporter",
+  "block.astroexpansion.force_field_generator": "Force Field Generator",
+  "block.astroexpansion.force_field": "Force Field",
+  "block.astroexpansion.oxygen_generator": "Oxygen Generator",
+  "block.astroexpansion.rocket": "Rocket",
+  
+  "item.astroexpansion.space_suit_helmet": "Space Suit Helmet",
+  "item.astroexpansion.space_suit_chestplate": "Space Suit Chestplate",
+  "item.astroexpansion.space_suit_leggings": "Space Suit Leggings",
+  "item.astroexpansion.space_suit_boots": "Space Suit Boots"
 }

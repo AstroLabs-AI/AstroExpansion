@@ -29,4 +29,16 @@ public class AEMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<com.astrolabs.astroexpansion.common.menu.ElectricFurnaceMenu>> ELECTRIC_FURNACE =
             MENU_TYPES.register("electric_furnace",
                     () -> IMenuTypeExtension.create(com.astrolabs.astroexpansion.common.menu.ElectricFurnaceMenu::new));
+    
+    public static final DeferredHolder<MenuType<?>, MenuType<com.astrolabs.astroexpansion.common.menu.WirelessEnergyNodeMenu>> WIRELESS_ENERGY_NODE =
+            MENU_TYPES.register("wireless_energy_node",
+                    () -> IMenuTypeExtension.create(com.astrolabs.astroexpansion.common.menu.WirelessEnergyNodeMenu::new));
+    
+    public static final DeferredHolder<MenuType<?>, MenuType<com.astrolabs.astroexpansion.common.menu.TeleporterMenu>> TELEPORTER =
+            MENU_TYPES.register("teleporter",
+                    () -> IMenuTypeExtension.create(com.astrolabs.astroexpansion.common.menu.TeleporterMenu::new));
+    
+    public static final DeferredHolder<MenuType<?>, MenuType<com.astrolabs.astroexpansion.common.menu.ForceFieldGeneratorMenu>> FORCE_FIELD_GENERATOR =
+            MENU_TYPES.register("force_field_generator",
+                    () -> IMenuTypeExtension.create(com.astrolabs.astroexpansion.common.menu.ForceFieldGeneratorMenu::new));
 }

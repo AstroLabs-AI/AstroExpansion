@@ -2,9 +2,13 @@ package com.astrolabs.astroexpansion.common.registry;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.blockentities.BasicGeneratorBlockEntity;
+import com.astrolabs.astroexpansion.common.blockentities.BatteryBankBlockEntity;
 import com.astrolabs.astroexpansion.common.blockentities.ComponentAssemblerBlockEntity;
 import com.astrolabs.astroexpansion.common.blockentities.EnergyConduitBlockEntity;
+import com.astrolabs.astroexpansion.common.blockentities.ForceFieldGeneratorBlockEntity;
 import com.astrolabs.astroexpansion.common.blockentities.MaterialProcessorBlockEntity;
+import com.astrolabs.astroexpansion.common.blockentities.TeleporterBlockEntity;
+import com.astrolabs.astroexpansion.common.blockentities.WirelessEnergyNodeBlockEntity;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -42,4 +46,20 @@ public class AEBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.astrolabs.astroexpansion.common.blockentities.ElectricFurnaceBlockEntity>> ELECTRIC_FURNACE =
             BLOCK_ENTITIES.register("electric_furnace",
                     () -> BlockEntityType.Builder.of(com.astrolabs.astroexpansion.common.blockentities.ElectricFurnaceBlockEntity::new, AEBlocks.ELECTRIC_FURNACE.get()).build(null));
+    
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BatteryBankBlockEntity>> BATTERY_BANK =
+            BLOCK_ENTITIES.register("battery_bank",
+                    () -> BlockEntityType.Builder.of(BatteryBankBlockEntity::new, AEBlocks.BATTERY_BANK.get()).build(null));
+    
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WirelessEnergyNodeBlockEntity>> WIRELESS_ENERGY_NODE =
+            BLOCK_ENTITIES.register("wireless_energy_node",
+                    () -> BlockEntityType.Builder.of(WirelessEnergyNodeBlockEntity::new, AEBlocks.WIRELESS_ENERGY_NODE.get()).build(null));
+    
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TeleporterBlockEntity>> TELEPORTER =
+            BLOCK_ENTITIES.register("teleporter",
+                    () -> BlockEntityType.Builder.of(TeleporterBlockEntity::new, AEBlocks.TELEPORTER.get()).build(null));
+    
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ForceFieldGeneratorBlockEntity>> FORCE_FIELD_GENERATOR =
+            BLOCK_ENTITIES.register("force_field_generator",
+                    () -> BlockEntityType.Builder.of(ForceFieldGeneratorBlockEntity::new, AEBlocks.FORCE_FIELD_GENERATOR.get()).build(null));
 }

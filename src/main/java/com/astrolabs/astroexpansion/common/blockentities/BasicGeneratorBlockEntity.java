@@ -91,8 +91,8 @@ public class BasicGeneratorBlockEntity extends AbstractMachineBlockEntity implem
         super.loadAdditional(tag, registries);
         items = NonNullList.withSize(1, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(tag, items, registries);
-        burnTime = tag.getInt("BurnTime");
-        burnTimeTotal = tag.getInt("BurnTimeTotal");
+        burnTime = tag.getIntOr("BurnTime", 0);
+        burnTimeTotal = tag.getIntOr("BurnTimeTotal", 0);
     }
     
     // Container implementation

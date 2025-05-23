@@ -59,9 +59,9 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity {
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         energyStorage.readFromNBT(tag);
-        processTime = tag.getInt("ProcessTime");
-        maxProcessTime = tag.getInt("MaxProcessTime");
-        isActive = tag.getBoolean("IsActive");
+        processTime = tag.getIntOr("ProcessTime", 0);
+        maxProcessTime = tag.getIntOr("MaxProcessTime", 0);
+        isActive = tag.getBooleanOr("IsActive", false);
     }
     
     @Override
@@ -81,5 +81,12 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity {
         if (level != null && !level.isClientSide) {
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
+    }
+    
+    @Override
+    public void preRemoveSideEffects() {
+        // This will be called by subclasses that implement Container
+        // The default Container implementation will drop items
+        super.preRemoveSideEffects();
     }
 }

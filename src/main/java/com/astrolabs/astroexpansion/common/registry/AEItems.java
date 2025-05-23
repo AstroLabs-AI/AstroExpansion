@@ -4,8 +4,11 @@ import com.astrolabs.astroexpansion.AstroExpansion;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import com.astrolabs.astroexpansion.common.items.SpaceSuitArmorItem;
 
 public class AEItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AstroExpansion.MODID);
@@ -96,4 +99,43 @@ public class AEItems {
     
     public static final DeferredItem<BlockItem> ELECTRIC_FURNACE_ITEM = ITEMS.register("electric_furnace",
             () -> new BlockItem(AEBlocks.ELECTRIC_FURNACE.get(), new Item.Properties()));
+    
+    public static final DeferredItem<BlockItem> BATTERY_BANK_ITEM = ITEMS.register("battery_bank",
+            () -> new BlockItem(AEBlocks.BATTERY_BANK.get(), new Item.Properties()));
+    
+    public static final DeferredItem<BlockItem> WIRELESS_ENERGY_NODE_ITEM = ITEMS.register("wireless_energy_node",
+            () -> new BlockItem(AEBlocks.WIRELESS_ENERGY_NODE.get(), new Item.Properties()));
+    
+    public static final DeferredItem<BlockItem> TELEPORTER_ITEM = ITEMS.register("teleporter",
+            () -> new BlockItem(AEBlocks.TELEPORTER.get(), new Item.Properties().rarity(Rarity.RARE)));
+    
+    public static final DeferredItem<BlockItem> FORCE_FIELD_GENERATOR_ITEM = ITEMS.register("force_field_generator",
+            () -> new BlockItem(AEBlocks.FORCE_FIELD_GENERATOR.get(), new Item.Properties().rarity(Rarity.RARE)));
+    
+    public static final DeferredItem<BlockItem> OXYGEN_GENERATOR_ITEM = ITEMS.register("oxygen_generator",
+            () -> new BlockItem(AEBlocks.OXYGEN_GENERATOR.get(), new Item.Properties()));
+    
+    public static final DeferredItem<BlockItem> ROCKET_ITEM = ITEMS.register("rocket",
+            () -> new BlockItem(AEBlocks.ROCKET.get(), new Item.Properties().rarity(Rarity.EPIC)));
+    
+    // Space Suit Armor
+    public static final DeferredItem<SpaceSuitArmorItem> SPACE_SUIT_HELMET = ITEMS.register("space_suit_helmet",
+            () -> new SpaceSuitArmorItem(ArmorType.HELMET, new Item.Properties()
+                    .humanoidArmor(AEArmorMaterials.SPACE_SUIT.get())
+                    .component(AEDataComponentTypes.OXYGEN.get(), 0)));
+    
+    public static final DeferredItem<SpaceSuitArmorItem> SPACE_SUIT_CHESTPLATE = ITEMS.register("space_suit_chestplate",
+            () -> new SpaceSuitArmorItem(ArmorType.CHESTPLATE, new Item.Properties()
+                    .humanoidArmor(AEArmorMaterials.SPACE_SUIT.get())
+                    .component(AEDataComponentTypes.OXYGEN.get(), 0)));
+    
+    public static final DeferredItem<SpaceSuitArmorItem> SPACE_SUIT_LEGGINGS = ITEMS.register("space_suit_leggings",
+            () -> new SpaceSuitArmorItem(ArmorType.LEGGINGS, new Item.Properties()
+                    .humanoidArmor(AEArmorMaterials.SPACE_SUIT.get())
+                    .component(AEDataComponentTypes.OXYGEN.get(), 0)));
+    
+    public static final DeferredItem<SpaceSuitArmorItem> SPACE_SUIT_BOOTS = ITEMS.register("space_suit_boots",
+            () -> new SpaceSuitArmorItem(ArmorType.BOOTS, new Item.Properties()
+                    .humanoidArmor(AEArmorMaterials.SPACE_SUIT.get())
+                    .component(AEDataComponentTypes.OXYGEN.get(), 0)));
 }
