@@ -136,7 +136,7 @@ jobs:
         
         ## Installation
         1. Install Minecraft Forge 1.20.1 (version 47.2.0 or newer)
-        2. Download \`astroexpansion-${{ steps.next_version.outputs.new_version }}-mc1.20.1.jar\` from the assets below
+        2. Download the JAR file from the assets below
         3. Place it in your \`.minecraft/mods\` folder
         
         ## Requirements
@@ -189,7 +189,8 @@ jobs:
         name: AstroExpansion v${{ steps.next_version.outputs.new_version }}
         body_path: CHANGELOG.md
         files: |
-          build/libs/astroexpansion-${{ steps.next_version.outputs.new_version }}-mc1.20.1.jar
+          build/libs/astroexpansion-${{ steps.next_version.outputs.new_version }}*.jar
+          !build/libs/*-sources.jar
         draft: false
         prerelease: false
         generate_release_notes: true
@@ -212,7 +213,7 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         if [[ "${{ steps.next_version.outputs.should_release }}" == "true" ]]; then
           echo "✅ **New version released:** v${{ steps.next_version.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
-          echo "📦 **Download:** [astroexpansion-${{ steps.next_version.outputs.new_version }}-mc1.20.1.jar](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.next_version.outputs.new_version }})" >> $GITHUB_STEP_SUMMARY
+          echo "📦 **Download:** [astroexpansion-${{ steps.next_version.outputs.new_version }}.jar](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.next_version.outputs.new_version }})" >> $GITHUB_STEP_SUMMARY
         else
           echo "✅ **Build successful** (no version change)" >> $GITHUB_STEP_SUMMARY
           echo "📦 **Current version:** v${{ steps.get_version.outputs.current_version }}" >> $GITHUB_STEP_SUMMARY
