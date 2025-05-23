@@ -1,0 +1,33 @@
+{
+  "itemGroup.astroexpansion.main": "Astro Expansion",
+  
+  "block.astroexpansion.titanium_ore": "Titanium Ore",
+  "block.astroexpansion.deepslate_titanium_ore": "Deepslate Titanium Ore",
+  "block.astroexpansion.lithium_ore": "Lithium Ore",
+  "block.astroexpansion.uranium_ore": "Uranium Ore",
+  "block.astroexpansion.titanium_block": "Block of Titanium",
+  "block.astroexpansion.steel_block": "Block of Steel",
+  
+  "item.astroexpansion.raw_titanium": "Raw Titanium",
+  "item.astroexpansion.raw_lithium": "Raw Lithium",
+  "item.astroexpansion.raw_uranium": "Raw Uranium",
+  "item.astroexpansion.titanium_ingot": "Titanium Ingot",
+  "item.astroexpansion.steel_ingot": "Steel Ingot",
+  "item.astroexpansion.lithium_ingot": "Lithium Ingot",
+  "item.astroexpansion.uranium_ingot": "Uranium Ingot",
+  "item.astroexpansion.titanium_dust": "Titanium Dust",
+  "item.astroexpansion.iron_dust": "Iron Dust",
+  "item.astroexpansion.coal_dust": "Coal Dust",
+  "item.astroexpansion.circuit_board": "Circuit Board",
+  "item.astroexpansion.processor": "Processor",
+  "item.astroexpansion.advanced_processor": "Advanced Processor",
+  "item.astroexpansion.energy_core": "Energy Core",
+  
+  "block.astroexpansion.material_processor": "Material Processor",
+  "block.astroexpansion.basic_generator": "Basic Generator",
+  "block.astroexpansion.component_assembler": "Component Assembler",
+  "block.astroexpansion.energy_conduit": "Energy Conduit",
+  "block.astroexpansion.research_console": "Research Console",
+  "block.astroexpansion.solar_panel": "Solar Panel",
+  "block.astroexpansion.electric_furnace": "Electric Furnace"
+}
