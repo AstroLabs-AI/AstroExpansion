@@ -7,15 +7,19 @@ Welcome to the comprehensive guide collection for AstroExpansion! These guides w
 ### Getting Started
 - [Quick Start Guide](guides/QUICK_START.md) - Your first steps in AstroExpansion
 - [Ore Generation](guides/ORE_GENERATION.md) - Where to find new resources
+- **📖 [In-Game Guide Book](guides/GUIDE_BOOK.md) - How to use the Astro Guide**
 
 ### Core Systems
 - [Energy System](guides/ENERGY_SYSTEM.md) - Power generation, storage, and distribution
 - [Digital Storage System](guides/STORAGE_SYSTEM.md) - How to build and use the storage network
+- **🔍 [Storage Search & Favorites](guides/STORAGE_SEARCH_GUIDE.md) - Advanced storage features**
 - [Machines & Processing](guides/MACHINES.md) - All machines and their uses
+- **⚡ [Machine Upgrades](guides/MACHINE_UPGRADES_GUIDE.md) - Speed, efficiency, and fortune upgrades**
 
 ### Advanced Technology
 - [Drone Automation](guides/DRONES.md) - Autonomous helpers for various tasks
 - [Multiblock Structures](guides/MULTIBLOCKS.md) - Industrial Furnace and future structures
+- **👻 [Multiblock Preview System](guides/MULTIBLOCK_PREVIEW_GUIDE.md) - Ghost block building assistance**
 - [Fluid Systems](guides/FLUIDS.md) - Tanks, pipes, and fluid handling
 
 ### Recipes & Crafting

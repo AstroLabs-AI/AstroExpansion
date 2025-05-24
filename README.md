@@ -9,10 +9,17 @@
 
 Astro Expansion is a comprehensive space exploration mod that transforms Minecraft into an interstellar adventure! Progress from basic technology through advanced energy systems, automation, and ultimately travel to space and the moon!
 
-## 🎉 Version 1.0.0 Released!
+## 🎉 Latest Updates
 
-**The Final Frontier Update** - Complete space exploration with dimensions, gravity, and more!
+### Version 1.0.18+ - Quality of Life Improvements
+- ✨ **Machine Tooltips**: Detailed hover information for all machines
+- 🔍 **Storage Search**: Filter items by name in Storage Terminal
+- ⭐ **Favorite Items**: Pin frequently used items in storage
+- 👻 **Structure Preview**: Ghost blocks show multiblock placement
+- 🎮 **Fixed GUIs**: All machine interfaces now perfectly aligned
+- 📖 **Guide Book**: Comprehensive in-game documentation system
 
+### Version 1.0.0 - The Final Frontier
 - ✅ **Phase 1-3**: Energy Systems, Digital Storage, Multiblocks
 - ✅ **Phase 4-6**: Fusion Power, Quantum Computing, Fuel Production
 - ✅ **Phase 7-9**: Rocket Assembly, Space Suits, Space Stations
@@ -21,12 +28,12 @@ Astro Expansion is a comprehensive space exploration mod that transforms Minecra
 ## 🌟 Core Features
 
 ### Technology Progression
-1. **Basic Tech**: Generators, processors, ore washing
-2. **Digital Storage**: Computerized item storage networks
-3. **Automation**: AI drones, import/export buses
-4. **Multiblocks**: Industrial furnace, fusion reactor
-5. **Space Tech**: Rockets, space suits, life support
-6. **Dimensions**: Travel to space and the moon!
+1. **Basic Tech**: Generators, processors, ore washing with machine upgrades
+2. **Digital Storage**: Computerized item storage with search and favorites
+3. **Automation**: AI drones, import/export buses, automated crafting
+4. **Multiblocks**: Industrial furnace, fusion reactor with visual previews
+5. **Space Tech**: Rockets, space suits, life support systems
+6. **Dimensions**: Travel to space and the moon with unique gravity!
 
 ### New Materials
 - **Titanium**: Strong lightweight metal
@@ -63,6 +70,14 @@ Astro Expansion is a comprehensive space exploration mod that transforms Minecra
 
 ## 🎮 Getting Started
 
+### In-Game Guide Book
+Craft the **Astro Guide** for comprehensive in-game documentation:
+```
+[Book] [Titanium Ingot] [Book]
+[Titanium Ingot] [Glass] [Titanium Ingot]
+[Book] [Titanium Ingot] [Book]
+```
+
 ### Survival Progression Path
 
 1. **Mine New Ores**
@@ -73,18 +88,22 @@ Astro Expansion is a comprehensive space exploration mod that transforms Minecra
 2. **Build Basic Machines**
    - Basic Generator + Material Processor
    - Double ore output with processing
+   - Add upgrades for speed and efficiency
 
 3. **Create Storage Network**
    - Storage Core + Terminal
    - Store millions of items digitally
+   - Use search and favorites for easy access
 
 4. **Assemble Multiblocks**
    - Industrial Furnace (3x3x3)
    - Fusion Reactor (5x5x5)
+   - Use ghost block preview for easy building
 
 5. **Research Advanced Tech**
    - Quantum Computer for unlocks
    - Fuel Refinery for rocket fuel
+   - Complete research trees
 
 6. **Prepare for Space**
    - Craft full Space Suit

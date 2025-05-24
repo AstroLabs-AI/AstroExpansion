@@ -2,6 +2,60 @@
 
 All notable changes to AstroExpansion will be documented in this file.
 
+## [Unreleased]
+
+### ✨ Added
+- **Machine Tooltips System**
+  - Comprehensive hover information for all machines
+  - Shows energy capacity, processing times, and features
+  - Special tooltips for storage drives, conduits, and buses
+  - Detailed stats on hover for better decision making
+
+- **Storage Terminal Search**
+  - Real-time item filtering by name
+  - Advanced search with @ for mod ID (e.g., @minecraft)
+  - Case-insensitive searching
+  - Clear button for quick reset
+
+- **Favorite Items System**
+  - Right-click items to mark as favorites
+  - Favorites appear with star icon (⭐)
+  - Persistent across game sessions
+  - Personal to each player
+
+- **Multiblock Ghost Preview**
+  - Hold controller block to see structure preview
+  - Color-coded blocks: Blue (empty), Green (correct), Red (wrong)
+  - Semi-transparent overlay for easy building
+  - Supports all multiblock structures
+
+- **In-Game Guide Book**
+  - Comprehensive documentation system
+  - Interactive categories and navigation
+  - 3D block previews and recipes
+  - Progress tracking and bookmarks
+
+### 🔧 Fixed
+- **GUI Alignment Issues**
+  - Fixed all machine GUIs to use standard Minecraft slot positions
+  - Player inventory now at X=8, Y=84 (was X=15, Y=99)
+  - Player hotbar now at X=8, Y=142 (was X=15, Y=157)
+  - Updated inventory labels to Y=72 for proper placement
+  - Fixed 13 machine GUIs: Basic Generator, Material Processor, Ore Washer, Component Assembler, Industrial Furnace, Fuel Refinery, Fusion Reactor, Quantum Computer, Rocket Assembly, Drone Dock, Energy Storage, and Fluid Tank
+
+- **Registry Crashes**
+  - Fixed duplicate registration of quantum_core item
+  - Removed redundant item registration in ModItems
+  - Block items now properly created by registerBlock method
+
+### 📚 Documentation
+- Created Storage Search & Favorites Guide
+- Created Machine Upgrades Guide
+- Created Multiblock Preview Guide
+- Created In-Game Guide Book Guide
+- Updated README with latest features
+- Updated main guides index with new guides
+
 ## [1.0.10] - 2024-01-24
 
 ### 🚀 Added
