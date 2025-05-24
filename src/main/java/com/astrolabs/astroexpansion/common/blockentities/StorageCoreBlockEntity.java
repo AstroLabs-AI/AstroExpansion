@@ -231,11 +231,20 @@ public class StorageCoreBlockEntity extends BlockEntity implements MenuProvider,
     @Override
     public int insertItem(ItemStack stack, boolean simulate) {
         if (!networkFormed || stack.isEmpty()) {
+            if (!simulate && !stack.isEmpty()) {
+                AstroExpansion.LOGGER.debug("Storage Core at {} - Cannot insert: Network formed: {}", 
+                    worldPosition, networkFormed);
+            }
             return 0;
         }
         
         long spaceAvailable = totalCapacity - usedCapacity;
         int toInsert = (int) Math.min(stack.getCount(), spaceAvailable);
+        
+        if (!simulate && toInsert == 0) {
+            AstroExpansion.LOGGER.info("Storage Core at {} is FULL! Used: {}/{}", 
+                worldPosition, usedCapacity, totalCapacity);
+        }
         
         if (toInsert > 0 && !simulate) {
             ItemStack key = stack.copy();
@@ -244,6 +253,9 @@ public class StorageCoreBlockEntity extends BlockEntity implements MenuProvider,
             usedCapacity += toInsert;
             setChanged();
             saveToDrives();
+            
+            AstroExpansion.LOGGER.debug("Storage Core at {} - Inserted {} x{} (Used: {}/{})", 
+                worldPosition, stack.getItem().toString(), toInsert, usedCapacity, totalCapacity);
         }
         
         return toInsert;

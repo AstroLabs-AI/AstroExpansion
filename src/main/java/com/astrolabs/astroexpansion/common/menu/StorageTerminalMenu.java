@@ -103,6 +103,12 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
                 remaining.shrink(inserted);
                 return remaining;
             }
+        } else {
+            // Network is null - terminal not connected to core
+            if (!level.isClientSide && !simulate) {
+                com.astrolabs.astroexpansion.AstroExpansion.LOGGER.warn(
+                    "Storage Terminal at {} has no network connection!", blockEntity.getBlockPos());
+            }
         }
         return stack;
     }

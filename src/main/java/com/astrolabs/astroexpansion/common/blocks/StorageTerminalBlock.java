@@ -76,4 +76,11 @@ public class StorageTerminalBlock extends BaseEntityBlock {
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new StorageTerminalBlockEntity(pos, state);
     }
+    
+    @Nullable
+    @Override
+    public <T extends BlockEntity> net.minecraft.world.level.block.entity.BlockEntityTicker<T> getTicker(Level level, BlockState state, net.minecraft.world.level.block.entity.BlockEntityType<T> blockEntityType) {
+        return createTickerHelper(blockEntityType, ModBlockEntities.STORAGE_TERMINAL.get(),
+            StorageTerminalBlockEntity::tick);
+    }
 }
