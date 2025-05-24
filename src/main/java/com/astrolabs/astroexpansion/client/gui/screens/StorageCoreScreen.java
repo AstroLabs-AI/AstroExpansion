@@ -22,6 +22,7 @@ public class StorageCoreScreen extends AbstractContainerScreen<StorageCoreMenu> 
     @Override
     protected void init() {
         super.init();
+        this.inventoryLabelY = 88; // Player inventory starts at Y=99
     }
     
     @Override

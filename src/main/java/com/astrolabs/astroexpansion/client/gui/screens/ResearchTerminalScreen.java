@@ -17,7 +17,7 @@ public class ResearchTerminalScreen extends AbstractContainerScreen<ResearchTerm
         super(menu, playerInventory, title);
         this.imageWidth = 176;
         this.imageHeight = 222;
-        this.inventoryLabelY = this.imageHeight - 94;
+        this.inventoryLabelY = 88; // Player inventory starts at Y=99
     }
     
     @Override

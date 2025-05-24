@@ -33,8 +33,8 @@ public class MaterialProcessorMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
         
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 56, 35));
-            this.addSlot(new SlotItemHandler(handler, 1, 116, 35) {
+            this.addSlot(new SlotItemHandler(handler, 0, 63, 50));
+            this.addSlot(new SlotItemHandler(handler, 1, 119, 50) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
                     return false;
@@ -121,14 +121,14 @@ public class MaterialProcessorMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 15 + l * 18, 99 + i * 18));
             }
         }
     }
     
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(playerInventory, i, 15 + i * 18, 157));
         }
     }
 }

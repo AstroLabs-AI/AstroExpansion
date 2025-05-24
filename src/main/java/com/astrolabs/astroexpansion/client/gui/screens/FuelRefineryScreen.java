@@ -20,6 +20,12 @@ public class FuelRefineryScreen extends AbstractContainerScreen<FuelRefineryMenu
     }
     
     @Override
+    protected void init() {
+        super.init();
+        this.inventoryLabelY = 88; // Player inventory starts at Y=99
+    }
+    
+    @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);

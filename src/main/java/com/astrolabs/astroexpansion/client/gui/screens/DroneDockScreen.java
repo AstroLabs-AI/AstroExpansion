@@ -23,7 +23,7 @@ public class DroneDockScreen extends AbstractContainerScreen<DroneDockMenu> {
     protected void init() {
         super.init();
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
-        this.inventoryLabelY = this.imageHeight - 94;
+        this.inventoryLabelY = 88; // Player inventory starts at Y=99
     }
     
     @Override

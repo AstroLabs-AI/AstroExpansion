@@ -52,13 +52,13 @@ public class ComponentAssemblerMenu extends AbstractContainerMenu {
         
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             // Input slots (4 slots in a 2x2 grid)
-            this.addSlot(new SlotItemHandler(handler, 0, 44, 17));
-            this.addSlot(new SlotItemHandler(handler, 1, 62, 17));
-            this.addSlot(new SlotItemHandler(handler, 2, 44, 35));
-            this.addSlot(new SlotItemHandler(handler, 3, 62, 35));
+            this.addSlot(new SlotItemHandler(handler, 0, 37, 23));
+            this.addSlot(new SlotItemHandler(handler, 1, 55, 23));
+            this.addSlot(new SlotItemHandler(handler, 2, 37, 41));
+            this.addSlot(new SlotItemHandler(handler, 3, 55, 41));
             
             // Output slot
-            this.addSlot(new SlotItemHandler(handler, 4, 116, 26));
+            this.addSlot(new SlotItemHandler(handler, 4, 131, 41));
         });
         
         addDataSlots(data);
@@ -148,14 +148,14 @@ public class ComponentAssemblerMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 15 + l * 18, 110 + i * 18));
             }
         }
     }
     
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(playerInventory, i, 15 + i * 18, 168));
         }
     }
     

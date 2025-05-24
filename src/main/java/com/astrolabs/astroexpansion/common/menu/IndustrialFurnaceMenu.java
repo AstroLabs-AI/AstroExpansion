@@ -42,7 +42,7 @@ public class IndustrialFurnaceMenu extends AbstractContainerMenu {
             // Output slots (3x3 grid)
             for (int row = 0; row < 3; row++) {
                 for (int col = 0; col < 3; col++) {
-                    this.addSlot(new SlotItemHandler(handler, 9 + row * 3 + col, 116 + col * 18, 17 + row * 18));
+                    this.addSlot(new SlotItemHandler(handler, 9 + row * 3 + col, 102 + col * 18, 17 + row * 18));
                 }
             }
         });
@@ -50,13 +50,13 @@ public class IndustrialFurnaceMenu extends AbstractContainerMenu {
         // Player inventory
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 9; ++col) {
-                this.addSlot(new Slot(inventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
+                this.addSlot(new Slot(inventory, col + row * 9 + 9, 15 + col * 18, 99 + row * 18));
             }
         }
         
         // Player hotbar
         for (int col = 0; col < 9; ++col) {
-            this.addSlot(new Slot(inventory, col, 8 + col * 18, 142));
+            this.addSlot(new Slot(inventory, col, 15 + col * 18, 157));
         }
     }
     

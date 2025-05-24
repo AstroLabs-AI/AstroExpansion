@@ -204,14 +204,14 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 18 + l * 18, 140 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 15 + l * 18, 99 + i * 18));
             }
         }
     }
     
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 18 + i * 18, 198));
+            this.addSlot(new Slot(playerInventory, i, 15 + i * 18, 157));
         }
     }
 }
