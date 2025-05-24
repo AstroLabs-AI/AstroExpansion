@@ -89,7 +89,7 @@ public class QuantumComputerPattern implements IMultiblockPattern {
     public QuantumComputerPattern() {
         matchers.put('O', MultiblockMatcher.block(ModBlocks.QUANTUM_COMPUTER_CONTROLLER.get()));
         matchers.put('Q', MultiblockMatcher.block(ModBlocks.QUANTUM_CASING.get()));
-        matchers.put('P', MultiblockMatcher.block(ModBlocks.QUANTUM_PROCESSOR.get()));
+        matchers.put('P', MultiblockMatcher.block(ModBlocks.QUANTUM_CASING.get())); // Use casing instead of processor
         matchers.put('C', MultiblockMatcher.block(ModBlocks.QUANTUM_CORE.get()));
         matchers.put(' ', MultiblockMatcher.block(Blocks.AIR));
     }
