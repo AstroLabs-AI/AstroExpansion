@@ -21,6 +21,7 @@ Welcome to the comprehensive guide collection for AstroExpansion! These guides w
 - [Drone Automation](guides/DRONES.md) - Autonomous helpers for various tasks
 - [Multiblock Structures](guides/MULTIBLOCKS.md) - Industrial Furnace and future structures
 - **👻 [Multiblock Preview System](guides/MULTIBLOCK_PREVIEW_GUIDE.md) - Ghost block building assistance**
+- **🚀 [Rocket Assembly Platform Build](guides/ROCKET_ASSEMBLY_BUILD_GUIDE.md) - Detailed 9x15x9 construction guide**
 - [Fluid Systems](guides/FLUIDS.md) - Tanks, pipes, and fluid handling
 
 ### Recipes & Crafting

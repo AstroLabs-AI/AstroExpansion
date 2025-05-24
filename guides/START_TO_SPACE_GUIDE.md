@@ -222,6 +222,7 @@ This guide will take you from punching trees to launching into space in Astro Ex
 
 ### Day 66-75: Build Your Rocket
 1. **Build Rocket Assembly Platform** (9x15x9)
+   - See **[Detailed Build Guide](ROCKET_ASSEMBLY_BUILD_GUIDE.md)**
    - Rocket Assembly Controller
    - Assembly Frame blocks
    - Launch Pad base
