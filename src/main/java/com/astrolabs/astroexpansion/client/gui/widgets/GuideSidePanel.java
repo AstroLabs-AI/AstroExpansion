@@ -31,18 +31,22 @@ public class GuideSidePanel extends AbstractWidget {
     
     @Override
     protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // Background - more transparent to not obscure book
-        graphics.fill(getX(), getY(), getX() + width, getY() + height, 0x88000000);
-        graphics.fill(getX() + 1, getY() + 1, getX() + width - 1, getY() + height - 1, 0x88222222);
+        // Background - semi-transparent with border
+        graphics.fill(getX(), getY(), getX() + width, getY() + height, 0xCC000000);
+        graphics.fill(getX() + 1, getY() + 1, getX() + width - 1, getY() + height - 1, 0xAA2B2B2B);
         
-        // Title
+        // Inner border for depth
+        graphics.fill(getX() + 2, getY() + 2, getX() + width - 2, getY() + height - 2, 0x88444444);
+        
+        // Title with underline
         String title = showingSearch ? "Search Results" : "Categories";
         graphics.drawCenteredString(Minecraft.getInstance().font, title, 
-            getX() + width / 2, getY() + 5, 0xFFFFFF);
+            getX() + width / 2, getY() + 5, 0xFFDD88);
+        graphics.fill(getX() + 10, getY() + 16, getX() + width - 10, getY() + 17, 0x88FFDD88);
         
         // Render entries
         int y = getY() + 20;
-        int visibleEntries = (height - 25) / 20;
+        int visibleEntries = (height - 25) / 18;  // Slightly more compact
         
         for (int i = scrollOffset; i < Math.min(scrollOffset + visibleEntries, entries.size()); i++) {
             PanelEntry entry = entries.get(i);
@@ -50,7 +54,7 @@ public class GuideSidePanel extends AbstractWidget {
                 mouseY >= y && mouseY < y + 20;
             
             entry.render(graphics, getX() + 5, y, width - 10, hovered);
-            y += 20;
+            y += 18;  // Match compact spacing
         }
         
         // Scroll bar
@@ -66,14 +70,14 @@ public class GuideSidePanel extends AbstractWidget {
         if (!isMouseOver(mouseX, mouseY)) return false;
         
         int y = getY() + 20;
-        int visibleEntries = (height - 25) / 20;
+        int visibleEntries = (height - 25) / 18;  // Match render spacing
         
         for (int i = scrollOffset; i < Math.min(scrollOffset + visibleEntries, entries.size()); i++) {
-            if (mouseY >= y && mouseY < y + 20) {
+            if (mouseY >= y && mouseY < y + 18) {
                 entries.get(i).onClick();
                 return true;
             }
-            y += 20;
+            y += 18;  // Match render spacing
         }
         
         return false;
@@ -83,7 +87,7 @@ public class GuideSidePanel extends AbstractWidget {
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
         if (!isMouseOver(mouseX, mouseY)) return false;
         
-        int visibleEntries = (height - 25) / 20;
+        int visibleEntries = (height - 25) / 18;
         int maxScroll = Math.max(0, entries.size() - visibleEntries);
         
         scrollOffset = Mth.clamp(scrollOffset - (int)delta, 0, maxScroll);

@@ -64,6 +64,8 @@ public class GuideBookScreen extends Screen {
     private Button backButton;
     private Button homeButton;
     private Button bookmarkButton;
+    private Button togglePanelButton;
+    private boolean sidePanelVisible = true;
     
     // Animation
     private float pageFlipProgress = 0;
@@ -90,9 +92,18 @@ public class GuideBookScreen extends Screen {
         addRenderableWidget(searchBar);
         
         // Side panel for categories/bookmarks
-        // Position panel inside the book area on the left side with some padding
-        sidePanel = new GuideSidePanel(bookX + 10, bookY + 40, 120, BOOK_HEIGHT - 80, this);
+        // Position panel to the left of the book, not overlapping content
+        sidePanel = new GuideSidePanel(bookX - 130, bookY + 40, 120, BOOK_HEIGHT - 80, this);
+        sidePanel.visible = sidePanelVisible;
         addRenderableWidget(sidePanel);
+        
+        // Toggle panel button
+        togglePanelButton = addRenderableWidget(Button.builder(
+            Component.literal(sidePanelVisible ? "◀" : "▶"),
+            btn -> toggleSidePanel())
+            .pos(bookX - 25, bookY + 10)
+            .size(20, 20)
+            .build());
         
         // Navigation buttons
         prevPageButton = addRenderableWidget(Button.builder(
@@ -148,16 +159,16 @@ public class GuideBookScreen extends Screen {
         
         // Render current pages
         if (!currentPages.isEmpty()) {
-            // Left page
+            // Left page - with proper margins
             if (currentPageIndex < currentPages.size()) {
                 IGuidePage leftPage = currentPages.get(currentPageIndex);
-                renderPage(graphics, leftPage, bookX + 20, bookY + 35, mouseX, mouseY, partialTick);
+                renderPage(graphics, leftPage, bookX + 30, bookY + 35, mouseX, mouseY, partialTick);
             }
             
-            // Right page
+            // Right page - with proper margins
             if (currentPageIndex + 1 < currentPages.size()) {
                 IGuidePage rightPage = currentPages.get(currentPageIndex + 1);
-                renderPage(graphics, rightPage, bookX + BOOK_WIDTH / 2 + 10, bookY + 35, mouseX, mouseY, partialTick);
+                renderPage(graphics, rightPage, bookX + BOOK_WIDTH / 2 + 15, bookY + 35, mouseX, mouseY, partialTick);
             }
         }
         
@@ -206,9 +217,9 @@ public class GuideBookScreen extends Screen {
         if (!currentPages.isEmpty()) {
             int bookX = (width - BOOK_WIDTH) / 2;
             int bookY = (height - BOOK_HEIGHT) / 2;
-            int leftStart = bookX + 28;
-            int rightStart = bookX + 256;
-            int pageY = bookY + 28;
+            int leftStart = bookX + 30;  // Match render position
+            int rightStart = bookX + BOOK_WIDTH / 2 + 15;  // Match render position
+            int pageY = bookY + 35;  // Match render position
             
             // Convert to relative coordinates
             int relX = (int)mouseX - bookX;
@@ -425,6 +436,12 @@ public class GuideBookScreen extends Screen {
         } else {
             bookmarkButton.setMessage(Component.literal("☆"));
         }
+    }
+    
+    private void toggleSidePanel() {
+        sidePanelVisible = !sidePanelVisible;
+        sidePanel.visible = sidePanelVisible;
+        togglePanelButton.setMessage(Component.literal(sidePanelVisible ? "◀" : "▶"));
     }
     
     private void playPageSound() {
