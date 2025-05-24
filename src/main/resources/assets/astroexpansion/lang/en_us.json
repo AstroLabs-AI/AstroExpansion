@@ -181,5 +181,10 @@
   "guide.astroexpansion.entry.ore_washer": "Ore Washer",
   "guide.astroexpansion.entry.energy_storage": "Energy Storage",
   "guide.astroexpansion.entry.component_assembler": "Component Assembler",
-  "guide.astroexpansion.entry.energy_conduit": "Energy Conduit"
+  "guide.astroexpansion.entry.energy_conduit": "Energy Conduit",
+  "guide.astroexpansion.entry.industrial_furnace": "Industrial Furnace",
+  "guide.astroexpansion.entry.fusion_reactor": "Fusion Reactor",
+  "guide.astroexpansion.entry.rocket_assembly": "Rocket Assembly Platform",
+  "guide.astroexpansion.entry.fuel_refinery": "Fuel Refinery",
+  "guide.astroexpansion.entry.quantum_computer": "Quantum Computer"
 }

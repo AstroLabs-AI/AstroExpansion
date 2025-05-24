@@ -7,11 +7,13 @@ import com.astrolabs.astroexpansion.common.guidebook.entries.BasicEntry;
 import com.astrolabs.astroexpansion.common.guidebook.pages.*;
 import com.astrolabs.astroexpansion.common.registry.ModBlocks;
 import com.astrolabs.astroexpansion.common.registry.ModItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -530,6 +532,148 @@ public class AstroGuideBook implements IGuideBook {
         componentAssembler.addTag("crafting");
         componentAssembler.addTag("automation");
         registerEntry(componentAssembler);
+        
+        // Industrial Furnace entry
+        BasicEntry industrialFurnace = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "industrial_furnace"),
+            Component.translatable("guide.astroexpansion.entry.industrial_furnace"),
+            new ItemStack(ModBlocks.INDUSTRIAL_FURNACE_CONTROLLER.get()),
+            category,
+            5
+        );
+        
+        industrialFurnace.addPage(new TextPage(
+            "## Industrial Furnace\n\n" +
+            "The **Industrial Furnace** is a 3x3x2 multiblock that smelts multiple items simultaneously.\n\n" +
+            "**Performance:**\n" +
+            "- Processes 6 items at once\n" +
+            "- 200% speed of vanilla furnace\n" +
+            "- Power Usage: 80 FE/tick\n" +
+            "- Shared fuel efficiency\n\n" +
+            "**Structure Requirements:**\n" +
+            "- 1x Industrial Furnace Controller\n" +
+            "- 11x Furnace Casing\n" +
+            "- 6x Vanilla Furnace\n\n" +
+            "Place controller in center of 3x3x2 structure!",
+            1
+        ));
+        
+        // Create multiblock structure map
+        Map<BlockPos, BlockState> furnaceStructure = new HashMap<>();
+        BlockState casing = ModBlocks.FURNACE_CASING.get().defaultBlockState();
+        BlockState furnace = net.minecraft.world.level.block.Blocks.FURNACE.defaultBlockState();
+        BlockState controller = ModBlocks.INDUSTRIAL_FURNACE_CONTROLLER.get().defaultBlockState();
+        
+        // Layer 1 (bottom)
+        for (int x = -1; x <= 1; x++) {
+            for (int z = -1; z <= 1; z++) {
+                if (x == 0 && z == 0) {
+                    furnaceStructure.put(new BlockPos(x, 0, z), controller);
+                } else {
+                    furnaceStructure.put(new BlockPos(x, 0, z), casing);
+                }
+            }
+        }
+        
+        // Layer 2 (top)
+        furnaceStructure.put(new BlockPos(-1, 1, -1), furnace);
+        furnaceStructure.put(new BlockPos(0, 1, -1), furnace);
+        furnaceStructure.put(new BlockPos(1, 1, -1), furnace);
+        furnaceStructure.put(new BlockPos(-1, 1, 0), furnace);
+        furnaceStructure.put(new BlockPos(0, 1, 0), casing);
+        furnaceStructure.put(new BlockPos(1, 1, 0), furnace);
+        furnaceStructure.put(new BlockPos(-1, 1, 1), furnace);
+        furnaceStructure.put(new BlockPos(0, 1, 1), casing);
+        furnaceStructure.put(new BlockPos(1, 1, 1), casing);
+        
+        industrialFurnace.addPage(new MultiblockPage(
+            furnaceStructure,
+            Component.literal("Industrial Furnace Structure"),
+            2
+        ));
+        
+        industrialFurnace.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "industrial_furnace_controller"),
+            3
+        ));
+        
+        industrialFurnace.addTag("machines");
+        industrialFurnace.addTag("multiblock");
+        industrialFurnace.addTag("processing");
+        registerEntry(industrialFurnace);
+        
+        // Fuel Refinery entry
+        BasicEntry fuelRefinery = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "fuel_refinery"),
+            Component.translatable("guide.astroexpansion.entry.fuel_refinery"),
+            new ItemStack(ModBlocks.FUEL_REFINERY_CONTROLLER.get()),
+            category,
+            6
+        );
+        
+        fuelRefinery.addPage(new TextPage(
+            "## Fuel Refinery\n\n" +
+            "The **Fuel Refinery** is a 5x5x3 multiblock that processes fluids into rocket fuel.\n\n" +
+            "**Processing Capabilities:**\n" +
+            "- Crude Oil → Rocket Fuel\n" +
+            "- Water → Hydrogen + Oxygen\n" +
+            "- Power Usage: 200 FE/tick\n" +
+            "- Processing Speed: Variable\n\n" +
+            "**Structure Components:**\n" +
+            "- 1x Fuel Refinery Controller\n" +
+            "- 8x Distillation Columns\n" +
+            "- 66x Refinery Casing\n\n" +
+            "Connect fluid pipes for input/output!",
+            1
+        ));
+        
+        // Create fuel refinery structure
+        Map<BlockPos, BlockState> refineryStructure = new HashMap<>();
+        BlockState refineryCasing = ModBlocks.REFINERY_CASING.get().defaultBlockState();
+        BlockState column = ModBlocks.DISTILLATION_COLUMN.get().defaultBlockState();
+        BlockState refineryController = ModBlocks.FUEL_REFINERY_CONTROLLER.get().defaultBlockState();
+        
+        // Build 5x5x3 structure
+        for (int y = 0; y < 3; y++) {
+            for (int x = -2; x <= 2; x++) {
+                for (int z = -2; z <= 2; z++) {
+                    boolean isEdge = (x == -2 || x == 2) || (z == -2 || z == 2);
+                    boolean isCorner = ((x == -2 || x == 2) && (z == -2 || z == 2));
+                    
+                    if (y == 0 || y == 2) {
+                        // Top and bottom layers - all casing
+                        refineryStructure.put(new BlockPos(x, y, z), refineryCasing);
+                    } else {
+                        // Middle layer
+                        if (x == 0 && z == -2 && y == 1) {
+                            refineryStructure.put(new BlockPos(x, y, z), refineryController);
+                        } else if (isCorner) {
+                            refineryStructure.put(new BlockPos(x, y, z), column);
+                        } else if (isEdge) {
+                            refineryStructure.put(new BlockPos(x, y, z), refineryCasing);
+                        }
+                        // Center is hollow
+                    }
+                }
+            }
+        }
+        
+        fuelRefinery.addPage(new MultiblockPage(
+            refineryStructure,
+            Component.literal("Fuel Refinery Structure"),
+            2
+        ));
+        
+        fuelRefinery.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "fuel_refinery_controller"),
+            3
+        ));
+        
+        fuelRefinery.addTag("machines");
+        fuelRefinery.addTag("multiblock");
+        fuelRefinery.addTag("fluids");
+        fuelRefinery.addTag("processing");
+        registerEntry(fuelRefinery);
     }
     
     private void createEnergyEntries(IGuideCategory category) {
@@ -594,6 +738,79 @@ public class AstroGuideBook implements IGuideBook {
         energyConduit.addTag("transfer");
         energyConduit.addTag("networks");
         registerEntry(energyConduit);
+        
+        // Fusion Reactor entry
+        BasicEntry fusionReactor = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "fusion_reactor"),
+            Component.translatable("guide.astroexpansion.entry.fusion_reactor"),
+            new ItemStack(ModBlocks.FUSION_REACTOR_CONTROLLER.get()),
+            category,
+            2
+        );
+        
+        fusionReactor.addPage(new TextPage(
+            "## Fusion Reactor\n\n" +
+            "The **Fusion Reactor** is a 5x5x5 multiblock that generates massive amounts of power from fusion.\n\n" +
+            "**Specifications:**\n" +
+            "- Power Generation: 100,000 FE/tick\n" +
+            "- Fuel: Deuterium + Tritium\n" +
+            "- Requires startup power: 1M FE\n" +
+            "- Self-sustaining once started\n\n" +
+            "**Structure Components:**\n" +
+            "- 1x Fusion Reactor Controller\n" +
+            "- 12x Fusion Coils (edges)\n" +
+            "- 98x Fusion Reactor Casing\n" +
+            "- 2x Fusion Core Blocks (top/bottom center)\n\n" +
+            "⚠️ Ensure proper containment before activation!",
+            1
+        ));
+        
+        // Create fusion reactor structure
+        Map<BlockPos, BlockState> fusionStructure = new HashMap<>();
+        BlockState casing = ModBlocks.FUSION_REACTOR_CASING.get().defaultBlockState();
+        BlockState coil = ModBlocks.FUSION_COIL.get().defaultBlockState();
+        BlockState core = ModBlocks.FUSION_CORE_BLOCK.get().defaultBlockState();
+        BlockState controller = ModBlocks.FUSION_REACTOR_CONTROLLER.get().defaultBlockState();
+        
+        // Build 5x5x5 hollow cube
+        for (int y = 0; y < 5; y++) {
+            for (int x = -2; x <= 2; x++) {
+                for (int z = -2; z <= 2; z++) {
+                    boolean isEdge = (x == -2 || x == 2) || (z == -2 || z == 2) || (y == 0 || y == 4);
+                    boolean isCorner = ((x == -2 || x == 2) && (z == -2 || z == 2));
+                    boolean isCenter = (x == 0 && z == 0);
+                    
+                    if (isEdge) {
+                        if (isCorner && y != 0 && y != 4) {
+                            fusionStructure.put(new BlockPos(x, y, z), coil);
+                        } else if (x == 0 && y == 2 && z == -2) {
+                            fusionStructure.put(new BlockPos(x, y, z), controller);
+                        } else if (isCenter && (y == 0 || y == 4)) {
+                            fusionStructure.put(new BlockPos(x, y, z), core);
+                        } else {
+                            fusionStructure.put(new BlockPos(x, y, z), casing);
+                        }
+                    }
+                }
+            }
+        }
+        
+        fusionReactor.addPage(new MultiblockPage(
+            fusionStructure,
+            Component.literal("Fusion Reactor Structure"),
+            2
+        ));
+        
+        fusionReactor.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "fusion_reactor_controller"),
+            3
+        ));
+        
+        fusionReactor.addTag("energy");
+        fusionReactor.addTag("multiblock");
+        fusionReactor.addTag("advanced");
+        fusionReactor.addTag("fusion");
+        registerEntry(fusionReactor);
     }
     
     private void createSpaceEntries(IGuideCategory category) {
@@ -622,6 +839,80 @@ public class AstroGuideBook implements IGuideBook {
         spaceSuit.addTag("space");
         spaceSuit.addTag("equipment");
         registerEntry(spaceSuit);
+        
+        // Rocket Assembly Platform entry
+        BasicEntry rocketAssembly = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "rocket_assembly"),
+            Component.translatable("guide.astroexpansion.entry.rocket_assembly"),
+            new ItemStack(ModBlocks.ROCKET_ASSEMBLY_CONTROLLER.get()),
+            category,
+            1
+        );
+        
+        rocketAssembly.addPage(new TextPage(
+            "## Rocket Assembly Platform\n\n" +
+            "The **Rocket Assembly Platform** is a massive 9x9x15 multiblock for building rockets.\n\n" +
+            "**Structure Components:**\n" +
+            "- 1x Rocket Assembly Controller\n" +
+            "- 81x Launch Pad blocks (base)\n" +
+            "- Assembly Frames (tower structure)\n\n" +
+            "**Assembly Process:**\n" +
+            "1. Build the platform structure\n" +
+            "2. Place rocket components in order:\n" +
+            "   - Engine → Fuel Tank → Hull → Nose Cone\n" +
+            "3. Supply power and materials\n" +
+            "4. Activate assembly sequence\n\n" +
+            "Once complete, your rocket is ready for launch!",
+            1
+        ));
+        
+        // Create simplified rocket assembly structure (showing key layers)
+        Map<BlockPos, BlockState> rocketStructure = new HashMap<>();
+        BlockState launchPad = ModBlocks.LAUNCH_PAD.get().defaultBlockState();
+        BlockState frame = ModBlocks.ASSEMBLY_FRAME.get().defaultBlockState();
+        BlockState controller = ModBlocks.ROCKET_ASSEMBLY_CONTROLLER.get().defaultBlockState();
+        
+        // Base layer (9x9 launch pad)
+        for (int x = -4; x <= 4; x++) {
+            for (int z = -4; z <= 4; z++) {
+                rocketStructure.put(new BlockPos(x, 0, z), launchPad);
+            }
+        }
+        
+        // Controller at center front
+        rocketStructure.put(new BlockPos(0, 1, -4), controller);
+        
+        // Sample frame structure (corners and edges at different heights)
+        int[] heights = {2, 5, 8, 11, 14};
+        for (int h : heights) {
+            // Corner frames
+            rocketStructure.put(new BlockPos(-4, h, -4), frame);
+            rocketStructure.put(new BlockPos(4, h, -4), frame);
+            rocketStructure.put(new BlockPos(-4, h, 4), frame);
+            rocketStructure.put(new BlockPos(4, h, 4), frame);
+            
+            // Some edge frames
+            rocketStructure.put(new BlockPos(0, h, -4), frame);
+            rocketStructure.put(new BlockPos(0, h, 4), frame);
+            rocketStructure.put(new BlockPos(-4, h, 0), frame);
+            rocketStructure.put(new BlockPos(4, h, 0), frame);
+        }
+        
+        rocketAssembly.addPage(new MultiblockPage(
+            rocketStructure,
+            Component.literal("Rocket Assembly Platform"),
+            2
+        ));
+        
+        rocketAssembly.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "rocket_assembly_controller"),
+            3
+        ));
+        
+        rocketAssembly.addTag("space");
+        rocketAssembly.addTag("multiblock");
+        rocketAssembly.addTag("rockets");
+        registerEntry(rocketAssembly);
     }
     
     private void createAutomationEntries(IGuideCategory category) {
@@ -649,6 +940,75 @@ public class AstroGuideBook implements IGuideBook {
         storage.addTag("automation");
         storage.addTag("storage");
         registerEntry(storage);
+        
+        // Quantum Computer entry
+        BasicEntry quantumComputer = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "quantum_computer"),
+            Component.translatable("guide.astroexpansion.entry.quantum_computer"),
+            new ItemStack(ModBlocks.QUANTUM_COMPUTER_CONTROLLER.get()),
+            category,
+            1
+        );
+        
+        quantumComputer.addPage(new TextPage(
+            "## Quantum Computer\n\n" +
+            "The **Quantum Computer** is a 7x7x7 multiblock for advanced research and computation.\n\n" +
+            "**Capabilities:**\n" +
+            "- Research data generation\n" +
+            "- Recipe optimization\n" +
+            "- Quantum calculations\n" +
+            "- Power Usage: 1,000 FE/tick\n\n" +
+            "**Structure Components:**\n" +
+            "- 1x Quantum Computer Controller\n" +
+            "- 8x Quantum Cores (center cube)\n" +
+            "- 334x Quantum Casing\n\n" +
+            "**Research Types:**\n" +
+            "- Basic → Advanced → Quantum\n" +
+            "- Space & Fusion specializations\n\n" +
+            "The pinnacle of computational technology!",
+            1
+        ));
+        
+        // Create quantum computer structure (simplified - showing key components)
+        Map<BlockPos, BlockState> quantumStructure = new HashMap<>();
+        BlockState casing = ModBlocks.QUANTUM_CASING.get().defaultBlockState();
+        BlockState core = ModBlocks.QUANTUM_CORE.get().defaultBlockState();
+        BlockState controller = ModBlocks.QUANTUM_COMPUTER_CONTROLLER.get().defaultBlockState();
+        
+        // Build 7x7x7 structure
+        for (int y = 0; y < 7; y++) {
+            for (int x = -3; x <= 3; x++) {
+                for (int z = -3; z <= 3; z++) {
+                    boolean isEdge = (x == -3 || x == 3) || (z == -3 || z == 3) || (y == 0 || y == 6);
+                    boolean isCenterCube = (Math.abs(x) <= 1 && Math.abs(z) <= 1 && y >= 2 && y <= 4);
+                    
+                    if (x == 0 && y == 3 && z == -3) {
+                        quantumStructure.put(new BlockPos(x, y, z), controller);
+                    } else if (isCenterCube && !isEdge) {
+                        quantumStructure.put(new BlockPos(x, y, z), core);
+                    } else if (isEdge) {
+                        quantumStructure.put(new BlockPos(x, y, z), casing);
+                    }
+                }
+            }
+        }
+        
+        quantumComputer.addPage(new MultiblockPage(
+            quantumStructure,
+            Component.literal("Quantum Computer Structure"),
+            2
+        ));
+        
+        quantumComputer.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "quantum_computer_controller"),
+            3
+        ));
+        
+        quantumComputer.addTag("automation");
+        quantumComputer.addTag("multiblock");
+        quantumComputer.addTag("research");
+        quantumComputer.addTag("quantum");
+        registerEntry(quantumComputer);
     }
     
     private void registerCategory(IGuideCategory category) {
