@@ -108,7 +108,7 @@ public class MatterDuplicatorScreen extends AbstractContainerScreen<MatterDuplic
         }
     }
 
-    private boolean isHovering(int x, int y, int width, int height, double mouseX, double mouseY) {
+    protected boolean isHovering(int x, int y, int width, int height, double mouseX, double mouseY) {
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         return mouseX >= (double)(i + x) && mouseX < (double)(i + x + width) 

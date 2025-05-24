@@ -5,7 +5,7 @@ import com.astrolabs.astroexpansion.common.blocks.machines.base.MachineTier;
 import com.astrolabs.astroexpansion.common.blocks.machines.base.UpgradeableMachineBlockEntity;
 import com.astrolabs.astroexpansion.common.capabilities.AstroEnergyStorage;
 import com.astrolabs.astroexpansion.common.menu.TieredOreWasherMenu;
-import com.astrolabs.astroexpansion.common.recipes.OreWashingRecipe;
+import com.astrolabs.astroexpansion.common.recipes.WashingRecipe;
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
 import com.astrolabs.astroexpansion.common.registry.ModRecipeTypes;
 import net.minecraft.core.BlockPos;
@@ -340,8 +340,8 @@ public class TieredOreWasherBlockEntity extends UpgradeableMachineBlockEntity im
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
         
-        Optional<OreWashingRecipe> recipe = level.getRecipeManager()
-                .getRecipeFor(ModRecipeTypes.ORE_WASHING.get(), inventory, level);
+        Optional<WashingRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(ModRecipeTypes.WASHING.get(), inventory, level);
         
         if (recipe.isPresent()) {
             ItemStack primaryOutput = recipe.get().getResultItem(level.registryAccess());
@@ -389,8 +389,8 @@ public class TieredOreWasherBlockEntity extends UpgradeableMachineBlockEntity im
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
         
-        Optional<OreWashingRecipe> match = level.getRecipeManager()
-                .getRecipeFor(ModRecipeTypes.ORE_WASHING.get(), inventory, level);
+        Optional<WashingRecipe> match = level.getRecipeManager()
+                .getRecipeFor(ModRecipeTypes.WASHING.get(), inventory, level);
         
         if (match.isEmpty()) return false;
         

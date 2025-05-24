@@ -255,12 +255,12 @@ public class TieredPowerGeneratorBlockEntity extends UpgradeableMachineBlockEnti
         
         for (Direction direction : Direction.values()) {
             BlockPos adjacentPos = worldPosition.relative(direction);
-            BlockEntity adjacent = level.getBlockEntity(adjacentPos);
+            net.minecraft.world.level.block.entity.BlockEntity adjacent = level.getBlockEntity(adjacentPos);
             
             if (adjacent != null) {
                 adjacent.getCapability(ForgeCapabilities.ENERGY, direction.getOpposite()).ifPresent(handler -> {
                     if (handler.canReceive()) {
-                        int toSend = Math.min(energyStorage.getEnergyStored(), energyStorage.getMaxExtract());
+                        int toSend = Math.min(energyStorage.getEnergyStored(), 100);
                         int sent = handler.receiveEnergy(toSend, false);
                         energyStorage.extractEnergy(sent, false);
                     }

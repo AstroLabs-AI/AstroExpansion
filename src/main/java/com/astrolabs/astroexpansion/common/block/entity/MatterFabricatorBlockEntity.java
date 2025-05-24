@@ -1,7 +1,7 @@
 package com.astrolabs.astroexpansion.common.block.entity;
 
 import com.astrolabs.astroexpansion.common.blocks.machines.MatterFabricatorBlock;
-import com.astrolabs.astroexpansion.common.energy.AstroEnergyStorage;
+import com.astrolabs.astroexpansion.common.capabilities.AstroEnergyStorage;
 import com.astrolabs.astroexpansion.common.menu.MatterFabricatorMenu;
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
 import com.astrolabs.astroexpansion.common.registry.ModFluids;
@@ -63,12 +63,7 @@ public class MatterFabricatorBlockEntity extends BlockEntity implements MenuProv
     };
 
     private final AstroEnergyStorage energyStorage = new AstroEnergyStorage(ENERGY_CAPACITY, 
-            ENERGY_CAPACITY, 0) {
-        @Override
-        public void onEnergyChanged() {
-            setChanged();
-        }
-    };
+            ENERGY_CAPACITY, 0);
 
     private final FluidTank fluidTank = new FluidTank(TANK_CAPACITY) {
         @Override

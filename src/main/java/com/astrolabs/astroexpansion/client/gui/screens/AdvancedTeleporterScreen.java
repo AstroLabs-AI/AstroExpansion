@@ -156,17 +156,17 @@ public class AdvancedTeleporterScreen extends AbstractContainerScreen<AdvancedTe
         // Energy tooltip
         if (x >= this.leftPos + 152 && x < this.leftPos + 164 && 
             y >= this.topPos + 17 && y < this.topPos + 69) {
-            List<Component> tooltip = new ArrayList<>();
-            tooltip.add(Component.literal("Energy: " + menu.getEnergy() + " / " + menu.getMaxEnergy() + " FE"));
-            guiGraphics.renderTooltip(this.font, tooltip, x, y);
+            guiGraphics.renderTooltip(this.font, 
+                Component.literal("Energy: " + menu.getEnergy() + " / " + menu.getMaxEnergy() + " FE"), 
+                x, y);
         }
         
         // Cooldown tooltip
         if (menu.getCooldown() > 0 && x >= this.leftPos + 80 && x < this.leftPos + 96 && 
             y >= this.topPos + 35 && y < this.topPos + 51) {
-            List<Component> tooltip = new ArrayList<>();
-            tooltip.add(Component.literal("Cooldown: " + (menu.getCooldown() / 20) + "s").withStyle(ChatFormatting.RED));
-            guiGraphics.renderTooltip(this.font, tooltip, x, y);
+            guiGraphics.renderTooltip(this.font, 
+                Component.literal("Cooldown: " + (menu.getCooldown() / 20) + "s").withStyle(ChatFormatting.RED), 
+                x, y);
         }
     }
     

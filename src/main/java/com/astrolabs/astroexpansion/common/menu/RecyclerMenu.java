@@ -1,6 +1,6 @@
 package com.astrolabs.astroexpansion.common.menu;
 
-import com.astrolabs.astroexpansion.api.capability.AstroEnergyStorage;
+import com.astrolabs.astroexpansion.common.capabilities.AstroEnergyStorage;
 import com.astrolabs.astroexpansion.common.block.entity.machine.RecyclerBlockEntity;
 import com.astrolabs.astroexpansion.common.registry.ModBlocks;
 import com.astrolabs.astroexpansion.common.registry.ModMenuTypes;

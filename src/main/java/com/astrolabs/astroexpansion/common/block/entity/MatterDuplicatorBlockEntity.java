@@ -2,7 +2,7 @@ package com.astrolabs.astroexpansion.common.block.entity;
 
 import com.astrolabs.astroexpansion.common.blocks.machines.MatterDuplicatorBlock;
 import com.astrolabs.astroexpansion.common.data.MatterRecipes;
-import com.astrolabs.astroexpansion.common.energy.AstroEnergyStorage;
+import com.astrolabs.astroexpansion.common.capabilities.AstroEnergyStorage;
 import com.astrolabs.astroexpansion.common.menu.MatterDuplicatorMenu;
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
 import com.astrolabs.astroexpansion.common.registry.ModFluids;
@@ -58,12 +58,7 @@ public class MatterDuplicatorBlockEntity extends BlockEntity implements MenuProv
     };
 
     private final AstroEnergyStorage energyStorage = new AstroEnergyStorage(ENERGY_CAPACITY, 
-            ENERGY_CAPACITY, 0) {
-        @Override
-        public void onEnergyChanged() {
-            setChanged();
-        }
-    };
+            ENERGY_CAPACITY, 0);
 
     private final FluidTank fluidTank = new FluidTank(TANK_CAPACITY) {
         @Override
