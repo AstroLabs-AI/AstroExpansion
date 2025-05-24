@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
@@ -57,6 +58,26 @@ public class MaterialProcessorBlock extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+    
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(LIT)) {
+            // Spawn processing particles when machine is active
+            com.astrolabs.astroexpansion.client.particle.MachineParticles.spawnProcessingParticles(level, pos, random);
+            
+            // Occasional smoke from top
+            if (random.nextFloat() < 0.3f) {
+                com.astrolabs.astroexpansion.client.particle.MachineParticles.spawnSmokeParticles(level, pos, random);
+            }
+            
+            // Machine sounds
+            if (random.nextDouble() < 0.1) {
+                level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    net.minecraft.sounds.SoundEvents.FURNACE_FIRE_CRACKLE, net.minecraft.sounds.SoundSource.BLOCKS,
+                    0.5F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            }
+        }
     }
     
     @Override

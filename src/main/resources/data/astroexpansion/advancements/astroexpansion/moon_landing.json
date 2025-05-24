@@ -1,0 +1,29 @@
+{
+  "parent": "astroexpansion:astroexpansion/to_the_stars",
+  "display": {
+    "icon": {
+      "item": "astroexpansion:moon_stone"
+    },
+    "title": {
+      "translate": "advancement.astroexpansion.moon_landing"
+    },
+    "description": {
+      "translate": "advancement.astroexpansion.moon_landing.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enter_moon": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "astroexpansion:moon"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 300
+  }
+}

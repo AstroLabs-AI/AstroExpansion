@@ -1,0 +1,29 @@
+{
+  "parent": "astroexpansion:astroexpansion/fusion_power",
+  "display": {
+    "icon": {
+      "item": "astroexpansion:rocket_assembly_controller"
+    },
+    "title": {
+      "translate": "advancement.astroexpansion.to_the_stars"
+    },
+    "description": {
+      "translate": "advancement.astroexpansion.to_the_stars.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enter_space": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "astroexpansion:space"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

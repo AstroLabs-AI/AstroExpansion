@@ -90,7 +90,8 @@ public class GuideBookScreen extends Screen {
         addRenderableWidget(searchBar);
         
         // Side panel for categories/bookmarks
-        sidePanel = new GuideSidePanel(bookX - 150, bookY, 140, BOOK_HEIGHT, this);
+        // Position panel inside the book area on the left side with some padding
+        sidePanel = new GuideSidePanel(bookX + 10, bookY + 40, 120, BOOK_HEIGHT - 80, this);
         addRenderableWidget(sidePanel);
         
         // Navigation buttons

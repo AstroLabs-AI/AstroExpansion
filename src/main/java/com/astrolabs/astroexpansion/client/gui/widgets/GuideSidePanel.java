@@ -31,9 +31,9 @@ public class GuideSidePanel extends AbstractWidget {
     
     @Override
     protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // Background
-        graphics.fill(getX(), getY(), getX() + width, getY() + height, 0xCC000000);
-        graphics.fill(getX() + 1, getY() + 1, getX() + width - 1, getY() + height - 1, 0xCC333333);
+        // Background - more transparent to not obscure book
+        graphics.fill(getX(), getY(), getX() + width, getY() + height, 0x88000000);
+        graphics.fill(getX() + 1, getY() + 1, getX() + width - 1, getY() + height - 1, 0x88222222);
         
         // Title
         String title = showingSearch ? "Search Results" : "Categories";

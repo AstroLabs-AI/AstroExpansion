@@ -94,6 +94,10 @@ public class WashingRecipe implements Recipe<Container> {
         return energyCost;
     }
     
+    public float getChance() {
+        return 1.0f; // Primary output always has 100% chance
+    }
+    
     public static class Serializer implements RecipeSerializer<WashingRecipe> {
         @Override
         public WashingRecipe fromJson(ResourceLocation id, JsonObject json) {

@@ -1,0 +1,30 @@
+{
+  "parent": "astroexpansion:astroexpansion/first_machine",
+  "display": {
+    "icon": {
+      "item": "astroexpansion:material_processor"
+    },
+    "title": {
+      "translate": "advancement.astroexpansion.ore_processing"
+    },
+    "description": {
+      "translate": "advancement.astroexpansion.ore_processing.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "use_processor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["astroexpansion:titanium_dust"]
+          }
+        ]
+      }
+    }
+  }
+}

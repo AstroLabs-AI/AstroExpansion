@@ -186,5 +186,30 @@
   "guide.astroexpansion.entry.fusion_reactor": "Fusion Reactor",
   "guide.astroexpansion.entry.rocket_assembly": "Rocket Assembly Platform",
   "guide.astroexpansion.entry.fuel_refinery": "Fuel Refinery",
-  "guide.astroexpansion.entry.quantum_computer": "Quantum Computer"
+  "guide.astroexpansion.entry.quantum_computer": "Quantum Computer",
+  
+  "gui.astroexpansion.category.material_processor": "Material Processing",
+  "gui.astroexpansion.category.ore_washer": "Ore Washing",
+  "gui.astroexpansion.category.component_assembler": "Component Assembly",
+  "gui.astroexpansion.chance": "%d%% Chance",
+  
+  "jei.astroexpansion.info.astro_guide": "The AstroExpansion Guide Book contains comprehensive information about all machines, items, and progression in the mod. Right-click to open and explore!",
+  "jei.astroexpansion.info.storage_core": "The Storage Core is the heart of a digital storage network. Place Storage Drives inside to store items digitally. Connect Storage Terminals with cables to access your items from anywhere in your base!",
+  
+  "advancement.astroexpansion.root": "AstroExpansion",
+  "advancement.astroexpansion.root.description": "Your journey to the stars begins",
+  "advancement.astroexpansion.first_machine": "Power Up!",
+  "advancement.astroexpansion.first_machine.description": "Craft and place a Basic Generator",
+  "advancement.astroexpansion.ore_processing": "Efficiency Expert",
+  "advancement.astroexpansion.ore_processing.description": "Process raw ore into dust",
+  "advancement.astroexpansion.storage_network": "Digital Age",
+  "advancement.astroexpansion.storage_network.description": "Build your first Storage Core",
+  "advancement.astroexpansion.multiblock_master": "Think Big",
+  "advancement.astroexpansion.multiblock_master.description": "Construct a multiblock structure",
+  "advancement.astroexpansion.fusion_power": "Unlimited Power!",
+  "advancement.astroexpansion.fusion_power.description": "Build and activate a Fusion Reactor",
+  "advancement.astroexpansion.to_the_stars": "Space Explorer",
+  "advancement.astroexpansion.to_the_stars.description": "Reach the space station dimension",
+  "advancement.astroexpansion.moon_landing": "One Giant Leap",
+  "advancement.astroexpansion.moon_landing.description": "Successfully land on the moon"
 }

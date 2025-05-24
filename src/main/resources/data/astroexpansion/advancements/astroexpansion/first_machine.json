@@ -1,0 +1,26 @@
+{
+  "parent": "astroexpansion:astroexpansion/root",
+  "display": {
+    "icon": {
+      "item": "astroexpansion:basic_generator"
+    },
+    "title": {
+      "translate": "advancement.astroexpansion.first_machine"
+    },
+    "description": {
+      "translate": "advancement.astroexpansion.first_machine.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "place_machine": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "astroexpansion:basic_generator"
+      }
+    }
+  }
+}

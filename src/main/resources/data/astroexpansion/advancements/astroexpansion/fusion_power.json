@@ -1,0 +1,29 @@
+{
+  "parent": "astroexpansion:astroexpansion/multiblock_master",
+  "display": {
+    "icon": {
+      "item": "astroexpansion:fusion_reactor_controller"
+    },
+    "title": {
+      "translate": "advancement.astroexpansion.fusion_power"
+    },
+    "description": {
+      "translate": "advancement.astroexpansion.fusion_power.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "build_reactor": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "astroexpansion:fusion_reactor_controller"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  }
+}

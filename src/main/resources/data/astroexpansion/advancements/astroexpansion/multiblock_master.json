@@ -1,0 +1,26 @@
+{
+  "parent": "astroexpansion:astroexpansion/storage_network",
+  "display": {
+    "icon": {
+      "item": "astroexpansion:industrial_furnace_controller"
+    },
+    "title": {
+      "translate": "advancement.astroexpansion.multiblock_master"
+    },
+    "description": {
+      "translate": "advancement.astroexpansion.multiblock_master.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "industrial_furnace": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "astroexpansion:industrial_furnace_controller"
+      }
+    }
+  }
+}
