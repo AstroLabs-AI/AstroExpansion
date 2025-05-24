@@ -5,7 +5,6 @@ import com.astrolabs.astroexpansion.common.capabilities.ResearchCapabilityProvid
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,11 +34,4 @@ public class CapabilityEvents {
         }
     }
     
-    @Mod.EventBusSubscriber(modid = AstroExpansion.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ModBusEvents {
-        @SubscribeEvent
-        public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-            event.register(com.astrolabs.astroexpansion.common.capabilities.ResearchCapability.class);
-        }
-    }
 }
