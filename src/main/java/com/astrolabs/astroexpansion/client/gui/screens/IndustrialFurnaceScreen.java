@@ -22,7 +22,7 @@ public class IndustrialFurnaceScreen extends AbstractContainerScreen<IndustrialF
     protected void init() {
         super.init();
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
-        this.inventoryLabelY = 88; // Player inventory starts at Y=99
+        this.inventoryLabelY = 72;
     }
     
     @Override

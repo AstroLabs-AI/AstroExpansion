@@ -17,7 +17,7 @@ public class QuantumComputerScreen extends AbstractContainerScreen<QuantumComput
     public QuantumComputerScreen(QuantumComputerMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
         this.imageHeight = 184;
-        this.inventoryLabelY = 88; // Player inventory starts at Y=99
+        this.inventoryLabelY = 72;
     }
     
     @Override

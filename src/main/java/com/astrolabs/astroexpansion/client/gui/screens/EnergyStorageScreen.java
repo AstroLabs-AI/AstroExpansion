@@ -19,7 +19,7 @@ public class EnergyStorageScreen extends AbstractContainerScreen<EnergyStorageMe
     protected void init() {
         super.init();
         // Standard label positions to avoid overlap
-        this.inventoryLabelY = 88; // Player inventory starts at Y=99
+        this.inventoryLabelY = 72;
         this.titleLabelY = 6;
     }
     

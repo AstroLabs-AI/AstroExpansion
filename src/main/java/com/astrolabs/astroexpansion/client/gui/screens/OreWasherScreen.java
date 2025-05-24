@@ -35,7 +35,7 @@ public class OreWasherScreen extends AbstractContainerScreen<OreWasherMenu> {
     protected void init() {
         super.init();
         // Standard label positions to avoid overlap
-        this.inventoryLabelY = 88; // Player inventory starts at Y=99
+        this.inventoryLabelY = 72; // Player inventory starts at Y=84
         this.titleLabelY = 6;
         
         // Initialize animated widgets

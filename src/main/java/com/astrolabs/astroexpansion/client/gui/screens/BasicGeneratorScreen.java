@@ -30,8 +30,8 @@ public class BasicGeneratorScreen extends AbstractContainerScreen<BasicGenerator
     @Override
     protected void init() {
         super.init();
-        // Standard inventory label position (player inventory starts at Y=99)
-        this.inventoryLabelY = 88;
+        // Standard inventory label position (player inventory starts at Y=84)
+        this.inventoryLabelY = 72;
         this.titleLabelY = 6;
         
         // Initialize animated widgets

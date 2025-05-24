@@ -19,7 +19,7 @@ public class RocketAssemblyScreen extends AbstractContainerScreen<RocketAssembly
         super(menu, playerInventory, title);
         this.imageWidth = 176;
         this.imageHeight = 222;
-        this.inventoryLabelY = 88; // Player inventory starts at Y=99
+        this.inventoryLabelY = 72;
     }
     
     @Override
