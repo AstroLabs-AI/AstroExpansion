@@ -136,6 +136,10 @@
   "item.astroexpansion.lunar_rover": "Lunar Rover",
   "item.astroexpansion.helium3_crystal": "Helium-3 Crystal",
   "item.astroexpansion.moon_dust_item": "Moon Dust",
+  "item.astroexpansion.astro_guide": "AstroExpansion Guide",
+  "item.astroexpansion.astro_guide.tooltip": "Your guide to the stars",
+  "item.astroexpansion.astro_guide.subtitle": "A comprehensive guide to space technology",
+  "item.astroexpansion.astro_guide.completion": "Completion: %s",
   
   "block.astroexpansion.space_teleporter": "Space Teleporter",
   "block.astroexpansion.moon_teleporter": "Moon Teleporter",
@@ -145,5 +149,26 @@
   "astroexpansion.energy.stored": "Energy: %s / %s FE",
   "astroexpansion.progress": "Progress: %s%%",
   "astroexpansion.storage.items": "Items: %s / %s",
-  "astroexpansion.storage.types": "Types: %s / 63"
+  "astroexpansion.storage.types": "Types: %s / 63",
+  
+  "gui.astroexpansion.guide_book": "AstroExpansion Guide",
+  
+  "guide.astroexpansion.category.getting_started": "Getting Started",
+  "guide.astroexpansion.category.getting_started.desc": "Begin your journey to the stars",
+  "guide.astroexpansion.category.machines": "Machines",
+  "guide.astroexpansion.category.machines.desc": "Power generation and processing",
+  "guide.astroexpansion.category.energy": "Energy Systems",
+  "guide.astroexpansion.category.energy.desc": "Power generation, storage, and distribution",
+  "guide.astroexpansion.category.space": "Space Exploration",
+  "guide.astroexpansion.category.space.desc": "Rockets, suits, and extraterrestrial adventures",
+  "guide.astroexpansion.category.automation": "Automation",
+  "guide.astroexpansion.category.automation.desc": "Storage networks and automated systems",
+  
+  "guide.astroexpansion.entry.welcome": "Welcome",
+  "guide.astroexpansion.entry.first_steps": "First Steps",
+  "guide.astroexpansion.entry.basic_generator": "Basic Generator",
+  "guide.astroexpansion.entry.material_processor": "Material Processor",
+  "guide.astroexpansion.entry.energy_basics": "Energy Basics",
+  "guide.astroexpansion.entry.space_suit": "Space Suit",
+  "guide.astroexpansion.entry.storage_system": "Storage System"
 }

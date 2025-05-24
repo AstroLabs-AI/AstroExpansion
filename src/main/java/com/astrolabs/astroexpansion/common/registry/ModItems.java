@@ -3,6 +3,7 @@ package com.astrolabs.astroexpansion.common.registry;
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.items.DroneItem;
 import com.astrolabs.astroexpansion.common.items.LunarRoverItem;
+import com.astrolabs.astroexpansion.common.items.AstroGuideItem;
 import com.astrolabs.astroexpansion.common.items.SpaceSuitArmorItem;
 import com.astrolabs.astroexpansion.common.items.StorageDriveItem;
 import net.minecraft.world.item.ArmorItem;
@@ -152,6 +153,10 @@ public class ModItems {
     
     public static final RegistryObject<Item> MOON_DUST_ITEM = ITEMS.register("moon_dust_item",
         () -> new Item(new Item.Properties()));
+    
+    // Guide Book
+    public static final RegistryObject<Item> ASTRO_GUIDE = ITEMS.register("astro_guide",
+        () -> new AstroGuideItem(new Item.Properties()));
     
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
