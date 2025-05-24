@@ -101,6 +101,76 @@ public class ModCreativeTabs {
                 
                 // Tools
                 output.accept(ModItems.WRENCH.get());
+                
+                // Space Items
+                output.accept(ModItems.SPACE_HELMET.get());
+                output.accept(ModItems.SPACE_CHESTPLATE.get());
+                output.accept(ModItems.SPACE_LEGGINGS.get());
+                output.accept(ModItems.SPACE_BOOTS.get());
+                output.accept(ModItems.OXYGEN_TANK.get());
+                output.accept(ModItems.OXYGEN_CANISTER.get());
+                
+                // Research Data
+                output.accept(ModItems.RESEARCH_DATA_BASIC.get());
+                output.accept(ModItems.RESEARCH_DATA_ADVANCED.get());
+                output.accept(ModItems.RESEARCH_DATA_QUANTUM.get());
+                output.accept(ModItems.RESEARCH_DATA_FUSION.get());
+                output.accept(ModItems.RESEARCH_DATA_SPACE.get());
+                
+                // Fuel Cells
+                output.accept(ModItems.EMPTY_FUEL_CELL.get());
+                output.accept(ModItems.DEUTERIUM_CELL.get());
+                output.accept(ModItems.TRITIUM_CELL.get());
+                
+                // Rocket Parts
+                output.accept(ModBlocks.ROCKET_ASSEMBLY_CONTROLLER.get());
+                output.accept(ModBlocks.LAUNCH_PAD.get());
+                output.accept(ModBlocks.ASSEMBLY_FRAME.get());
+                output.accept(ModBlocks.ROCKET_ENGINE.get());
+                output.accept(ModBlocks.ROCKET_FUEL_TANK.get());
+                output.accept(ModBlocks.ROCKET_HULL.get());
+                output.accept(ModBlocks.ROCKET_NOSE_CONE.get());
+                
+                // Space Station
+                output.accept(ModBlocks.STATION_HULL.get());
+                output.accept(ModBlocks.STATION_GLASS.get());
+                output.accept(ModBlocks.DOCKING_PORT.get());
+                output.accept(ModBlocks.LIFE_SUPPORT_SYSTEM.get());
+                output.accept(ModBlocks.OXYGEN_GENERATOR.get());
+                output.accept(ModBlocks.SOLAR_PANEL.get());
+                
+                // Teleporters
+                output.accept(ModBlocks.SPACE_TELEPORTER.get());
+                output.accept(ModBlocks.MOON_TELEPORTER.get());
+                output.accept(ModBlocks.EARTH_TELEPORTER.get());
+                
+                // Quantum Computer
+                output.accept(ModBlocks.QUANTUM_COMPUTER_CONTROLLER.get());
+                output.accept(ModBlocks.QUANTUM_CASING.get());
+                output.accept(ModBlocks.QUANTUM_CORE.get());
+                output.accept(ModItems.QUANTUM_PROCESSOR.get());
+                
+                // Fuel Refinery
+                output.accept(ModBlocks.FUEL_REFINERY_CONTROLLER.get());
+                output.accept(ModBlocks.REFINERY_CASING.get());
+                output.accept(ModBlocks.DISTILLATION_COLUMN.get());
+                
+                // Research
+                output.accept(ModBlocks.RESEARCH_TERMINAL.get());
+                
+                // Fusion Reactor Extra
+                output.accept(ModBlocks.FUSION_COIL.get());
+                output.accept(ModBlocks.FUSION_CORE_BLOCK.get());
+                
+                // Lunar Resources
+                output.accept(ModBlocks.MOON_STONE.get());
+                output.accept(ModBlocks.MOON_DUST.get());
+                output.accept(ModBlocks.HELIUM3_ORE.get());
+                output.accept(ModItems.MOON_DUST_ITEM.get());
+                output.accept(ModItems.HELIUM3_CRYSTAL.get());
+                
+                // Vehicles
+                output.accept(ModItems.LUNAR_ROVER.get());
             })
             .build());
     
