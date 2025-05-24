@@ -58,4 +58,19 @@ public class ResearchTerminalMenu extends AbstractContainerMenu {
     public int getResearchPoints() {
         return blockEntity.getResearchPoints();
     }
+    
+    public java.util.List<String> getAvailableResearches() {
+        return blockEntity.getAvailableResearches();
+    }
+    
+    public int getResearchCost(String researchId) {
+        return blockEntity.getResearchCost(researchId);
+    }
+    
+    public void attemptResearch(int researchIndex) {
+        if (researchIndex >= 0 && researchIndex < getAvailableResearches().size()) {
+            String researchId = getAvailableResearches().get(researchIndex);
+            blockEntity.attemptResearch(researchId);
+        }
+    }
 }

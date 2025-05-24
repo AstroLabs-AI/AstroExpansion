@@ -65,4 +65,52 @@ public class ResearchTerminalBlockEntity extends BlockEntity implements MenuProv
         }
         return false;
     }
+    
+    public java.util.List<String> getAvailableResearches() {
+        // Return list of available research topics
+        java.util.List<String> researches = new java.util.ArrayList<>();
+        researches.add("advanced_materials");
+        researches.add("energy_efficiency");
+        researches.add("rocket_propulsion");
+        researches.add("quantum_computing");
+        researches.add("fusion_technology");
+        researches.add("drone_automation");
+        researches.add("multiblock_optimization");
+        researches.add("space_exploration");
+        return researches;
+    }
+    
+    public int getResearchCost(String researchId) {
+        // Return cost for each research topic
+        switch (researchId) {
+            case "advanced_materials":
+                return 100;
+            case "energy_efficiency":
+                return 150;
+            case "rocket_propulsion":
+                return 200;
+            case "quantum_computing":
+                return 300;
+            case "fusion_technology":
+                return 400;
+            case "drone_automation":
+                return 250;
+            case "multiblock_optimization":
+                return 350;
+            case "space_exploration":
+                return 500;
+            default:
+                return 100;
+        }
+    }
+    
+    public void attemptResearch(String researchId) {
+        int cost = getResearchCost(researchId);
+        if (consumeResearchPoints(cost)) {
+            // Research successful - in a real implementation, this would unlock new recipes/features
+            if (level != null && !level.isClientSide) {
+                // Play success sound or send message to player
+            }
+        }
+    }
 }

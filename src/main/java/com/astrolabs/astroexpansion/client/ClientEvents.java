@@ -31,6 +31,9 @@ public class ClientEvents {
             MenuScreens.register(ModMenuTypes.FUSION_REACTOR.get(), FusionReactorScreen::new);
             MenuScreens.register(ModMenuTypes.FLUID_TANK.get(), FluidTankScreen::new);
             MenuScreens.register(ModMenuTypes.QUANTUM_COMPUTER.get(), QuantumComputerScreen::new);
+            MenuScreens.register(ModMenuTypes.RESEARCH_TERMINAL.get(), ResearchTerminalScreen::new);
+            MenuScreens.register(ModMenuTypes.FUEL_REFINERY.get(), FuelRefineryScreen::new);
+            MenuScreens.register(ModMenuTypes.ROCKET_ASSEMBLY.get(), RocketAssemblyScreen::new);
         });
     }
     

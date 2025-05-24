@@ -245,4 +245,28 @@ public class FuelRefineryControllerBlockEntity extends MultiblockControllerBase 
     public int getFluidCapacity() {
         return FLUID_CAPACITY;
     }
+    
+    public int getOilAmount() {
+        return crudeOilTank.getFluidAmount();
+    }
+    
+    public int getOilCapacity() {
+        return crudeOilTank.getCapacity();
+    }
+    
+    public int getFuelAmount() {
+        return rocketFuelTank.getFluidAmount();
+    }
+    
+    public int getFuelCapacity() {
+        return rocketFuelTank.getCapacity();
+    }
+    
+    public int getProgress() {
+        return processingTime;
+    }
+    
+    public int getMaxProgress() {
+        return PROCESS_TIME;
+    }
 }

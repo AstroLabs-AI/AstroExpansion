@@ -370,4 +370,20 @@ public class RocketAssemblyControllerBlockEntity extends MultiblockControllerBas
     public ItemStackHandler getItemHandler() {
         return itemHandler;
     }
+    
+    public boolean isAssembled() {
+        return isFormed() && rocketBuilt;
+    }
+    
+    public int getFuelAmount() {
+        return fuelTank.getFluidAmount();
+    }
+    
+    public int getMaxFuel() {
+        return FUEL_CAPACITY;
+    }
+    
+    public boolean hasRequiredComponents() {
+        return hasRocketParts();
+    }
 }
