@@ -21,9 +21,6 @@ public class ClientEvents {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             // Register menu screens
-            MenuScreens.register(ModMenuTypes.BASIC_GENERATOR_MENU.get(), BasicGeneratorScreen::new);
-            MenuScreens.register(ModMenuTypes.MATERIAL_PROCESSOR_MENU.get(), MaterialProcessorScreen::new);
-            MenuScreens.register(ModMenuTypes.ORE_WASHER_MENU.get(), OreWasherScreen::new);
             MenuScreens.register(ModMenuTypes.RECYCLER.get(), RecyclerScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_STORAGE_MENU.get(), EnergyStorageScreen::new);
             MenuScreens.register(ModMenuTypes.STORAGE_CORE_MENU.get(), StorageCoreScreen::new);
@@ -41,6 +38,11 @@ public class ClientEvents {
             MenuScreens.register(ModMenuTypes.MATTER_DUPLICATOR_MENU.get(), MatterDuplicatorScreen::new);
             MenuScreens.register(ModMenuTypes.ADVANCED_TELEPORTER.get(), AdvancedTeleporterScreen::new);
             MenuScreens.register(ModMenuTypes.ROCKET_WORKBENCH.get(), RocketWorkbenchScreen::new);
+            
+            // Register tiered machine screens
+            MenuScreens.register(ModMenuTypes.TIERED_MATERIAL_PROCESSOR.get(), TieredMaterialProcessorScreen::new);
+            MenuScreens.register(ModMenuTypes.TIERED_ORE_WASHER.get(), TieredOreWasherScreen::new);
+            MenuScreens.register(ModMenuTypes.TIERED_POWER_GENERATOR.get(), TieredPowerGeneratorScreen::new);
         });
     }
     

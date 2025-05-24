@@ -96,33 +96,7 @@ public class ModBlocks {
             .strength(5.0F, 6.0F)
             .sound(SoundType.METAL)));
     
-    // Machines - Legacy (keeping for compatibility)
-    public static final RegistryObject<Block> BASIC_GENERATOR = registerMachineBlock("basic_generator",
-        () -> new BasicGeneratorBlock(BlockBehaviour.Properties.of()
-            .mapColor(MapColor.METAL)
-            .requiresCorrectToolForDrops()
-            .strength(3.5F)
-            .sound(SoundType.METAL)
-            .noOcclusion()),
-        MachineTooltips.BASIC_GENERATOR);
-    
-    public static final RegistryObject<Block> MATERIAL_PROCESSOR = registerMachineBlock("material_processor",
-        () -> new MaterialProcessorBlock(BlockBehaviour.Properties.of()
-            .mapColor(MapColor.METAL)
-            .requiresCorrectToolForDrops()
-            .strength(3.5F)
-            .sound(SoundType.METAL)
-            .noOcclusion()),
-        MachineTooltips.MATERIAL_PROCESSOR);
-    
-    public static final RegistryObject<Block> ORE_WASHER = registerMachineBlock("ore_washer",
-        () -> new OreWasherBlock(BlockBehaviour.Properties.of()
-            .mapColor(MapColor.METAL)
-            .requiresCorrectToolForDrops()
-            .strength(3.5F)
-            .sound(SoundType.METAL)
-            .noOcclusion()),
-        MachineTooltips.ORE_WASHER);
+    // Remove legacy machines - using tiered versions only
     
     public static final RegistryObject<Block> RECYCLER = registerBlock("recycler",
         () -> new RecyclerBlock(BlockBehaviour.Properties.of()

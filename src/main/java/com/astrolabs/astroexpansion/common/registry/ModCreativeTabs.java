@@ -54,10 +54,7 @@ public class ModCreativeTabs {
                 output.accept(ModItems.TITANIUM_PLATE.get());
                 output.accept(ModItems.SCRAP.get());
                 
-                // Machines (Legacy)
-                output.accept(ModBlocks.BASIC_GENERATOR.get());
-                output.accept(ModBlocks.MATERIAL_PROCESSOR.get());
-                output.accept(ModBlocks.ORE_WASHER.get());
+                // Machines
                 output.accept(ModBlocks.RECYCLER.get());
                 output.accept(ModBlocks.ENERGY_CONDUIT.get());
                 output.accept(ModBlocks.ENERGY_STORAGE.get());
@@ -138,7 +135,16 @@ public class ModCreativeTabs {
                 output.accept(ModItems.DEUTERIUM_CELL.get());
                 output.accept(ModItems.TRITIUM_CELL.get());
                 
-                // Rocket Parts
+                // Rocket System - New Simplified Version
+                output.accept(ModBlocks.LAUNCH_RAIL.get());
+                output.accept(ModBlocks.ROCKET_WORKBENCH.get());
+                output.accept(ModBlocks.LANDING_PAD.get());
+                output.accept(ModItems.PROBE_ROCKET.get());
+                output.accept(ModItems.PERSONAL_ROCKET.get());
+                output.accept(ModItems.CARGO_SHUTTLE.get());
+                output.accept(ModItems.ROCKET_FUEL.get());
+                
+                // Rocket Parts (Legacy - for multiblock)
                 output.accept(ModBlocks.ROCKET_ASSEMBLY_CONTROLLER.get());
                 output.accept(ModBlocks.LAUNCH_PAD.get());
                 output.accept(ModBlocks.ASSEMBLY_FRAME.get());
@@ -184,9 +190,31 @@ public class ModCreativeTabs {
                 output.accept(ModBlocks.HELIUM3_ORE.get());
                 output.accept(ModItems.MOON_DUST_ITEM.get());
                 output.accept(ModItems.HELIUM3_CRYSTAL.get());
+                output.accept(ModItems.HELIUM3_CANISTER.get());
+                output.accept(ModItems.RAW_LUNAR_IRON.get());
+                output.accept(ModItems.LUNAR_IRON_INGOT.get());
+                
+                // Space Loot
+                output.accept(ModItems.ALIEN_ARTIFACT.get());
+                output.accept(ModItems.METEOR_FRAGMENT.get());
+                output.accept(ModItems.COSMIC_DUST.get());
+                output.accept(ModItems.SPACE_STATION_KEY.get());
                 
                 // Vehicles
                 output.accept(ModItems.LUNAR_ROVER.get());
+                
+                // Matter Fabrication
+                output.accept(ModBlocks.MATTER_FABRICATOR.get());
+                output.accept(ModBlocks.MATTER_DUPLICATOR.get());
+                output.accept(ModItems.UU_MATTER_BUCKET.get());
+                
+                // Advanced Teleporter
+                output.accept(ModBlocks.ADVANCED_TELEPORTER.get());
+                output.accept(ModBlocks.TELEPORTER_FRAME.get());
+                output.accept(ModItems.TELEPORTER_FREQUENCY_CARD.get());
+                
+                // Tools and Utilities
+                output.accept(ModItems.MULTIMETER.get());
                 
                 // Machine Upgrades
                 output.accept(ModItems.SPEED_UPGRADE_1.get());

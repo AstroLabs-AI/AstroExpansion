@@ -134,7 +134,7 @@ public class SpaceStationStructure {
         
         // Place some machinery
         if (random.nextFloat() < 0.5f) {
-            level.setBlock(center.offset(-5, 1, -2), ModBlocks.BASIC_GENERATOR.get().defaultBlockState(), 3);
+            level.setBlock(center.offset(-5, 1, -2), ModBlocks.POWER_GENERATOR_BASIC.get().defaultBlockState(), 3);
         }
         if (random.nextFloat() < 0.3f) {
             level.setBlock(center.offset(5, 1, 2), ModBlocks.STORAGE_TERMINAL.get().defaultBlockState(), 3);

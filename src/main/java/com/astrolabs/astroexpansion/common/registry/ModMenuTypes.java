@@ -15,14 +15,7 @@ public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
         DeferredRegister.create(ForgeRegistries.MENU_TYPES, AstroExpansion.MODID);
     
-    public static final RegistryObject<MenuType<BasicGeneratorMenu>> BASIC_GENERATOR_MENU =
-        registerMenuType(BasicGeneratorMenu::new, "basic_generator_menu");
-    
-    public static final RegistryObject<MenuType<MaterialProcessorMenu>> MATERIAL_PROCESSOR_MENU =
-        registerMenuType(MaterialProcessorMenu::new, "material_processor_menu");
-    
-    public static final RegistryObject<MenuType<OreWasherMenu>> ORE_WASHER_MENU =
-        registerMenuType(OreWasherMenu::new, "ore_washer_menu");
+    // Removed legacy machine menus - using tiered versions only
     
     public static final RegistryObject<MenuType<RecyclerMenu>> RECYCLER =
         registerMenuType(RecyclerMenu::new, "recycler_menu");

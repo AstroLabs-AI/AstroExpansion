@@ -11,13 +11,19 @@ Astro Expansion is a comprehensive space exploration mod that transforms Minecra
 
 ## 🎉 Latest Updates
 
-### Version 1.0.18+ - Quality of Life Improvements
+### Version 1.1.0 - Streamlined Space Adventure!
+- 🚀 **New Rocket System**: Simplified 3-tier progression (Probe → Personal → Cargo)
+- 🛸 **Easy Space Access**: Single-block Launch Rails replace complex multiblocks
+- 🎯 **Adventure Focus**: Probe rockets return with random space loot
+- 🌌 **Space Stations**: Abandoned structures with treasure in space dimension
+- ⚡ **Simple Fuel**: Water for personal rockets, deuterium for cargo shuttles
+- 🎨 **Rocket Workbench**: New crafting station for all rocket types
+
+### Version 1.0.18 - Quality of Life
 - ✨ **Machine Tooltips**: Detailed hover information for all machines
 - 🔍 **Storage Search**: Filter items by name in Storage Terminal
 - ⭐ **Favorite Items**: Pin frequently used items in storage
 - 👻 **Structure Preview**: Ghost blocks show multiblock placement
-- 🎮 **Fixed GUIs**: All machine interfaces now perfectly aligned
-- 📖 **Guide Book**: Comprehensive in-game documentation system
 
 ### Version 1.0.0 - The Final Frontier
 - ✅ **Phase 1-3**: Energy Systems, Digital Storage, Multiblocks
@@ -47,12 +53,13 @@ Astro Expansion is a comprehensive space exploration mod that transforms Minecra
 - **Distribution**: Smart energy conduits
 - **Consumers**: Machines, assemblers, life support
 
-### Space Exploration
-- **Space Dimension**: Zero gravity void
-- **Moon Dimension**: Low gravity with Helium-3
-- **Space Stations**: Build bases in space
-- **Life Support**: Oxygen generation and protection
-- **Vehicles**: Lunar rover for exploration
+### Space Exploration (NEW!)
+- **Streamlined Rockets**: 3-tier system - Probe, Personal, Cargo
+- **Launch Infrastructure**: Simple Launch Rails and Landing Pads
+- **Space Loot**: Alien artifacts, meteor fragments, cosmic dust
+- **Abandoned Stations**: Explore derelict structures for treasure
+- **Easy Fuel**: Water buckets, deuterium cells - no complex refining
+- **Adventure Focus**: Send probes for loot, explore space personally
 
 ## 📦 Installation
 
@@ -107,15 +114,16 @@ Craft the **Astro Guide** for comprehensive in-game documentation:
    - Fuel Refinery for rocket fuel
    - Complete research trees
 
-6. **Prepare for Space**
-   - Craft full Space Suit
-   - Build Oxygen Generator
-   - Assemble Rocket (9x15x9)
+6. **Launch Into Space** (NEW!)
+   - Build Launch Rail (1 block!)
+   - Send Probe Rockets for loot
+   - Craft Personal Rocket with water fuel
+   - No complex multiblock required!
 
 7. **Explore New Worlds**
-   - Teleport to Space Station
+   - Discover abandoned space stations
    - Mine Helium-3 on the Moon
-   - Build extraterrestrial bases
+   - Build cargo shuttles for transport
 
 ### Quick Start Commands
 ```minecraft
@@ -124,10 +132,11 @@ Craft the **Astro Guide** for comprehensive in-game documentation:
 /give @p astroexpansion:basic_generator
 /give @p astroexpansion:material_processor
 
-# Space items
-/give @p astroexpansion:space_helmet
-/give @p astroexpansion:space_teleporter
-/give @p astroexpansion:lunar_rover
+# Space items (NEW!)
+/give @p astroexpansion:probe_rocket
+/give @p astroexpansion:personal_rocket
+/give @p astroexpansion:launch_rail
+/give @p astroexpansion:rocket_workbench
 ```
 
 ## 🚀 Major Systems
@@ -145,12 +154,12 @@ Craft the **Astro Guide** for comprehensive in-game documentation:
 - **AI Drones**: Mining, farming, combat, logistics
 - **Fluid System**: Pipes, tanks, pumps
 
-### Space Technology
-- **Space Suit**: Protection from vacuum
-- **Life Support**: Oxygen and atmosphere
-- **Solar Panels**: 2x power in space
-- **Teleporters**: Instant dimension travel
-- **Lunar Rover**: Moon exploration vehicle
+### Space Technology (Simplified!)
+- **Rocket Tiers**: Probe (unmanned) → Personal (one-way) → Cargo (reusable)
+- **Launch System**: Single-block Launch Rails and Landing Pads
+- **Space Loot**: Alien artifacts, meteor fragments, station keys
+- **Easy Fuel**: Water buckets for personal, deuterium for cargo
+- **Adventure**: Abandoned stations with treasure chests
 
 ## 🔧 Development
 

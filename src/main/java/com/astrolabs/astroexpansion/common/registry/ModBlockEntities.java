@@ -16,20 +16,7 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
         DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, AstroExpansion.MODID);
     
-    public static final RegistryObject<BlockEntityType<BasicGeneratorBlockEntity>> BASIC_GENERATOR =
-        BLOCK_ENTITIES.register("basic_generator",
-            () -> BlockEntityType.Builder.of(BasicGeneratorBlockEntity::new,
-                ModBlocks.BASIC_GENERATOR.get()).build(null));
-    
-    public static final RegistryObject<BlockEntityType<MaterialProcessorBlockEntity>> MATERIAL_PROCESSOR =
-        BLOCK_ENTITIES.register("material_processor",
-            () -> BlockEntityType.Builder.of(MaterialProcessorBlockEntity::new,
-                ModBlocks.MATERIAL_PROCESSOR.get()).build(null));
-    
-    public static final RegistryObject<BlockEntityType<OreWasherBlockEntity>> ORE_WASHER =
-        BLOCK_ENTITIES.register("ore_washer",
-            () -> BlockEntityType.Builder.of(OreWasherBlockEntity::new,
-                ModBlocks.ORE_WASHER.get()).build(null));
+    // Removed legacy machine block entities - using tiered versions only
     
     public static final RegistryObject<BlockEntityType<RecyclerBlockEntity>> RECYCLER =
         BLOCK_ENTITIES.register("recycler",
