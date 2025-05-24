@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "T T",
+    " P ",
+    "T T"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "P": {
+      "item": "astroexpansion:titanium_plate"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:assembly_frame",
+    "count": 2
+  }
+}

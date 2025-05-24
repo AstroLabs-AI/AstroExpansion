@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PTP",
+    "T T",
+    "PTP"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "P": {
+      "item": "astroexpansion:titanium_plate"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:rocket_fuel_tank"
+  }
+}

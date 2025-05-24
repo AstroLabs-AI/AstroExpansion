@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " P ",
+    "PTP",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "C": {
+      "item": "astroexpansion:advanced_processor"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:rocket_nose_cone"
+  }
+}

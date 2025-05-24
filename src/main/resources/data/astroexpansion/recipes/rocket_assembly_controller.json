@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PCP",
+    "EAE",
+    "TTT"
+  ],
+  "key": {
+    "P": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "C": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    },
+    "A": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_block"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:rocket_assembly_controller"
+  }
+}

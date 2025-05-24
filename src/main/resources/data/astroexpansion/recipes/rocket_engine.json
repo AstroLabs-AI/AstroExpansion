@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TPT",
+    "PEP",
+    "TFT"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "P": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    },
+    "F": {
+      "item": "astroexpansion:fusion_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:rocket_engine"
+  }
+}
