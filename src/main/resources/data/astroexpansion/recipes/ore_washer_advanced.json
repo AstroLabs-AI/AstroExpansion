@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TFT",
+    "AWA",
+    "TET"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "F": {
+      "item": "astroexpansion:fluid_tank"
+    },
+    "A": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "W": {
+      "item": "astroexpansion:ore_washer_basic"
+    },
+    "E": {
+      "item": "astroexpansion:titanium_plate"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:ore_washer_advanced"
+  }
+}

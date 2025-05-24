@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "QPQ",
+    " U "
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "P": {
+      "item": "astroexpansion:helium3_crystal"
+    },
+    "U": {
+      "item": "astroexpansion:fortune_upgrade_2"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:fortune_upgrade_3"
+  }
+}

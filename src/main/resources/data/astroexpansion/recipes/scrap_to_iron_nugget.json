@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "astroexpansion:scrap" },
+    { "item": "astroexpansion:scrap" },
+    { "item": "astroexpansion:scrap" },
+    { "item": "astroexpansion:scrap" }
+  ],
+  "result": {
+    "item": "minecraft:iron_nugget",
+    "count": 1
+  }
+}

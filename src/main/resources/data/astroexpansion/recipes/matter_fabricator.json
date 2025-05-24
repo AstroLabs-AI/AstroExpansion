@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QEQ",
+    "FCF",
+    "QEQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    },
+    "F": {
+      "item": "astroexpansion:fusion_core"
+    },
+    "C": {
+      "item": "astroexpansion:quantum_computer_controller"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:matter_fabricator"
+  }
+}

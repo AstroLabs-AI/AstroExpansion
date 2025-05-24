@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ATA",
+    "QMQ",
+    "ATA"
+  ],
+  "key": {
+    "A": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "T": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_core"
+    },
+    "M": {
+      "item": "astroexpansion:matter_fabricator"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:matter_duplicator"
+  }
+}

@@ -1,7 +1,9 @@
 package com.astrolabs.astroexpansion.common.blockentities;
 
 import com.astrolabs.astroexpansion.common.blocks.BasicGeneratorBlock;
+import com.astrolabs.astroexpansion.common.blocks.machines.base.UpgradeableMachineBlockEntity;
 import com.astrolabs.astroexpansion.common.capabilities.AstroEnergyStorage;
+import com.astrolabs.astroexpansion.common.capabilities.CombinedItemHandler;
 import com.astrolabs.astroexpansion.common.menu.BasicGeneratorMenu;
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -30,7 +32,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvider {
+public class BasicGeneratorBlockEntity extends UpgradeableMachineBlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -46,13 +48,15 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
     private final AstroEnergyStorage energyStorage = new AstroEnergyStorage(10000, 0, 100);
     
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<IItemHandler> lazyCombinedHandler = LazyOptional.empty();
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
     
     protected final ContainerData data;
     private int burnTime = 0;
     private int maxBurnTime = 0;
     
-    private static final int ENERGY_PER_TICK = 40;
+    private static final int BASE_ENERGY_PER_TICK = 40;
+    private int energyPerTick = BASE_ENERGY_PER_TICK;
     
     public BasicGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BASIC_GENERATOR.get(), pos, state);
@@ -64,6 +68,7 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
                     case 1 -> BasicGeneratorBlockEntity.this.maxBurnTime;
                     case 2 -> BasicGeneratorBlockEntity.this.energyStorage.getEnergyStored();
                     case 3 -> BasicGeneratorBlockEntity.this.energyStorage.getMaxEnergyStored();
+                    case 4 -> BasicGeneratorBlockEntity.this.energyPerTick;
                     default -> 0;
                 };
             }
@@ -74,12 +79,13 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
                     case 0 -> BasicGeneratorBlockEntity.this.burnTime = value;
                     case 1 -> BasicGeneratorBlockEntity.this.maxBurnTime = value;
                     case 2 -> BasicGeneratorBlockEntity.this.energyStorage.setEnergy(value);
+                    case 4 -> BasicGeneratorBlockEntity.this.energyPerTick = value;
                 }
             }
             
             @Override
             public int getCount() {
-                return 4;
+                return 5;
             }
         };
     }
@@ -102,7 +108,8 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
         }
         
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
+            // Return combined handler for GUI access
+            return lazyCombinedHandler.cast();
         }
         
         return super.getCapability(cap, side);
@@ -113,6 +120,7 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         lazyEnergyHandler = LazyOptional.of(() -> energyStorage);
+        lazyCombinedHandler = LazyOptional.of(() -> new CombinedItemHandler(itemHandler, upgradeHandler));
     }
     
     @Override
@@ -120,6 +128,7 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
         super.invalidateCaps();
         lazyItemHandler.invalidate();
         lazyEnergyHandler.invalidate();
+        lazyCombinedHandler.invalidate();
     }
     
     @Override
@@ -128,6 +137,7 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
         nbt.put("energy", energyStorage.writeToNBT(new CompoundTag()));
         nbt.putInt("burn_time", burnTime);
         nbt.putInt("max_burn_time", maxBurnTime);
+        nbt.putInt("energy_per_tick", energyPerTick);
         super.saveAdditional(nbt);
     }
     
@@ -138,12 +148,17 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
         energyStorage.readFromNBT(nbt.getCompound("energy"));
         burnTime = nbt.getInt("burn_time");
         maxBurnTime = nbt.getInt("max_burn_time");
+        energyPerTick = nbt.contains("energy_per_tick") ? nbt.getInt("energy_per_tick") : BASE_ENERGY_PER_TICK;
     }
     
     public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots() + upgradeHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        // Drop upgrades
+        for (int i = 0; i < upgradeHandler.getSlots(); i++) {
+            inventory.setItem(itemHandler.getSlots() + i, upgradeHandler.getStackInSlot(i));
         }
         
         Containers.dropContents(this.level, this.worldPosition, inventory);
@@ -159,7 +174,16 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
         
         if (entity.burnTime > 0) {
             entity.burnTime--;
-            entity.energyStorage.addEnergy(ENERGY_PER_TICK);
+            
+            // Calculate energy per tick with speed modifier (affects generation rate)
+            int energyToGenerate = entity.energyPerTick;
+            
+            // Apply fortune modifier for bonus energy
+            if (entity.cachedFortuneMultiplier > 1.0f && entity.level.random.nextFloat() < (entity.cachedFortuneMultiplier - 1.0f)) {
+                energyToGenerate += BASE_ENERGY_PER_TICK; // Bonus energy
+            }
+            
+            entity.energyStorage.addEnergy(energyToGenerate);
             changed = true;
         }
         
@@ -168,7 +192,8 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
             int fuelValue = ForgeHooks.getBurnTime(fuel, RecipeType.SMELTING);
             
             if (fuelValue > 0) {
-                entity.burnTime = entity.maxBurnTime = fuelValue;
+                // Apply efficiency modifier to fuel burn time (longer burn = more efficient)
+                entity.burnTime = entity.maxBurnTime = (int)(fuelValue * entity.cachedEfficiencyMultiplier);
                 
                 if (!fuel.isEmpty()) {
                     fuel.shrink(1);
@@ -216,5 +241,12 @@ public class BasicGeneratorBlockEntity extends BlockEntity implements MenuProvid
     
     public int getMaxBurnTime() {
         return maxBurnTime;
+    }
+    
+    @Override
+    public void onUpgradesChanged() {
+        super.onUpgradesChanged();
+        // Recalculate energy per tick based on speed multiplier
+        energyPerTick = (int)(BASE_ENERGY_PER_TICK * cachedSpeedMultiplier);
     }
 }

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "QPQ",
+    " U "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "P": {
+      "item": "astroexpansion:plasma_injector"
+    },
+    "U": {
+      "item": "astroexpansion:speed_upgrade_2"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:speed_upgrade_3"
+  }
+}

@@ -1,6 +1,7 @@
 package com.astrolabs.astroexpansion.common.menu;
 
 import com.astrolabs.astroexpansion.common.blockentities.MaterialProcessorBlockEntity;
+import com.astrolabs.astroexpansion.common.items.upgrades.UpgradeItem;
 import com.astrolabs.astroexpansion.common.registry.ModBlocks;
 import com.astrolabs.astroexpansion.common.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,10 +12,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import com.astrolabs.astroexpansion.common.capabilities.CombinedItemHandler;
 
 public class MaterialProcessorMenu extends AbstractContainerMenu {
-    private final MaterialProcessorBlockEntity blockEntity;
+    public final MaterialProcessorBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
     
@@ -33,13 +36,41 @@ public class MaterialProcessorMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
         
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 63, 50));
-            this.addSlot(new SlotItemHandler(handler, 1, 119, 50) {
-                @Override
-                public boolean mayPlace(ItemStack stack) {
-                    return false;
+            // Combined handler includes main inventory (0-1) and upgrades (2-5)
+            if (handler instanceof CombinedItemHandler) {
+                // Main slots
+                this.addSlot(new SlotItemHandler(handler, 0, 63, 50));
+                this.addSlot(new SlotItemHandler(handler, 1, 119, 50) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return false;
+                    }
+                });
+                
+                // Upgrade slots (in a row at the top)
+                for (int i = 0; i < 4; i++) {
+                    this.addSlot(new SlotItemHandler(handler, 2 + i, 44 + i * 18, 17) {
+                        @Override
+                        public boolean mayPlace(ItemStack stack) {
+                            return stack.getItem() instanceof UpgradeItem;
+                        }
+                        
+                        @Override
+                        public int getMaxStackSize() {
+                            return 1;
+                        }
+                    });
                 }
-            });
+            } else {
+                // Fallback for old behavior
+                this.addSlot(new SlotItemHandler(handler, 0, 63, 50));
+                this.addSlot(new SlotItemHandler(handler, 1, 119, 50) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return false;
+                    }
+                });
+            }
         });
         
         addDataSlots(data);
@@ -73,7 +104,7 @@ public class MaterialProcessorMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
     
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;
+    private static final int TE_INVENTORY_SLOT_COUNT = 6; // 2 main slots + 4 upgrade slots
     
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -83,10 +114,20 @@ public class MaterialProcessorMenu extends AbstractContainerMenu {
         ItemStack copyOfSourceStack = sourceStack.copy();
         
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX + 1, false)) {
-                return ItemStack.EMPTY;
+            // Moving from player inventory
+            if (sourceStack.getItem() instanceof UpgradeItem) {
+                // Try to move upgrades to upgrade slots
+                if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX + 2, TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else {
+                // Try to move other items to input slot
+                if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX + 1, false)) {
+                    return ItemStack.EMPTY;
+                }
             }
         } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
+            // Moving from machine slots back to player inventory
             if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
             }

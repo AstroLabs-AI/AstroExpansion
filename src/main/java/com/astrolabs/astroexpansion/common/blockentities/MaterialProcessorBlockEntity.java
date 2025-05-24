@@ -1,6 +1,7 @@
 package com.astrolabs.astroexpansion.common.blockentities;
 
 import com.astrolabs.astroexpansion.common.blocks.MaterialProcessorBlock;
+import com.astrolabs.astroexpansion.common.blocks.machines.base.UpgradeableMachineBlockEntity;
 import com.astrolabs.astroexpansion.common.capabilities.AstroEnergyStorage;
 import com.astrolabs.astroexpansion.common.menu.MaterialProcessorMenu;
 import com.astrolabs.astroexpansion.common.recipes.ProcessingRecipe;
@@ -19,7 +20,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -27,12 +27,14 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import com.astrolabs.astroexpansion.common.capabilities.CombinedItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.Random;
 
-public class MaterialProcessorBlockEntity extends BlockEntity implements MenuProvider {
+public class MaterialProcessorBlockEntity extends UpgradeableMachineBlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -53,7 +55,10 @@ public class MaterialProcessorBlockEntity extends BlockEntity implements MenuPro
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 200;
+    private int baseMaxProgress = 200;
     private int energyPerTick = 20;
+    private int baseEnergyPerTick = 20;
+    private final Random random = new Random();
     
     public MaterialProcessorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.MATERIAL_PROCESSOR.get(), pos, state);
@@ -103,6 +108,10 @@ public class MaterialProcessorBlockEntity extends BlockEntity implements MenuPro
         }
         
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
+            if (side == null) {
+                // Internal access - return combined handler with upgrades
+                return LazyOptional.of(() -> new CombinedItemHandler(itemHandler, upgradeHandler)).cast();
+            }
             return lazyItemHandler.cast();
         }
         
@@ -137,6 +146,15 @@ public class MaterialProcessorBlockEntity extends BlockEntity implements MenuPro
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         energyStorage.readFromNBT(nbt.getCompound("energy"));
         progress = nbt.getInt("progress");
+        onUpgradesChanged();
+    }
+    
+    @Override
+    public void onUpgradesChanged() {
+        super.onUpgradesChanged();
+        // Update processing values based on upgrades
+        maxProgress = (int)(baseMaxProgress / getSpeedMultiplier());
+        energyPerTick = (int)(baseEnergyPerTick * getEfficiencyMultiplier());
     }
     
     public void drops() {
@@ -157,8 +175,13 @@ public class MaterialProcessorBlockEntity extends BlockEntity implements MenuPro
         boolean wasProcessing = entity.progress > 0;
         
         if (hasRecipe && entity.hasEnoughEnergy()) {
-            entity.progress++;
-            entity.energyStorage.extractEnergy(entity.energyPerTick, false);
+            // Apply speed upgrade
+            int progressIncrement = (int)Math.ceil(entity.getSpeedMultiplier());
+            entity.progress += progressIncrement;
+            
+            // Apply efficiency upgrade
+            int energyToConsume = (int)(entity.energyPerTick * entity.getEfficiencyMultiplier());
+            entity.energyStorage.extractEnergy(energyToConsume, false);
             
             if (entity.progress >= entity.maxProgress) {
                 entity.craftItem();
@@ -208,11 +231,20 @@ public class MaterialProcessorBlockEntity extends BlockEntity implements MenuPro
             .getRecipeFor(ModRecipeTypes.PROCESSING.get(), inventory, level);
         
         if (recipe.isPresent()) {
-            ItemStack result = recipe.get().getResultItem(level.registryAccess());
+            ItemStack result = recipe.get().getResultItem(level.registryAccess()).copy();
+            
+            // Apply fortune upgrade
+            if (getFortuneMultiplier() > 1.0f && random.nextFloat() < (getFortuneMultiplier() - 1.0f)) {
+                result.grow(1);
+            }
             
             itemHandler.extractItem(0, 1, false);
-            itemHandler.setStackInSlot(1, new ItemStack(result.getItem(),
-                itemHandler.getStackInSlot(1).getCount() + result.getCount()));
+            ItemStack outputStack = itemHandler.getStackInSlot(1);
+            if (outputStack.isEmpty()) {
+                itemHandler.setStackInSlot(1, result);
+            } else {
+                outputStack.grow(result.getCount());
+            }
         }
     }
     

@@ -1,6 +1,8 @@
 package com.astrolabs.astroexpansion.common.network;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
+import com.astrolabs.astroexpansion.common.network.packets.TeleportPacket;
+import com.astrolabs.astroexpansion.common.network.packets.UpdateTeleporterNamePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -26,12 +28,18 @@ public class ModPacketHandler {
         
         INSTANCE = net;
         
-        // Register packets here when needed
-        // net.messageBuilder(ExamplePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-        //     .decoder(ExamplePacket::new)
-        //     .encoder(ExamplePacket::toBytes)
-        //     .consumerMainThread(ExamplePacket::handle)
-        //     .add();
+        // Teleporter packets
+        net.messageBuilder(TeleportPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+            .decoder(TeleportPacket::new)
+            .encoder(TeleportPacket::toBytes)
+            .consumerMainThread(TeleportPacket::handle)
+            .add();
+            
+        net.messageBuilder(UpdateTeleporterNamePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+            .decoder(UpdateTeleporterNamePacket::new)
+            .encoder(UpdateTeleporterNamePacket::toBytes)
+            .consumerMainThread(UpdateTeleporterNamePacket::handle)
+            .add();
     }
     
     public static <MSG> void sendToServer(MSG message) {

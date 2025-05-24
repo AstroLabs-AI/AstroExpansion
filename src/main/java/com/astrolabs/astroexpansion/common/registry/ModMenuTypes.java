@@ -24,6 +24,9 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<OreWasherMenu>> ORE_WASHER_MENU =
         registerMenuType(OreWasherMenu::new, "ore_washer_menu");
     
+    public static final RegistryObject<MenuType<RecyclerMenu>> RECYCLER =
+        registerMenuType(RecyclerMenu::new, "recycler_menu");
+    
     public static final RegistryObject<MenuType<EnergyStorageMenu>> ENERGY_STORAGE_MENU =
         registerMenuType(EnergyStorageMenu::new, "energy_storage_menu");
     
@@ -59,6 +62,27 @@ public class ModMenuTypes {
     
     public static final RegistryObject<MenuType<RocketAssemblyMenu>> ROCKET_ASSEMBLY =
         registerMenuType(RocketAssemblyMenu::new, "rocket_assembly_menu");
+    
+    // Tiered machine menus
+    public static final RegistryObject<MenuType<TieredMaterialProcessorMenu>> TIERED_MATERIAL_PROCESSOR =
+        registerMenuType(TieredMaterialProcessorMenu::new, "tiered_material_processor_menu");
+    
+    public static final RegistryObject<MenuType<TieredOreWasherMenu>> TIERED_ORE_WASHER =
+        registerMenuType(TieredOreWasherMenu::new, "tiered_ore_washer_menu");
+    
+    public static final RegistryObject<MenuType<TieredPowerGeneratorMenu>> TIERED_POWER_GENERATOR =
+        registerMenuType(TieredPowerGeneratorMenu::new, "tiered_power_generator_menu");
+    
+    // Matter Fabrication
+    public static final RegistryObject<MenuType<MatterFabricatorMenu>> MATTER_FABRICATOR_MENU =
+        registerMenuType(MatterFabricatorMenu::new, "matter_fabricator_menu");
+    
+    public static final RegistryObject<MenuType<MatterDuplicatorMenu>> MATTER_DUPLICATOR_MENU =
+        registerMenuType(MatterDuplicatorMenu::new, "matter_duplicator_menu");
+    
+    // Advanced Teleporter
+    public static final RegistryObject<MenuType<AdvancedTeleporterMenu>> ADVANCED_TELEPORTER =
+        registerMenuType(AdvancedTeleporterMenu::new, "advanced_teleporter_menu");
     
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

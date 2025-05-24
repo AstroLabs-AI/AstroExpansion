@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TDT",
+    "CMC",
+    "TAT"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "M": {
+      "item": "astroexpansion:material_processor_basic"
+    },
+    "A": {
+      "item": "astroexpansion:titanium_plate"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:material_processor_advanced"
+  }
+}

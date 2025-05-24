@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "PBP",
+    "IEI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "B": {
+      "item": "minecraft:iron_block"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:material_processor_basic"
+  }
+}

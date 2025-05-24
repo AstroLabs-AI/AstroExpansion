@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IBI",
+    "PCP",
+    "IEI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "P": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "item": "minecraft:cauldron"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:ore_washer_basic"
+  }
+}

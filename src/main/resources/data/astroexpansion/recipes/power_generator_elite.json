@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NQN",
+    "FGF",
+    "NRN"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "F": {
+      "item": "astroexpansion:fusion_core"
+    },
+    "G": {
+      "item": "astroexpansion:power_generator_advanced"
+    },
+    "R": {
+      "item": "astroexpansion:fusion_reactor_casing"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:power_generator_elite"
+  }
+}

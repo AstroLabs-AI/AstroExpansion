@@ -1,6 +1,8 @@
 package com.astrolabs.astroexpansion.common.menu;
 
 import com.astrolabs.astroexpansion.common.blockentities.BasicGeneratorBlockEntity;
+import com.astrolabs.astroexpansion.common.capabilities.CombinedItemHandler;
+import com.astrolabs.astroexpansion.common.items.upgrades.UpgradeItem;
 import com.astrolabs.astroexpansion.common.registry.ModBlocks;
 import com.astrolabs.astroexpansion.common.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,12 +16,12 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class BasicGeneratorMenu extends AbstractContainerMenu {
-    private final BasicGeneratorBlockEntity blockEntity;
+    public final BasicGeneratorBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
     
     public BasicGeneratorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
     }
     
     public BasicGeneratorMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -33,7 +35,29 @@ public class BasicGeneratorMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
         
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 63, 68));
+            // Combined handler includes main inventory (0) and upgrades (1-4)
+            if (handler instanceof CombinedItemHandler) {
+                // Fuel slot
+                this.addSlot(new SlotItemHandler(handler, 0, 63, 50));
+                
+                // Upgrade slots (in a row at the top)
+                for (int i = 0; i < 4; i++) {
+                    this.addSlot(new SlotItemHandler(handler, 1 + i, 44 + i * 18, 17) {
+                        @Override
+                        public boolean mayPlace(ItemStack stack) {
+                            return stack.getItem() instanceof UpgradeItem;
+                        }
+                        
+                        @Override
+                        public int getMaxStackSize() {
+                            return 1;
+                        }
+                    });
+                }
+            } else {
+                // Fallback for old behavior
+                this.addSlot(new SlotItemHandler(handler, 0, 63, 50));
+            }
         });
         
         addDataSlots(data);
@@ -46,7 +70,7 @@ public class BasicGeneratorMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 26;
+        int progressArrowSize = 14;
         
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -68,7 +92,7 @@ public class BasicGeneratorMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
     
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;
+    private static final int TE_INVENTORY_SLOT_COUNT = 5; // 1 fuel slot + 4 upgrade slots
     
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -77,15 +101,21 @@ public class BasicGeneratorMenu extends AbstractContainerMenu {
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
         
-        // Check if the slot clicked is one of the vanilla container slots
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;
+            // Moving from player inventory
+            if (sourceStack.getItem() instanceof UpgradeItem) {
+                // Try to move upgrades to upgrade slots
+                if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX + 1, TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else {
+                // Try to move other items to fuel slot
+                if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX + 1, false)) {
+                    return ItemStack.EMPTY;
+                }
             }
         } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
-            // This is a TE slot so merge the stack into the players inventory
+            // Moving from machine slots back to player inventory
             if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
             }
@@ -110,6 +140,10 @@ public class BasicGeneratorMenu extends AbstractContainerMenu {
     
     public int getMaxEnergyStored() {
         return data.get(3);
+    }
+    
+    public int getEnergyPerTick() {
+        return data.get(4);
     }
     
     @Override

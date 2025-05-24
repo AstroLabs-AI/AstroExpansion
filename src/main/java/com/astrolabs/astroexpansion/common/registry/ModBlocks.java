@@ -2,6 +2,10 @@ package com.astrolabs.astroexpansion.common.registry;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.blocks.*;
+import com.astrolabs.astroexpansion.common.block.machine.RecyclerBlock;
+import com.astrolabs.astroexpansion.common.blocks.machines.base.MachineTier;
+import com.astrolabs.astroexpansion.common.blocks.machines.MatterFabricatorBlock;
+import com.astrolabs.astroexpansion.common.blocks.machines.MatterDuplicatorBlock;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -88,7 +92,7 @@ public class ModBlocks {
             .strength(5.0F, 6.0F)
             .sound(SoundType.METAL)));
     
-    // Machines
+    // Machines - Legacy (keeping for compatibility)
     public static final RegistryObject<Block> BASIC_GENERATOR = registerBlock("basic_generator",
         () -> new BasicGeneratorBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
@@ -112,6 +116,89 @@ public class ModBlocks {
             .strength(3.5F)
             .sound(SoundType.METAL)
             .noOcclusion()));
+    
+    public static final RegistryObject<Block> RECYCLER = registerBlock("recycler",
+        () -> new RecyclerBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(3.5F)
+            .sound(SoundType.METAL)
+            .noOcclusion()));
+    
+    // Tiered Machines - Material Processor
+    public static final RegistryObject<Block> MATERIAL_PROCESSOR_BASIC = registerBlock("material_processor_basic",
+        () -> new TieredMaterialProcessorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(3.5F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.BASIC));
+    
+    public static final RegistryObject<Block> MATERIAL_PROCESSOR_ADVANCED = registerBlock("material_processor_advanced",
+        () -> new TieredMaterialProcessorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(4.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.ADVANCED));
+    
+    public static final RegistryObject<Block> MATERIAL_PROCESSOR_ELITE = registerBlock("material_processor_elite",
+        () -> new TieredMaterialProcessorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.ELITE));
+    
+    // Tiered Machines - Ore Washer
+    public static final RegistryObject<Block> ORE_WASHER_BASIC = registerBlock("ore_washer_basic",
+        () -> new TieredOreWasherBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(3.5F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.BASIC));
+    
+    public static final RegistryObject<Block> ORE_WASHER_ADVANCED = registerBlock("ore_washer_advanced",
+        () -> new TieredOreWasherBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(4.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.ADVANCED));
+    
+    public static final RegistryObject<Block> ORE_WASHER_ELITE = registerBlock("ore_washer_elite",
+        () -> new TieredOreWasherBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.ELITE));
+    
+    // Tiered Machines - Power Generator
+    public static final RegistryObject<Block> POWER_GENERATOR_BASIC = registerBlock("power_generator_basic",
+        () -> new TieredPowerGeneratorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(3.5F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.BASIC));
+    
+    public static final RegistryObject<Block> POWER_GENERATOR_ADVANCED = registerBlock("power_generator_advanced",
+        () -> new TieredPowerGeneratorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(4.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.ADVANCED));
+    
+    public static final RegistryObject<Block> POWER_GENERATOR_ELITE = registerBlock("power_generator_elite",
+        () -> new TieredPowerGeneratorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion(), MachineTier.ELITE));
     
     public static final RegistryObject<Block> ENERGY_CONDUIT = registerBlock("energy_conduit",
         () -> new EnergyConduitBlock(BlockBehaviour.Properties.of()
@@ -284,6 +371,31 @@ public class ModBlocks {
     
     public static final RegistryObject<Block> FLUID_PIPE = registerBlock("fluid_pipe",
         () -> new FluidPipeBlock());
+    
+    // Matter Fabrication
+    public static final RegistryObject<Block> MATTER_FABRICATOR = registerBlock("matter_fabricator",
+        () -> new MatterFabricatorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion()
+            .lightLevel(state -> 7)));
+    
+    public static final RegistryObject<Block> MATTER_DUPLICATOR = registerBlock("matter_duplicator",
+        () -> new MatterDuplicatorBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F)
+            .sound(SoundType.METAL)
+            .noOcclusion()));
+    
+    // Advanced Teleporter System
+    public static final RegistryObject<Block> ADVANCED_TELEPORTER = registerBlock("advanced_teleporter",
+        () -> new AdvancedTeleporterBlock());
+    
+    public static final RegistryObject<Block> TELEPORTER_FRAME = registerBlock("teleporter_frame",
+        () -> new TeleporterFrameBlock());
     
     // Register block with item
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

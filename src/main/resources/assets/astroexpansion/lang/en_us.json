@@ -20,6 +20,7 @@
   "item.astroexpansion.quantum_processor": "Quantum Processor",
   "item.astroexpansion.titanium_plate": "Titanium Plate",
   "item.astroexpansion.wrench": "Wrench",
+  "item.astroexpansion.scrap": "Scrap",
   
   "block.astroexpansion.titanium_ore": "Titanium Ore",
   "block.astroexpansion.deepslate_titanium_ore": "Deepslate Titanium Ore",
@@ -35,6 +36,29 @@
   "block.astroexpansion.basic_generator": "Basic Generator",
   "block.astroexpansion.material_processor": "Material Processor",
   "block.astroexpansion.ore_washer": "Ore Washer",
+  "block.astroexpansion.recycler": "Recycler",
+  
+  "block.astroexpansion.material_processor_basic": "Basic Material Processor",
+  "block.astroexpansion.material_processor_advanced": "Advanced Material Processor",
+  "block.astroexpansion.material_processor_elite": "Elite Material Processor",
+  
+  "block.astroexpansion.ore_washer_basic": "Basic Ore Washer",
+  "block.astroexpansion.ore_washer_advanced": "Advanced Ore Washer",
+  "block.astroexpansion.ore_washer_elite": "Elite Ore Washer",
+  
+  "block.astroexpansion.power_generator_basic": "Basic Power Generator",
+  "block.astroexpansion.power_generator_advanced": "Advanced Power Generator",
+  "block.astroexpansion.power_generator_elite": "Elite Power Generator",
+  
+  "tier.astroexpansion.basic": "Basic",
+  "tier.astroexpansion.advanced": "Advanced",
+  "tier.astroexpansion.elite": "Elite",
+  
+  "tooltip.astroexpansion.tier": "Tier: %s",
+  "tooltip.astroexpansion.speed_multiplier": "Speed: %s",
+  "tooltip.astroexpansion.efficiency_multiplier": "Efficiency: %s",
+  "tooltip.astroexpansion.upgrade_slots": "Upgrade Slots: %s",
+  "tooltip.astroexpansion.energy_capacity": "Energy Capacity: %s RF",
   "block.astroexpansion.energy_conduit": "Energy Conduit",
   "block.astroexpansion.energy_storage": "Energy Storage",
   
@@ -211,5 +235,67 @@
   "advancement.astroexpansion.to_the_stars": "Space Explorer",
   "advancement.astroexpansion.to_the_stars.description": "Reach the space station dimension",
   "advancement.astroexpansion.moon_landing": "One Giant Leap",
-  "advancement.astroexpansion.moon_landing.description": "Successfully land on the moon"
+  "advancement.astroexpansion.moon_landing.description": "Successfully land on the moon",
+  
+  "item.astroexpansion.speed_upgrade_1": "Speed Upgrade I",
+  "item.astroexpansion.speed_upgrade_2": "Speed Upgrade II",
+  "item.astroexpansion.speed_upgrade_3": "Speed Upgrade III",
+  "item.astroexpansion.efficiency_upgrade_1": "Efficiency Upgrade I",
+  "item.astroexpansion.efficiency_upgrade_2": "Efficiency Upgrade II",
+  "item.astroexpansion.efficiency_upgrade_3": "Efficiency Upgrade III",
+  "item.astroexpansion.fortune_upgrade_1": "Fortune Upgrade I",
+  "item.astroexpansion.fortune_upgrade_2": "Fortune Upgrade II",
+  "item.astroexpansion.fortune_upgrade_3": "Fortune Upgrade III",
+  
+  "block.astroexpansion.matter_fabricator": "Matter Fabricator",
+  "block.astroexpansion.matter_duplicator": "Matter Duplicator",
+  
+  "item.astroexpansion.uu_matter_bucket": "UU-Matter Bucket",
+  "item.astroexpansion.rare_earth_dust": "Rare Earth Dust",
+  "item.astroexpansion.rare_earth_ingot": "Rare Earth Ingot",
+  "item.astroexpansion.raw_lunar_iron": "Raw Lunar Iron",
+  "item.astroexpansion.lunar_iron_ingot": "Lunar Iron Ingot",
+  "item.astroexpansion.helium3_canister": "Helium-3 Canister",
+  "item.astroexpansion.rocket_computer": "Rocket Computer",
+  "item.astroexpansion.rocket_fuel": "Rocket Fuel",
+  "item.astroexpansion.filled_fuel_cell": "Filled Fuel Cell",
+  "item.astroexpansion.oxygen_mask": "Oxygen Mask",
+  "item.astroexpansion.thermal_padding_helmet": "Thermal Padding Helmet",
+  "item.astroexpansion.thermal_padding_chestplate": "Thermal Padding Chestplate",
+  "item.astroexpansion.thermal_padding_leggings": "Thermal Padding Leggings",
+  "item.astroexpansion.thermal_padding_boots": "Thermal Padding Boots",
+  "item.astroexpansion.multimeter": "Multimeter",
+  "item.astroexpansion.quantum_core": "Quantum Core",
+  
+  "fluid.astroexpansion.uu_matter": "UU-Matter",
+  
+  "tooltip.astroexpansion.matter_fabricator.desc": "Converts massive amounts of energy into UU-Matter",
+  "tooltip.astroexpansion.matter_fabricator.energy": "Energy Usage: %s",
+  "tooltip.astroexpansion.matter_fabricator.production": "Production: %s",
+  "tooltip.astroexpansion.matter_fabricator.scrap": "Scrap reduces energy cost by 25%",
+  
+  "tooltip.astroexpansion.matter_duplicator.desc": "Uses UU-Matter to duplicate items",
+  "tooltip.astroexpansion.matter_duplicator.usage": "Place item in target slot to duplicate",
+  "tooltip.astroexpansion.matter_duplicator.cost": "UU-Matter cost varies by item",
+  
+  "tooltip.astroexpansion.energy": "Energy: %d / %d FE",
+  "tooltip.astroexpansion.uu_matter": "UU-Matter: %d / %d mB",
+  "tooltip.astroexpansion.production_rate": "Production Rate: %d%%",
+  "tooltip.astroexpansion.uu_cost": "UU-Matter Cost: %d mB",
+  
+  "gui.astroexpansion.recycler.recycling": "Recycling...",
+  "gui.astroexpansion.recycler.idle": "Idle",
+  "gui.astroexpansion.recycler.output_info": "Output Chances",
+  
+  "block.astroexpansion.advanced_teleporter": "Advanced Teleporter",
+  "block.astroexpansion.teleporter_frame": "Teleporter Frame",
+  
+  "item.astroexpansion.teleporter_frequency_card": "Teleporter Frequency Card",
+  
+  "gui.astroexpansion.advanced_teleporter.frequency": "Frequency: %s",
+  "gui.astroexpansion.advanced_teleporter.no_frequency": "No Frequency Set",
+  "gui.astroexpansion.advanced_teleporter.multiblock_not_formed": "Multiblock not formed!",
+  "gui.astroexpansion.advanced_teleporter.connected": "Connected Teleporters:",
+  "gui.astroexpansion.advanced_teleporter.cooldown": "Cooldown: %ds",
+  "gui.astroexpansion.advanced_teleporter.energy_cost": "%d FE"
 }

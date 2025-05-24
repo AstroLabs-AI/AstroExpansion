@@ -6,8 +6,14 @@ import com.astrolabs.astroexpansion.common.items.LunarRoverItem;
 import com.astrolabs.astroexpansion.common.items.AstroGuideItem;
 import com.astrolabs.astroexpansion.common.items.SpaceSuitArmorItem;
 import com.astrolabs.astroexpansion.common.items.StorageDriveItem;
+import com.astrolabs.astroexpansion.common.items.TeleporterFrequencyCardItem;
+import com.astrolabs.astroexpansion.common.items.upgrades.SpeedUpgrade;
+import com.astrolabs.astroexpansion.common.items.upgrades.EfficiencyUpgrade;
+import com.astrolabs.astroexpansion.common.items.upgrades.FortuneUpgrade;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -58,6 +64,10 @@ public class ModItems {
     // Misc
     public static final RegistryObject<Item> WRENCH = ITEMS.register("wrench",
         () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SCRAP = ITEMS.register("scrap",
+        () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MULTIMETER = ITEMS.register("multimeter",
+        () -> new Item(new Item.Properties().stacksTo(1)));
     
     // Storage Components
     public static final RegistryObject<Item> STORAGE_DRIVE_1K = ITEMS.register("storage_drive_1k",
@@ -97,6 +107,9 @@ public class ModItems {
     public static final RegistryObject<Item> PLASMA_INJECTOR = ITEMS.register("plasma_injector",
         () -> new Item(new Item.Properties()));
     
+    public static final RegistryObject<Item> QUANTUM_CORE = ITEMS.register("quantum_core",
+        () -> new Item(new Item.Properties()));
+    
     // Fusion Fuels
     public static final RegistryObject<Item> DEUTERIUM_CELL = ITEMS.register("deuterium_cell",
         () -> new Item(new Item.Properties()));
@@ -123,6 +136,16 @@ public class ModItems {
     public static final RegistryObject<Item> RESEARCH_DATA_SPACE = ITEMS.register("research_data_space",
         () -> new Item(new Item.Properties()));
     
+    // Rocket Components
+    public static final RegistryObject<Item> ROCKET_COMPUTER = ITEMS.register("rocket_computer",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> ROCKET_FUEL = ITEMS.register("rocket_fuel",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> FILLED_FUEL_CELL = ITEMS.register("filled_fuel_cell",
+        () -> new Item(new Item.Properties()));
+    
     // Space Suit Armor
     public static final RegistryObject<Item> SPACE_HELMET = ITEMS.register("space_helmet",
         () -> new SpaceSuitArmorItem(ArmorItem.Type.HELMET, new Item.Properties()));
@@ -143,6 +166,22 @@ public class ModItems {
     public static final RegistryObject<Item> OXYGEN_CANISTER = ITEMS.register("oxygen_canister",
         () -> new Item(new Item.Properties().stacksTo(16)));
     
+    public static final RegistryObject<Item> OXYGEN_MASK = ITEMS.register("oxygen_mask",
+        () -> new Item(new Item.Properties().stacksTo(1)));
+    
+    // Thermal Padding
+    public static final RegistryObject<Item> THERMAL_PADDING_HELMET = ITEMS.register("thermal_padding_helmet",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> THERMAL_PADDING_CHESTPLATE = ITEMS.register("thermal_padding_chestplate",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> THERMAL_PADDING_LEGGINGS = ITEMS.register("thermal_padding_leggings",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> THERMAL_PADDING_BOOTS = ITEMS.register("thermal_padding_boots",
+        () -> new Item(new Item.Properties()));
+    
     // Vehicles
     public static final RegistryObject<Item> LUNAR_ROVER = ITEMS.register("lunar_rover",
         () -> new LunarRoverItem());
@@ -154,9 +193,58 @@ public class ModItems {
     public static final RegistryObject<Item> MOON_DUST_ITEM = ITEMS.register("moon_dust_item",
         () -> new Item(new Item.Properties()));
     
+    public static final RegistryObject<Item> HELIUM3_CANISTER = ITEMS.register("helium3_canister",
+        () -> new Item(new Item.Properties()));
+    
+    // Rare Resources
+    public static final RegistryObject<Item> RARE_EARTH_DUST = ITEMS.register("rare_earth_dust",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> RARE_EARTH_INGOT = ITEMS.register("rare_earth_ingot",
+        () -> new Item(new Item.Properties()));
+    
+    // Lunar Resources
+    public static final RegistryObject<Item> RAW_LUNAR_IRON = ITEMS.register("raw_lunar_iron",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> LUNAR_IRON_INGOT = ITEMS.register("lunar_iron_ingot",
+        () -> new Item(new Item.Properties()));
+    
     // Guide Book
     public static final RegistryObject<Item> ASTRO_GUIDE = ITEMS.register("astro_guide",
         () -> new AstroGuideItem(new Item.Properties()));
+    
+    // Machine Upgrades
+    public static final RegistryObject<Item> SPEED_UPGRADE_1 = ITEMS.register("speed_upgrade_1",
+        () -> new SpeedUpgrade(new Item.Properties(), 1));
+    public static final RegistryObject<Item> SPEED_UPGRADE_2 = ITEMS.register("speed_upgrade_2",
+        () -> new SpeedUpgrade(new Item.Properties(), 2));
+    public static final RegistryObject<Item> SPEED_UPGRADE_3 = ITEMS.register("speed_upgrade_3",
+        () -> new SpeedUpgrade(new Item.Properties(), 3));
+    
+    public static final RegistryObject<Item> EFFICIENCY_UPGRADE_1 = ITEMS.register("efficiency_upgrade_1",
+        () -> new EfficiencyUpgrade(new Item.Properties(), 1));
+    public static final RegistryObject<Item> EFFICIENCY_UPGRADE_2 = ITEMS.register("efficiency_upgrade_2",
+        () -> new EfficiencyUpgrade(new Item.Properties(), 2));
+    public static final RegistryObject<Item> EFFICIENCY_UPGRADE_3 = ITEMS.register("efficiency_upgrade_3",
+        () -> new EfficiencyUpgrade(new Item.Properties(), 3));
+    
+    public static final RegistryObject<Item> FORTUNE_UPGRADE_1 = ITEMS.register("fortune_upgrade_1",
+        () -> new FortuneUpgrade(new Item.Properties(), 1));
+    public static final RegistryObject<Item> FORTUNE_UPGRADE_2 = ITEMS.register("fortune_upgrade_2",
+        () -> new FortuneUpgrade(new Item.Properties(), 2));
+    public static final RegistryObject<Item> FORTUNE_UPGRADE_3 = ITEMS.register("fortune_upgrade_3",
+        () -> new FortuneUpgrade(new Item.Properties(), 3));
+    
+    // UU-Matter
+    public static final RegistryObject<Item> UU_MATTER_BUCKET = ITEMS.register("uu_matter_bucket",
+        () -> new BucketItem(ModFluids.UU_MATTER, new Item.Properties()
+            .craftRemainder(Items.BUCKET)
+            .stacksTo(1)));
+    
+    // Advanced Teleporter
+    public static final RegistryObject<Item> TELEPORTER_FREQUENCY_CARD = ITEMS.register("teleporter_frequency_card",
+        () -> new TeleporterFrequencyCardItem());
     
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "astroexpansion:block/power_generator_elite_top",
+    "front": "astroexpansion:block/power_generator_elite_front",
+    "side": "astroexpansion:block/power_generator_elite_side"
+  }
+}

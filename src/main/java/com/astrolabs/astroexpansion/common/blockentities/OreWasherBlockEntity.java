@@ -1,7 +1,9 @@
 package com.astrolabs.astroexpansion.common.blockentities;
 
 import com.astrolabs.astroexpansion.common.blocks.OreWasherBlock;
+import com.astrolabs.astroexpansion.common.blocks.machines.base.UpgradeableMachineBlockEntity;
 import com.astrolabs.astroexpansion.common.capabilities.AstroEnergyStorage;
+import com.astrolabs.astroexpansion.common.capabilities.CombinedItemHandler;
 import com.astrolabs.astroexpansion.common.menu.OreWasherMenu;
 import com.astrolabs.astroexpansion.common.recipes.WashingRecipe;
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
@@ -19,7 +21,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -34,8 +35,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.Random;
 
-public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
+public class OreWasherBlockEntity extends UpgradeableMachineBlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -64,7 +66,12 @@ public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
+    private int baseMaxProgress = 100;
     private int energyPerTick = 10;
+    private int baseEnergyPerTick = 10;
+    private int waterPerOperation = 100;
+    private int baseWaterPerOperation = 100;
+    private final Random random = new Random();
     
     public OreWasherBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ORE_WASHER.get(), pos, state);
@@ -116,6 +123,10 @@ public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
         }
         
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
+            if (side == null) {
+                // Internal access - return combined handler with upgrades
+                return LazyOptional.of(() -> new CombinedItemHandler(itemHandler, upgradeHandler)).cast();
+            }
             return lazyItemHandler.cast();
         }
         
@@ -158,6 +169,16 @@ public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
         energyStorage.readFromNBT(nbt.getCompound("energy"));
         progress = nbt.getInt("progress");
         fluidTank.readFromNBT(nbt.getCompound("fluid"));
+        onUpgradesChanged();
+    }
+    
+    @Override
+    public void onUpgradesChanged() {
+        super.onUpgradesChanged();
+        // Update processing values based on upgrades
+        maxProgress = (int)(baseMaxProgress / getSpeedMultiplier());
+        energyPerTick = (int)(baseEnergyPerTick * getEfficiencyMultiplier());
+        waterPerOperation = (int)(baseWaterPerOperation / getEfficiencyMultiplier());
     }
     
     public void drops() {
@@ -177,9 +198,14 @@ public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
         boolean hasRecipe = entity.hasRecipe();
         boolean wasProcessing = entity.progress > 0;
         
-        if (hasRecipe && entity.hasEnoughEnergy()) {
-            entity.progress++;
-            entity.energyStorage.extractEnergy(entity.energyPerTick, false);
+        if (hasRecipe && entity.hasEnoughEnergy() && entity.hasEnoughWater()) {
+            // Apply speed upgrade
+            int progressIncrement = (int)Math.ceil(entity.getSpeedMultiplier());
+            entity.progress += progressIncrement;
+            
+            // Apply efficiency upgrade to energy consumption
+            int energyToConsume = (int)(entity.energyPerTick * entity.getEfficiencyMultiplier());
+            entity.energyStorage.extractEnergy(energyToConsume, false);
             
             if (entity.progress >= entity.maxProgress) {
                 entity.craftItem();
@@ -208,7 +234,16 @@ public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
             .getRecipeFor(ModRecipeTypes.WASHING.get(), inventory, level);
         
         if (recipe.isPresent()) {
-            return canInsertIntoOutputSlots(recipe.get());
+            // Update max progress based on recipe time and speed upgrade
+            WashingRecipe washingRecipe = recipe.get();
+            baseMaxProgress = washingRecipe.getProcessTime();
+            maxProgress = (int)(baseMaxProgress / getSpeedMultiplier());
+            
+            // Update energy cost based on recipe and efficiency upgrade
+            baseEnergyPerTick = washingRecipe.getEnergyCost() / baseMaxProgress;
+            energyPerTick = (int)(baseEnergyPerTick * getEfficiencyMultiplier());
+            
+            return canInsertIntoOutputSlots(washingRecipe);
         }
         
         return false;
@@ -216,6 +251,10 @@ public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
     
     private boolean hasEnoughEnergy() {
         return energyStorage.getEnergyStored() >= energyPerTick;
+    }
+    
+    private boolean hasEnoughWater() {
+        return fluidTank.getFluidAmount() >= waterPerOperation;
     }
     
     private void craftItem() {
@@ -232,16 +271,40 @@ public class OreWasherBlockEntity extends BlockEntity implements MenuProvider {
             
             itemHandler.extractItem(0, 1, false);
             
-            // Primary output
-            ItemStack primaryOutput = washingRecipe.getResultItem(level.registryAccess());
-            itemHandler.setStackInSlot(1, new ItemStack(primaryOutput.getItem(),
-                itemHandler.getStackInSlot(1).getCount() + primaryOutput.getCount()));
+            // Consume water with efficiency upgrade
+            fluidTank.drain(waterPerOperation, IFluidHandler.FluidAction.EXECUTE);
             
-            // Secondary output (10% chance)
-            if (level.random.nextFloat() < washingRecipe.getSecondaryChance()) {
-                ItemStack secondaryOutput = washingRecipe.getSecondaryOutput();
-                itemHandler.setStackInSlot(2, new ItemStack(secondaryOutput.getItem(),
-                    itemHandler.getStackInSlot(2).getCount() + secondaryOutput.getCount()));
+            // Primary output
+            ItemStack primaryOutput = washingRecipe.getResultItem(level.registryAccess()).copy();
+            
+            // Apply fortune upgrade to primary output
+            if (getFortuneMultiplier() > 1.0f && random.nextFloat() < (getFortuneMultiplier() - 1.0f)) {
+                primaryOutput.grow(1);
+            }
+            
+            ItemStack slot1 = itemHandler.getStackInSlot(1);
+            if (slot1.isEmpty()) {
+                itemHandler.setStackInSlot(1, primaryOutput);
+            } else {
+                slot1.grow(primaryOutput.getCount());
+            }
+            
+            // Secondary output with fortune upgrade affecting chance
+            float enhancedSecondaryChance = Math.min(1.0f, washingRecipe.getSecondaryChance() * getFortuneMultiplier());
+            if (level.random.nextFloat() < enhancedSecondaryChance) {
+                ItemStack secondaryOutput = washingRecipe.getSecondaryOutput().copy();
+                
+                // Additional fortune effect on secondary output
+                if (getFortuneMultiplier() > 1.5f && random.nextFloat() < (getFortuneMultiplier() - 1.5f)) {
+                    secondaryOutput.grow(1);
+                }
+                
+                ItemStack slot2 = itemHandler.getStackInSlot(2);
+                if (slot2.isEmpty()) {
+                    itemHandler.setStackInSlot(2, secondaryOutput);
+                } else {
+                    slot2.grow(secondaryOutput.getCount());
+                }
             }
         }
     }

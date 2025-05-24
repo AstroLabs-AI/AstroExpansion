@@ -52,13 +52,28 @@ public class ModCreativeTabs {
                 output.accept(ModItems.ENERGY_CORE.get());
                 output.accept(ModItems.ADVANCED_PROCESSOR.get());
                 output.accept(ModItems.TITANIUM_PLATE.get());
+                output.accept(ModItems.SCRAP.get());
                 
-                // Machines
+                // Machines (Legacy)
                 output.accept(ModBlocks.BASIC_GENERATOR.get());
                 output.accept(ModBlocks.MATERIAL_PROCESSOR.get());
                 output.accept(ModBlocks.ORE_WASHER.get());
+                output.accept(ModBlocks.RECYCLER.get());
                 output.accept(ModBlocks.ENERGY_CONDUIT.get());
                 output.accept(ModBlocks.ENERGY_STORAGE.get());
+                
+                // Tiered Machines
+                output.accept(ModBlocks.POWER_GENERATOR_BASIC.get());
+                output.accept(ModBlocks.POWER_GENERATOR_ADVANCED.get());
+                output.accept(ModBlocks.POWER_GENERATOR_ELITE.get());
+                
+                output.accept(ModBlocks.MATERIAL_PROCESSOR_BASIC.get());
+                output.accept(ModBlocks.MATERIAL_PROCESSOR_ADVANCED.get());
+                output.accept(ModBlocks.MATERIAL_PROCESSOR_ELITE.get());
+                
+                output.accept(ModBlocks.ORE_WASHER_BASIC.get());
+                output.accept(ModBlocks.ORE_WASHER_ADVANCED.get());
+                output.accept(ModBlocks.ORE_WASHER_ELITE.get());
                 
                 // Storage System
                 output.accept(ModBlocks.STORAGE_CORE.get());
@@ -172,6 +187,17 @@ public class ModCreativeTabs {
                 
                 // Vehicles
                 output.accept(ModItems.LUNAR_ROVER.get());
+                
+                // Machine Upgrades
+                output.accept(ModItems.SPEED_UPGRADE_1.get());
+                output.accept(ModItems.SPEED_UPGRADE_2.get());
+                output.accept(ModItems.SPEED_UPGRADE_3.get());
+                output.accept(ModItems.EFFICIENCY_UPGRADE_1.get());
+                output.accept(ModItems.EFFICIENCY_UPGRADE_2.get());
+                output.accept(ModItems.EFFICIENCY_UPGRADE_3.get());
+                output.accept(ModItems.FORTUNE_UPGRADE_1.get());
+                output.accept(ModItems.FORTUNE_UPGRADE_2.get());
+                output.accept(ModItems.FORTUNE_UPGRADE_3.get());
             })
             .build());
     

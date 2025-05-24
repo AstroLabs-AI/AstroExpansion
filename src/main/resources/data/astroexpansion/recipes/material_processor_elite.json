@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NQN",
+    "PMP",
+    "NFN"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "P": {
+      "item": "astroexpansion:plasma_injector"
+    },
+    "M": {
+      "item": "astroexpansion:material_processor_advanced"
+    },
+    "F": {
+      "item": "astroexpansion:fusion_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:material_processor_elite"
+  }
+}

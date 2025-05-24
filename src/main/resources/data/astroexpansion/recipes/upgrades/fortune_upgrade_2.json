@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "DPD",
+    " U "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "U": {
+      "item": "astroexpansion:fortune_upgrade_1"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:fortune_upgrade_2"
+  }
+}

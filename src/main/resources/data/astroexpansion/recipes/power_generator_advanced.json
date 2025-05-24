@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TAT",
+    "PGP",
+    "TET"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "A": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "P": {
+      "item": "astroexpansion:titanium_plate"
+    },
+    "G": {
+      "item": "astroexpansion:power_generator_basic"
+    },
+    "E": {
+      "item": "astroexpansion:energy_storage"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:power_generator_advanced"
+  }
+}

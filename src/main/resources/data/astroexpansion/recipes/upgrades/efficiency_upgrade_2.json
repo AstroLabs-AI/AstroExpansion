@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "EPE",
+    " U "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    },
+    "P": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "U": {
+      "item": "astroexpansion:efficiency_upgrade_1"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:efficiency_upgrade_2"
+  }
+}

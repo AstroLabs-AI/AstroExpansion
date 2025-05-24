@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "QPQ",
+    " U "
+  ],
+  "key": {
+    "L": {
+      "item": "astroexpansion:lithium_ingot"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "P": {
+      "item": "astroexpansion:fusion_core"
+    },
+    "U": {
+      "item": "astroexpansion:efficiency_upgrade_2"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:efficiency_upgrade_3"
+  }
+}

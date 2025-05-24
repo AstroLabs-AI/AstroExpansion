@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NQN",
+    "PWP",
+    "NHN"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "P": {
+      "item": "astroexpansion:fluid_pipe"
+    },
+    "W": {
+      "item": "astroexpansion:ore_washer_advanced"
+    },
+    "H": {
+      "item": "astroexpansion:helium3_canister"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:ore_washer_elite"
+  }
+}

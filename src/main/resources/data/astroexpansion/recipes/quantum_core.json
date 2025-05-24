@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QPQ",
+    "DND",
+    "QPQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "astroexpansion:quantum_processor"
+    },
+    "P": {
+      "item": "astroexpansion:plasma_injector"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:quantum_core"
+  }
+}

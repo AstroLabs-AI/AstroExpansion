@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "astroexpansion:item/teleporter_frequency_card"
+  }
+}

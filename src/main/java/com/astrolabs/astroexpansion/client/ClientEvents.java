@@ -22,6 +22,7 @@ public class ClientEvents {
             MenuScreens.register(ModMenuTypes.BASIC_GENERATOR_MENU.get(), BasicGeneratorScreen::new);
             MenuScreens.register(ModMenuTypes.MATERIAL_PROCESSOR_MENU.get(), MaterialProcessorScreen::new);
             MenuScreens.register(ModMenuTypes.ORE_WASHER_MENU.get(), OreWasherScreen::new);
+            MenuScreens.register(ModMenuTypes.RECYCLER.get(), RecyclerScreen::new);
             MenuScreens.register(ModMenuTypes.ENERGY_STORAGE_MENU.get(), EnergyStorageScreen::new);
             MenuScreens.register(ModMenuTypes.STORAGE_CORE_MENU.get(), StorageCoreScreen::new);
             MenuScreens.register(ModMenuTypes.STORAGE_TERMINAL_MENU.get(), StorageTerminalScreen::new);
@@ -34,6 +35,9 @@ public class ClientEvents {
             MenuScreens.register(ModMenuTypes.RESEARCH_TERMINAL.get(), ResearchTerminalScreen::new);
             MenuScreens.register(ModMenuTypes.FUEL_REFINERY.get(), FuelRefineryScreen::new);
             MenuScreens.register(ModMenuTypes.ROCKET_ASSEMBLY.get(), RocketAssemblyScreen::new);
+            MenuScreens.register(ModMenuTypes.MATTER_FABRICATOR_MENU.get(), MatterFabricatorScreen::new);
+            MenuScreens.register(ModMenuTypes.MATTER_DUPLICATOR_MENU.get(), MatterDuplicatorScreen::new);
+            MenuScreens.register(ModMenuTypes.ADVANCED_TELEPORTER.get(), AdvancedTeleporterScreen::new);
         });
     }
     

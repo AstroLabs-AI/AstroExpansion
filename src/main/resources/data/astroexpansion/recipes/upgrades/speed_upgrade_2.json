@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "CPC",
+    " U "
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "P": {
+      "item": "astroexpansion:advanced_processor"
+    },
+    "U": {
+      "item": "astroexpansion:speed_upgrade_1"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:speed_upgrade_2"
+  }
+}

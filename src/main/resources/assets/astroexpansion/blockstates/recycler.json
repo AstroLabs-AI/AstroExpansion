@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,powered=false": { "model": "astroexpansion:block/recycler" },
+    "facing=south,powered=false": { "model": "astroexpansion:block/recycler", "y": 180 },
+    "facing=west,powered=false": { "model": "astroexpansion:block/recycler", "y": 270 },
+    "facing=east,powered=false": { "model": "astroexpansion:block/recycler", "y": 90 },
+    "facing=north,powered=true": { "model": "astroexpansion:block/recycler_active" },
+    "facing=south,powered=true": { "model": "astroexpansion:block/recycler_active", "y": 180 },
+    "facing=west,powered=true": { "model": "astroexpansion:block/recycler_active", "y": 270 },
+    "facing=east,powered=true": { "model": "astroexpansion:block/recycler_active", "y": 90 }
+  }
+}

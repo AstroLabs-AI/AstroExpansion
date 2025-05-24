@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "astroexpansion:scrap"
+    }
+  },
+  "result": {
+    "item": "minecraft:iron_ingot",
+    "count": 1
+  }
+}

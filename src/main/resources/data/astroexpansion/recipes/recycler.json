@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "HCH",
+    "IEI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "astroexpansion:processor"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:recycler"
+  }
+}

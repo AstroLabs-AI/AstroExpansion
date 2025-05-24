@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "formed=false,powered=false": { "model": "astroexpansion:block/advanced_teleporter" },
+    "formed=false,powered=true": { "model": "astroexpansion:block/advanced_teleporter" },
+    "formed=true,powered=false": { "model": "astroexpansion:block/advanced_teleporter" },
+    "formed=true,powered=true": { "model": "astroexpansion:block/advanced_teleporter" }
+  }
+}
