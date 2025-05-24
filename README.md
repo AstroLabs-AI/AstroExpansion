@@ -80,6 +80,8 @@ Craft the **Astro Guide** for comprehensive in-game documentation:
 
 ### Survival Progression Path
 
+📚 **[Complete Start to Space Guide](guides/START_TO_SPACE_GUIDE.md)** - Detailed 80-day walkthrough!
+
 1. **Mine New Ores**
    - Titanium (Y: 0-56)
    - Lithium (Y: -64-0)

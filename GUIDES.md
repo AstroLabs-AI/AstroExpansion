@@ -6,6 +6,7 @@ Welcome to the comprehensive guide collection for AstroExpansion! These guides w
 
 ### Getting Started
 - [Quick Start Guide](guides/QUICK_START.md) - Your first steps in AstroExpansion
+- **🚀 [Start to Space Guide](guides/START_TO_SPACE_GUIDE.md) - Complete walkthrough from beginning to space**
 - [Ore Generation](guides/ORE_GENERATION.md) - Where to find new resources
 - **📖 [In-Game Guide Book](guides/GUIDE_BOOK.md) - How to use the Astro Guide**
 
