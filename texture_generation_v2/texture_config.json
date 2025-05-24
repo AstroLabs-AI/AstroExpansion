@@ -40,7 +40,6 @@
     "empty_fuel_cell": {"type": "cell"},
     "filled_fuel_cell": {"type": "cell"},
     "rocket_fuel": {"type": "fuel"},
-    "scrap": {"type": "waste"},
     "moon_dust_item": {"type": "dust", "material": "moon"},
     "research_data_basic": {"type": "data"},
     "research_data_advanced": {"type": "data"},
@@ -59,7 +58,12 @@
     "raw_lunar_iron": {"type": "raw"},
     "helium3_crystal": {"type": "crystal"},
     "oxygen_mask": {"type": "mask"},
-    "titanium_plate": {"type": "plate"}
+    "titanium_plate": {"type": "plate"},
+    "scrap": {"type": "waste"},
+    "alien_artifact": {"type": "artifact"},
+    "meteor_fragment": {"type": "fragment"},
+    "cosmic_dust": {"type": "dust", "material": "cosmic"},
+    "space_station_key": {"type": "key"}
   },
   "guis": {
     "basic_generator": {"type": "generator"},

@@ -721,6 +721,12 @@ class TextureGenerator:
             texture = self.create_mask_texture(material)
         elif item_type == "plate":
             texture = self.create_plate_texture(material)
+        elif item_type == "artifact":
+            texture = self.create_artifact_texture(material)
+        elif item_type == "fragment":
+            texture = self.create_fragment_texture(material)
+        elif item_type == "key":
+            texture = self.create_key_texture(material)
         else:
             # Generic item
             texture = self.create_generic_item_texture(material)
@@ -779,7 +785,9 @@ class TextureGenerator:
         material_colors = {
             "titanium": (168, 168, 180),
             "lithium": (255, 192, 203),
-            "uranium": (100, 200, 100)
+            "uranium": (100, 200, 100),
+            "cosmic": (100, 50, 150),  # Purple cosmic dust
+            "moon": (200, 200, 200)    # Gray moon dust
         }
         
         base_color = material_colors.get(material, (128, 128, 128))
@@ -1414,6 +1422,99 @@ class TextureGenerator:
         for x, y in [(3, 4), (12, 4), (3, 11), (12, 11)]:
             texture[y, x] = (*rivet_color, 255)
             texture[y-1, x] = (120, 120, 120, 255)  # Highlight
+        
+        return texture
+    
+    def create_artifact_texture(self, artifact_type: str) -> np.ndarray:
+        """Create alien artifact texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Alien artifact - mysterious object
+        base_color = (100, 50, 150)  # Purple alien tech
+        glow_color = (200, 150, 255)
+        
+        # Main shape - angular/crystalline
+        texture[3:13, 4:12] = (*base_color, 255)
+        
+        # Angular cuts
+        texture[3:5, 4:6] = (0, 0, 0, 0)
+        texture[11:13, 10:12] = (0, 0, 0, 0)
+        texture[3:5, 10:12] = (0, 0, 0, 0)
+        texture[11:13, 4:6] = (0, 0, 0, 0)
+        
+        # Glowing patterns
+        texture[6:10, 7:9] = (*glow_color, 255)
+        texture[7:9, 6:10] = (*glow_color, 255)
+        
+        # Energy veins
+        texture[5, 7:9] = tuple(int(c * 0.7) for c in glow_color) + (255,)
+        texture[10, 7:9] = tuple(int(c * 0.7) for c in glow_color) + (255,)
+        texture[7:9, 5] = tuple(int(c * 0.7) for c in glow_color) + (255,)
+        texture[7:9, 10] = tuple(int(c * 0.7) for c in glow_color) + (255,)
+        
+        return texture
+    
+    def create_fragment_texture(self, fragment_type: str) -> np.ndarray:
+        """Create meteor fragment texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Meteor rock colors
+        rock_color = (60, 50, 40)
+        hot_color = (200, 100, 50)
+        metal_color = (140, 140, 150)
+        
+        # Irregular rock shape
+        # Main body
+        texture[4:12, 5:11] = (*rock_color, 255)
+        texture[5:11, 4:12] = (*rock_color, 255)
+        
+        # Rough edges
+        texture[3, 6:9] = (*rock_color, 255)
+        texture[12, 7:10] = (*rock_color, 255)
+        texture[6:9, 3] = (*rock_color, 255)
+        texture[7:10, 12] = (*rock_color, 255)
+        
+        # Hot/melted areas
+        texture[6:8, 6:8] = (*hot_color, 255)
+        texture[9:11, 8:10] = (*hot_color, 255)
+        
+        # Metallic inclusions
+        texture[5, 9] = (*metal_color, 255)
+        texture[10, 5] = (*metal_color, 255)
+        texture[8, 7] = (*metal_color, 255)
+        
+        return texture
+    
+    def create_key_texture(self, key_type: str) -> np.ndarray:
+        """Create key texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Key colors
+        key_color = (180, 180, 190)  # Silver/metal
+        accent_color = (100, 150, 255)  # Blue tech accent
+        
+        # Key handle (circular)
+        # Ring
+        for angle in range(0, 360, 30):
+            x = int(4 + 2.5 * np.cos(np.radians(angle)))
+            y = int(4 + 2.5 * np.sin(np.radians(angle)))
+            if 0 <= x < 16 and 0 <= y < 16:
+                texture[y, x] = (*key_color, 255)
+        
+        # Fill handle
+        texture[2:7, 2:7] = (*key_color, 255)
+        texture[3:6, 3:6] = (0, 0, 0, 0)  # Hole in handle
+        
+        # Key shaft
+        texture[5:7, 6:14] = (*key_color, 255)
+        
+        # Key teeth (high-tech pattern)
+        texture[7, 10:14] = (*key_color, 255)
+        texture[6, 12:14] = (*key_color, 255)
+        texture[5, 13:14] = (*key_color, 255)
+        
+        # Tech accent on handle
+        texture[4, 4] = (*accent_color, 255)
         
         return texture
     

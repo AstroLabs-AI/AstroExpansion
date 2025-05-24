@@ -1,17 +1,30 @@
-# AstroExpansion v1.0.35
+# AstroExpansion v1.0.35 Release Notes
 
-## What's Changed
-- Release v1.0.34 with professional textures (knoxhack)
+## Complete Texture Fix
 
-## Installation
-1. Install Minecraft Forge 1.20.1 (version 47.2.0 or newer)
-2. Download the JAR file from the assets below
-3. Place it in your `.minecraft/mods` folder
+This release fixes ALL missing textures that were causing invisible items.
 
-## Requirements
-- Minecraft 1.20.1
-- Forge 47.2.0+
-- Java 17+
+### Fixed Issues
+
+- **Fixed ALL invisible items** - Every registered item now has a texture
+- **Fixed machine texture naming** - Corrected names for power_generator, material_processor, ore_washer
+- **Added final missing textures**:
+  - scrap
+  - alien_artifact
+  - meteor_fragment
+  - cosmic_dust
+  - space_station_key
+
+### Texture Summary
+
+- Total textures: 400+
+- New professional textures: 110+
+- All items should now display correctly in-game
+- No more invisible/missing textures
+
+### Installation
+
+Replace your old JAR with this version. Delete any resource pack overrides to see the new textures.
 
 ---
-*This release was automatically generated from commit 8eefc38*
+*If you still experience invisible items, please ensure you're using the correct JAR file and have restarted Minecraft.*
