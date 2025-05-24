@@ -16,6 +16,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.ChatFormatting;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class WrenchItem extends Item {
     
@@ -100,5 +104,25 @@ public class WrenchItem extends Item {
     public boolean isFoil(ItemStack stack) {
         // Make wrench glow when it has special features
         return true;
+    }
+    
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.literal("Universal Tool").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.empty());
+        tooltip.add(Component.literal("Right-click: ").withStyle(ChatFormatting.YELLOW)
+            .append(Component.literal("Rotate blocks").withStyle(ChatFormatting.WHITE)));
+        tooltip.add(Component.literal("Shift + Right-click: ").withStyle(ChatFormatting.YELLOW)
+            .append(Component.literal("Instant break / Toggle preview").withStyle(ChatFormatting.WHITE)));
+        tooltip.add(Component.empty());
+        tooltip.add(Component.literal("Multiblock Preview:").withStyle(ChatFormatting.AQUA));
+        tooltip.add(Component.literal("  Hold to see structure ghost blocks").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("  ").withStyle(ChatFormatting.GRAY)
+            .append(Component.literal("Green").withStyle(ChatFormatting.GREEN))
+            .append(Component.literal(" = Correct, ").withStyle(ChatFormatting.GRAY))
+            .append(Component.literal("Red").withStyle(ChatFormatting.RED))
+            .append(Component.literal(" = Wrong, ").withStyle(ChatFormatting.GRAY))
+            .append(Component.literal("Blue").withStyle(ChatFormatting.BLUE))
+            .append(Component.literal(" = Missing").withStyle(ChatFormatting.GRAY)));
     }
 }

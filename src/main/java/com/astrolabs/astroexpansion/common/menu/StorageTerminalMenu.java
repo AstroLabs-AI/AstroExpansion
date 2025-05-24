@@ -2,9 +2,12 @@ package com.astrolabs.astroexpansion.common.menu;
 
 import com.astrolabs.astroexpansion.api.storage.IStorageNetwork;
 import com.astrolabs.astroexpansion.common.blockentities.StorageTerminalBlockEntity;
+import com.astrolabs.astroexpansion.common.data.FavoriteItemsData;
 import com.astrolabs.astroexpansion.common.registry.ModBlocks;
 import com.astrolabs.astroexpansion.common.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -14,15 +17,21 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class StorageTerminalMenu extends AbstractContainerMenu {
     private final StorageTerminalBlockEntity blockEntity;
     private final Level level;
+    private final Player player;
     private final List<ItemStack> networkItems = new ArrayList<>();
     private String searchQuery = "";
+    private Set<ItemStack> clientFavorites = new HashSet<>(); // Client-side cache
     
     // Crafting grid slots (3x3)
     private final CraftingContainer craftingGrid = new TransientCraftingContainer(this, 3, 3);
@@ -36,6 +45,7 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
         super(ModMenuTypes.STORAGE_TERMINAL_MENU.get(), id);
         this.blockEntity = (StorageTerminalBlockEntity) entity;
         this.level = inv.player.level();
+        this.player = inv.player;
         
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -51,6 +61,17 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
         this.addSlot(new ResultSlot(inv.player, craftingGrid, craftingResult, 0, 124, 35));
         
         updateNetworkItems();
+        
+        // Sync favorites on menu open
+        if (!level.isClientSide && level instanceof ServerLevel serverLevel && inv.player instanceof ServerPlayer serverPlayer) {
+            FavoriteItemsData favoritesData = FavoriteItemsData.get(serverLevel);
+            com.astrolabs.astroexpansion.common.network.ModPacketHandler.sendToPlayer(
+                new com.astrolabs.astroexpansion.common.network.packets.SyncFavoritesPacket(
+                    favoritesData.getFavorites(inv.player.getUUID())
+                ), 
+                serverPlayer
+            );
+        }
     }
     
     public void updateNetworkItems() {
@@ -62,19 +83,48 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
     }
     
     public List<ItemStack> getFilteredItems() {
-        if (searchQuery.isEmpty()) {
-            return networkItems;
-        }
-        
         List<ItemStack> filtered = new ArrayList<>();
-        String query = searchQuery.toLowerCase();
+        String query = searchQuery.toLowerCase().trim();
         
         for (ItemStack stack : networkItems) {
-            String name = stack.getHoverName().getString().toLowerCase();
-            if (name.contains(query)) {
+            boolean matches = false;
+            
+            if (query.isEmpty()) {
+                matches = true;
+            } else if (query.startsWith("@")) {
+                // Search by mod ID
+                String modId = query.substring(1);
+                String itemModId = ForgeRegistries.ITEMS.getKey(stack.getItem()).getNamespace();
+                matches = itemModId.toLowerCase().contains(modId);
+            } else {
+                // Search by item name
+                String name = stack.getHoverName().getString().toLowerCase();
+                matches = name.contains(query);
+            }
+            
+            if (matches) {
                 filtered.add(stack);
             }
         }
+        
+        // Sort with favorites first
+        Set<ItemStack> favorites;
+        if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
+            FavoriteItemsData favoritesData = FavoriteItemsData.get(serverLevel);
+            favorites = favoritesData.getFavorites(player.getUUID());
+        } else {
+            // Client-side, use cached favorites
+            favorites = clientFavorites;
+        }
+        
+        filtered.sort((a, b) -> {
+            boolean aFav = favorites.stream().anyMatch(fav -> ItemStack.isSameItemSameTags(fav, a));
+            boolean bFav = favorites.stream().anyMatch(fav -> ItemStack.isSameItemSameTags(fav, b));
+            
+            if (aFav && !bFav) return -1;
+            if (!aFav && bFav) return 1;
+            return 0;
+        });
         
         return filtered;
     }
@@ -119,6 +169,38 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
             return network.extractItem(stack, simulate);
         }
         return ItemStack.EMPTY;
+    }
+    
+    public void toggleFavorite(ItemStack stack, Player player) {
+        if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
+            FavoriteItemsData favoritesData = FavoriteItemsData.get(serverLevel);
+            favoritesData.toggleFavorite(player.getUUID(), stack);
+            updateNetworkItems(); // Refresh to re-sort
+            
+            // Sync favorites to client
+            if (player instanceof ServerPlayer serverPlayer) {
+                com.astrolabs.astroexpansion.common.network.ModPacketHandler.sendToPlayer(
+                    new com.astrolabs.astroexpansion.common.network.packets.SyncFavoritesPacket(
+                        favoritesData.getFavorites(player.getUUID())
+                    ), 
+                    serverPlayer
+                );
+            }
+        }
+    }
+    
+    public boolean isFavorite(ItemStack stack) {
+        if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
+            FavoriteItemsData favoritesData = FavoriteItemsData.get(serverLevel);
+            return favoritesData.isFavorite(player.getUUID(), stack);
+        } else {
+            // Client-side check
+            return clientFavorites.stream().anyMatch(fav -> ItemStack.isSameItemSameTags(fav, stack));
+        }
+    }
+    
+    public void setClientFavorites(Set<ItemStack> favorites) {
+        this.clientFavorites = new HashSet<>(favorites);
     }
     
     @Override

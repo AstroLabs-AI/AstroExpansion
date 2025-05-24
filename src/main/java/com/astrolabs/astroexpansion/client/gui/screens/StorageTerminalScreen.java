@@ -2,8 +2,12 @@ package com.astrolabs.astroexpansion.client.gui.screens;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.menu.StorageTerminalMenu;
+import com.astrolabs.astroexpansion.common.network.ModPacketHandler;
+import com.astrolabs.astroexpansion.common.network.packets.UpdateStorageSearchPacket;
+import com.astrolabs.astroexpansion.common.network.packets.ToggleFavoriteItemPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -12,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StorageTerminalScreen extends AbstractContainerScreen<StorageTerminalMenu> {
@@ -36,14 +41,25 @@ public class StorageTerminalScreen extends AbstractContainerScreen<StorageTermin
         // Create search box
         int searchX = this.leftPos + 8;
         int searchY = this.topPos + 6;
-        this.searchBox = new EditBox(this.font, searchX, searchY, 120, 12, Component.literal(""));
+        this.searchBox = new EditBox(this.font, searchX, searchY, 100, 12, Component.literal(""));
         this.searchBox.setMaxLength(50);
         this.searchBox.setBordered(false);
         this.searchBox.setVisible(true);
         this.searchBox.setFocused(true);
         this.searchBox.setTextColor(0xFFFFFF);
         this.searchBox.setResponder(this::onSearchChanged);
+        this.searchBox.setHint(Component.literal("Search... (@mod for mod ID)"));
         this.addRenderableWidget(this.searchBox);
+        
+        // Add clear button
+        Button clearButton = Button.builder(Component.literal("X"), button -> {
+            this.searchBox.setValue("");
+            this.onSearchChanged("");
+        })
+        .pos(this.leftPos + 110, this.topPos + 5)
+        .size(14, 14)
+        .build();
+        this.addRenderableWidget(clearButton);
         
         // Update terminal with current search
         this.menu.setSearchQuery("");
@@ -52,6 +68,8 @@ public class StorageTerminalScreen extends AbstractContainerScreen<StorageTermin
     private void onSearchChanged(String query) {
         this.menu.setSearchQuery(query);
         this.scrollOffset = 0;
+        // Send search update to server
+        ModPacketHandler.sendToServer(new UpdateStorageSearchPacket(query));
     }
     
     @Override
@@ -110,13 +128,25 @@ public class StorageTerminalScreen extends AbstractContainerScreen<StorageTermin
             guiGraphics.renderItem(stack, slotX, slotY);
             guiGraphics.renderItemDecorations(font, stack, slotX, slotY);
             
+            // Render favorite star
+            if (menu.isFavorite(stack)) {
+                // Draw a small yellow star in the top-left corner
+                guiGraphics.drawString(font, "★", slotX, slotY - 2, 0xFFD700, false);
+            }
+            
             // Handle mouse hover
             if (isHovering(slotX - leftPos, slotY - topPos, 16, 16, mouseX, mouseY)) {
                 guiGraphics.fillGradient(slotX, slotY, slotX + 16, slotY + 16, 
                     0x80FFFFFF, 0x80FFFFFF);
                 
-                // Show tooltip
-                guiGraphics.renderTooltip(font, stack, mouseX, mouseY);
+                // Show tooltip with favorite hint
+                List<Component> tooltip = new ArrayList<>();
+                tooltip.add(stack.getHoverName());
+                if (hasShiftDown()) {
+                    tooltip.add(Component.literal(""));
+                    tooltip.add(Component.literal("Shift+Click to toggle favorite").withStyle(style -> style.withColor(0xFFD700)));
+                }
+                guiGraphics.renderTooltip(font, tooltip, stack.getTooltipImage(), mouseX, mouseY);
             }
         }
     }
@@ -157,13 +187,15 @@ public class StorageTerminalScreen extends AbstractContainerScreen<StorageTermin
             if (isHovering(slotX - leftPos, slotY - topPos, 16, 16, (int)mouseX, (int)mouseY)) {
                 ItemStack stack = items.get(i);
                 
+                // Shift+click - toggle favorite
+                if (hasShiftDown()) {
+                    ModPacketHandler.sendToServer(new ToggleFavoriteItemPacket(stack));
+                    return true;
+                }
+                
                 // Left click - extract single item
                 // Right click - extract stack
-                // Shift+click - extract all
                 int amount = button == 0 ? 1 : stack.getMaxStackSize();
-                if (hasShiftDown()) {
-                    amount = stack.getCount();
-                }
                 
                 ItemStack requested = stack.copy();
                 requested.setCount(amount);

@@ -1,8 +1,7 @@
 package com.astrolabs.astroexpansion.common.network;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
-import com.astrolabs.astroexpansion.common.network.packets.TeleportPacket;
-import com.astrolabs.astroexpansion.common.network.packets.UpdateTeleporterNamePacket;
+import com.astrolabs.astroexpansion.common.network.packets.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -39,6 +38,25 @@ public class ModPacketHandler {
             .decoder(UpdateTeleporterNamePacket::new)
             .encoder(UpdateTeleporterNamePacket::toBytes)
             .consumerMainThread(UpdateTeleporterNamePacket::handle)
+            .add();
+            
+        // Storage Terminal packets
+        net.messageBuilder(UpdateStorageSearchPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+            .decoder(UpdateStorageSearchPacket::new)
+            .encoder(UpdateStorageSearchPacket::toBytes)
+            .consumerMainThread(UpdateStorageSearchPacket::handle)
+            .add();
+            
+        net.messageBuilder(ToggleFavoriteItemPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+            .decoder(ToggleFavoriteItemPacket::new)
+            .encoder(ToggleFavoriteItemPacket::toBytes)
+            .consumerMainThread(ToggleFavoriteItemPacket::handle)
+            .add();
+            
+        net.messageBuilder(SyncFavoritesPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+            .decoder(SyncFavoritesPacket::new)
+            .encoder(SyncFavoritesPacket::toBytes)
+            .consumerMainThread(SyncFavoritesPacket::handle)
             .add();
     }
     
