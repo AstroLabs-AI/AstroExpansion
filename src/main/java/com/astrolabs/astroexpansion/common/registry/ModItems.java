@@ -109,8 +109,6 @@ public class ModItems {
     public static final RegistryObject<Item> PLASMA_INJECTOR = ITEMS.register("plasma_injector",
         () -> new Item(new Item.Properties()));
     
-    public static final RegistryObject<Item> QUANTUM_CORE = ITEMS.register("quantum_core",
-        () -> new Item(new Item.Properties()));
     
     // Fusion Fuels
     public static final RegistryObject<Item> DEUTERIUM_CELL = ITEMS.register("deuterium_cell",
