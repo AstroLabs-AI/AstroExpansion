@@ -7,6 +7,8 @@ import com.astrolabs.astroexpansion.common.items.AstroGuideItem;
 import com.astrolabs.astroexpansion.common.items.SpaceSuitArmorItem;
 import com.astrolabs.astroexpansion.common.items.StorageDriveItem;
 import com.astrolabs.astroexpansion.common.items.TeleporterFrequencyCardItem;
+import com.astrolabs.astroexpansion.common.items.WrenchItem;
+import com.astrolabs.astroexpansion.common.items.MultimeterItem;
 import com.astrolabs.astroexpansion.common.items.upgrades.SpeedUpgrade;
 import com.astrolabs.astroexpansion.common.items.upgrades.EfficiencyUpgrade;
 import com.astrolabs.astroexpansion.common.items.upgrades.FortuneUpgrade;
@@ -63,11 +65,11 @@ public class ModItems {
     
     // Misc
     public static final RegistryObject<Item> WRENCH = ITEMS.register("wrench",
-        () -> new Item(new Item.Properties().stacksTo(1)));
+        () -> new WrenchItem(new Item.Properties()));
     public static final RegistryObject<Item> SCRAP = ITEMS.register("scrap",
         () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> MULTIMETER = ITEMS.register("multimeter",
-        () -> new Item(new Item.Properties().stacksTo(1)));
+        () -> new MultimeterItem(new Item.Properties()));
     
     // Storage Components
     public static final RegistryObject<Item> STORAGE_DRIVE_1K = ITEMS.register("storage_drive_1k",

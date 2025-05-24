@@ -6,6 +6,10 @@ import com.astrolabs.astroexpansion.common.block.machine.RecyclerBlock;
 import com.astrolabs.astroexpansion.common.blocks.machines.base.MachineTier;
 import com.astrolabs.astroexpansion.common.blocks.machines.MatterFabricatorBlock;
 import com.astrolabs.astroexpansion.common.blocks.machines.MatterDuplicatorBlock;
+import com.astrolabs.astroexpansion.common.items.MachineBlockItem;
+import com.astrolabs.astroexpansion.common.items.ConduitBlockItem;
+import com.astrolabs.astroexpansion.common.items.BusBlockItem;
+import com.astrolabs.astroexpansion.common.registry.MachineTooltips;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -93,29 +97,32 @@ public class ModBlocks {
             .sound(SoundType.METAL)));
     
     // Machines - Legacy (keeping for compatibility)
-    public static final RegistryObject<Block> BASIC_GENERATOR = registerBlock("basic_generator",
+    public static final RegistryObject<Block> BASIC_GENERATOR = registerMachineBlock("basic_generator",
         () -> new BasicGeneratorBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(3.5F)
             .sound(SoundType.METAL)
-            .noOcclusion()));
+            .noOcclusion()),
+        MachineTooltips.BASIC_GENERATOR);
     
-    public static final RegistryObject<Block> MATERIAL_PROCESSOR = registerBlock("material_processor",
+    public static final RegistryObject<Block> MATERIAL_PROCESSOR = registerMachineBlock("material_processor",
         () -> new MaterialProcessorBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(3.5F)
             .sound(SoundType.METAL)
-            .noOcclusion()));
+            .noOcclusion()),
+        MachineTooltips.MATERIAL_PROCESSOR);
     
-    public static final RegistryObject<Block> ORE_WASHER = registerBlock("ore_washer",
+    public static final RegistryObject<Block> ORE_WASHER = registerMachineBlock("ore_washer",
         () -> new OreWasherBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(3.5F)
             .sound(SoundType.METAL)
-            .noOcclusion()));
+            .noOcclusion()),
+        MachineTooltips.ORE_WASHER);
     
     public static final RegistryObject<Block> RECYCLER = registerBlock("recycler",
         () -> new RecyclerBlock(BlockBehaviour.Properties.of()
@@ -207,29 +214,32 @@ public class ModBlocks {
             .sound(SoundType.METAL)
             .noOcclusion()));
     
-    public static final RegistryObject<Block> ENERGY_STORAGE = registerBlock("energy_storage",
+    public static final RegistryObject<Block> ENERGY_STORAGE = registerMachineBlock("energy_storage",
         () -> new EnergyStorageBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(3.5F)
-            .sound(SoundType.METAL)));
+            .sound(SoundType.METAL)),
+        MachineTooltips.ENERGY_STORAGE);
     
     // Storage System
-    public static final RegistryObject<Block> STORAGE_CORE = registerBlock("storage_core",
+    public static final RegistryObject<Block> STORAGE_CORE = registerMachineBlock("storage_core",
         () -> new StorageCoreBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(3.5F)
             .sound(SoundType.METAL)
-            .lightLevel(state -> state.getValue(StorageCoreBlock.FORMED) ? 7 : 0)));
+            .lightLevel(state -> state.getValue(StorageCoreBlock.FORMED) ? 7 : 0)),
+        MachineTooltips.STORAGE_CORE);
     
-    public static final RegistryObject<Block> STORAGE_TERMINAL = registerBlock("storage_terminal",
+    public static final RegistryObject<Block> STORAGE_TERMINAL = registerMachineBlock("storage_terminal",
         () -> new StorageTerminalBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
             .strength(3.5F)
             .sound(SoundType.METAL)
-            .noOcclusion()));
+            .noOcclusion()),
+        MachineTooltips.STORAGE_TERMINAL);
     
     // Drones
     public static final RegistryObject<Block> DRONE_DOCK = registerBlock("drone_dock",
@@ -406,6 +416,27 @@ public class ModBlocks {
     
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+    
+    // Register machine block with custom tooltip
+    private static <T extends Block> RegistryObject<T> registerMachineBlock(String name, Supplier<T> block, MachineBlockItem.MachineTooltipData tooltipData) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        ModItems.ITEMS.register(name, () -> new MachineBlockItem(toReturn.get(), new Item.Properties(), tooltipData));
+        return toReturn;
+    }
+    
+    // Register conduit block with custom tooltip
+    private static <T extends Block> RegistryObject<T> registerConduitBlock(String name, Supplier<T> block, int transferRate, String conduitType) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        ModItems.ITEMS.register(name, () -> new ConduitBlockItem(toReturn.get(), new Item.Properties(), transferRate, conduitType));
+        return toReturn;
+    }
+    
+    // Register bus block with custom tooltip
+    private static <T extends Block> RegistryObject<T> registerBusBlock(String name, Supplier<T> block, boolean isImport) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        ModItems.ITEMS.register(name, () -> new BusBlockItem(toReturn.get(), new Item.Properties(), isImport));
+        return toReturn;
     }
     
     public static void register(IEventBus eventBus) {
