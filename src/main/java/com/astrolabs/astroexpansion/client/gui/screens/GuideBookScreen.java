@@ -5,6 +5,8 @@ import com.astrolabs.astroexpansion.api.guidebook.*;
 import com.astrolabs.astroexpansion.client.gui.widgets.GuideSearchBar;
 import com.astrolabs.astroexpansion.client.gui.widgets.GuideSidePanel;
 import com.astrolabs.astroexpansion.common.guidebook.AstroGuideBook;
+import com.astrolabs.astroexpansion.common.guidebook.pages.CategoryOverviewPage;
+import com.astrolabs.astroexpansion.common.guidebook.pages.HomePage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -39,6 +41,20 @@ public class GuideBookScreen extends Screen {
     private IGuideEntry currentEntry;
     private int currentPageIndex = 0;
     private List<IGuidePage> currentPages = new ArrayList<>();
+    
+    // Navigation history
+    private final List<NavigationState> navigationHistory = new ArrayList<>();
+    private static class NavigationState {
+        final IGuideCategory category;
+        final IGuideEntry entry;
+        final int pageIndex;
+        
+        NavigationState(IGuideCategory category, IGuideEntry entry, int pageIndex) {
+            this.category = category;
+            this.entry = entry;
+            this.pageIndex = pageIndex;
+        }
+    }
     
     // GUI elements
     private GuideSearchBar searchBar;
@@ -187,14 +203,50 @@ public class GuideBookScreen extends Screen {
         
         // Pass to current pages
         if (!currentPages.isEmpty()) {
+            int bookX = (width - BOOK_WIDTH) / 2;
+            int bookY = (height - BOOK_HEIGHT) / 2;
+            int leftStart = bookX + 28;
+            int rightStart = bookX + 256;
+            int pageY = bookY + 28;
+            
+            // Convert to relative coordinates
+            int relX = (int)mouseX - bookX;
+            int relY = (int)mouseY - bookY;
+            
             if (currentPageIndex < currentPages.size()) {
-                if (currentPages.get(currentPageIndex).mouseClicked(mouseX, mouseY, button)) {
-                    return true;
+                IGuidePage leftPage = currentPages.get(currentPageIndex);
+                if (relX >= leftStart - bookX && relX < leftStart - bookX + PAGE_WIDTH && 
+                    relY >= pageY - bookY && relY < pageY - bookY + PAGE_HEIGHT) {
+                    if (leftPage.mouseClicked(relX - (leftStart - bookX), relY - (pageY - bookY), button)) {
+                        // Special handling for CategoryOverviewPage
+                        if (leftPage instanceof CategoryOverviewPage) {
+                            CategoryOverviewPage catPage = (CategoryOverviewPage) leftPage;
+                            IGuideEntry clickedEntry = catPage.getClickedEntry(
+                                relX - (leftStart - bookX), relY - (pageY - bookY));
+                            if (clickedEntry != null) {
+                                showEntry(clickedEntry);
+                            }
+                        }
+                        return true;
+                    }
                 }
             }
             if (currentPageIndex + 1 < currentPages.size()) {
-                if (currentPages.get(currentPageIndex + 1).mouseClicked(mouseX, mouseY, button)) {
-                    return true;
+                IGuidePage rightPage = currentPages.get(currentPageIndex + 1);
+                if (relX >= rightStart - bookX && relX < rightStart - bookX + PAGE_WIDTH && 
+                    relY >= pageY - bookY && relY < pageY - bookY + PAGE_HEIGHT) {
+                    if (rightPage.mouseClicked(relX - (rightStart - bookX), relY - (pageY - bookY), button)) {
+                        // Special handling for CategoryOverviewPage
+                        if (rightPage instanceof CategoryOverviewPage) {
+                            CategoryOverviewPage catPage = (CategoryOverviewPage) rightPage;
+                            IGuideEntry clickedEntry = catPage.getClickedEntry(
+                                relX - (rightStart - bookX), relY - (pageY - bookY));
+                            if (clickedEntry != null) {
+                                showEntry(clickedEntry);
+                            }
+                        }
+                        return true;
+                    }
                 }
             }
         }
@@ -258,8 +310,24 @@ public class GuideBookScreen extends Screen {
     }
     
     private void goBack() {
-        // TODO: Implement navigation history
-        if (currentEntry != null) {
+        if (!navigationHistory.isEmpty()) {
+            NavigationState state = navigationHistory.remove(navigationHistory.size() - 1);
+            currentCategory = state.category;
+            currentEntry = state.entry;
+            currentPageIndex = state.pageIndex;
+            
+            // Restore pages
+            currentPages.clear();
+            if (state.entry != null) {
+                currentPages.addAll(state.entry.getPages());
+            } else if (state.category != null) {
+                currentPages.add(new CategoryOverviewPage(state.category, guideBook));
+            } else {
+                currentPages.add(new HomePage());
+            }
+            
+            updateButtons();
+        } else if (currentEntry != null) {
             showCategory(currentEntry.getCategory());
         } else if (currentCategory != null) {
             goHome();
@@ -273,7 +341,12 @@ public class GuideBookScreen extends Screen {
         
         // Show main categories page
         currentPages.clear();
-        // TODO: Generate home page with categories
+        
+        // Create home page
+        currentPages.add(new HomePage());
+        
+        // Update side panel to show categories
+        sidePanel.showCategories();
         
         updateButtons();
     }
@@ -286,19 +359,31 @@ public class GuideBookScreen extends Screen {
     }
     
     public void showCategory(IGuideCategory category) {
+        // Save current state to history
+        if (currentCategory != null || currentEntry != null) {
+            navigationHistory.add(new NavigationState(currentCategory, currentEntry, currentPageIndex));
+        }
+        
         currentCategory = category;
         currentEntry = null;
         currentPageIndex = 0;
         
         // Generate category pages
         currentPages.clear();
-        // TODO: Generate category overview pages
+        
+        // Create category overview page
+        currentPages.add(new CategoryOverviewPage(category, guideBook));
         
         guideBook.getProgress(player).getViewedEntries().add(category.getId());
         updateButtons();
     }
     
     public void showEntry(IGuideEntry entry) {
+        // Save current state to history
+        if (currentCategory != null || currentEntry != null) {
+            navigationHistory.add(new NavigationState(currentCategory, currentEntry, currentPageIndex));
+        }
+        
         currentEntry = entry;
         currentPageIndex = 0;
         

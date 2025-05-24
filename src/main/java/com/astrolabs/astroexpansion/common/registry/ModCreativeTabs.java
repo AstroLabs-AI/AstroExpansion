@@ -101,6 +101,7 @@ public class ModCreativeTabs {
                 
                 // Tools
                 output.accept(ModItems.WRENCH.get());
+                output.accept(ModItems.ASTRO_GUIDE.get());
                 
                 // Space Items
                 output.accept(ModItems.SPACE_HELMET.get());

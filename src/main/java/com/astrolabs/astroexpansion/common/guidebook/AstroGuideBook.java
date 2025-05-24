@@ -151,6 +151,214 @@ public class AstroGuideBook implements IGuideBook {
         firstSteps.addTag("basics");
         firstSteps.addTag("materials");
         registerEntry(firstSteps);
+        
+        // Titanium Ore entry
+        BasicEntry titaniumOre = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "titanium_ore"),
+            Component.translatable("guide.astroexpansion.entry.titanium_ore"),
+            new ItemStack(ModBlocks.TITANIUM_ORE.get()),
+            category,
+            2
+        );
+        
+        titaniumOre.addPage(new TextPage(
+            "## Titanium Ore\n\n" +
+            "**Titanium Ore** is the foundation of all advanced technology in AstroExpansion. " +
+            "This valuable resource spawns in the Overworld.\n\n" +
+            "**Generation Info:**\n" +
+            "- Height Range: Y=-64 to Y=20\n" +
+            "- Vein Size: 3-8 blocks\n" +
+            "- Rarity: Common below Y=0\n\n" +
+            "**Variants:**\n" +
+            "- Stone Titanium Ore (Y=0 to Y=20)\n" +
+            "- Deepslate Titanium Ore (Y=-64 to Y=0)\n\n" +
+            "Mine with an Iron Pickaxe or better!",
+            1
+        ));
+        
+        titaniumOre.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "titanium_ingot_smelting"),
+            2
+        ));
+        
+        titaniumOre.addTag("materials");
+        titaniumOre.addTag("ores");
+        registerEntry(titaniumOre);
+        
+        // Lithium Ore entry
+        BasicEntry lithiumOre = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "lithium_ore"),
+            Component.translatable("guide.astroexpansion.entry.lithium_ore"),
+            new ItemStack(ModBlocks.LITHIUM_ORE.get()),
+            category,
+            3
+        );
+        
+        lithiumOre.addPage(new TextPage(
+            "## Lithium Ore\n\n" +
+            "**Lithium Ore** is essential for energy storage and advanced batteries. " +
+            "This light metal is crucial for space technology.\n\n" +
+            "**Generation Info:**\n" +
+            "- Height Range: Y=-32 to Y=32\n" +
+            "- Vein Size: 4-9 blocks\n" +
+            "- Rarity: Uncommon\n\n" +
+            "**Processing:**\n" +
+            "- Direct smelting yields Lithium Ingots\n" +
+            "- Ore washing provides bonus output\n" +
+            "- Can be processed into dust for crafting\n\n" +
+            "Used in batteries and energy components!",
+            1
+        ));
+        
+        lithiumOre.addTag("materials");
+        lithiumOre.addTag("ores");
+        lithiumOre.addTag("energy");
+        registerEntry(lithiumOre);
+        
+        // Uranium Ore entry
+        BasicEntry uraniumOre = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "uranium_ore"),
+            Component.translatable("guide.astroexpansion.entry.uranium_ore"),
+            new ItemStack(ModBlocks.URANIUM_ORE.get()),
+            category,
+            4
+        );
+        
+        uraniumOre.addPage(new TextPage(
+            "## Uranium Ore\n\n" +
+            "**Uranium Ore** is a radioactive material used in advanced power generation. " +
+            "Handle with care!\n\n" +
+            "**Generation Info:**\n" +
+            "- Height Range: Y=-64 to Y=-16\n" +
+            "- Vein Size: 1-4 blocks\n" +
+            "- Rarity: Rare\n\n" +
+            "**Safety Warning:**\n" +
+            "⚠️ Radioactive! Long exposure may cause negative effects.\n\n" +
+            "**Uses:**\n" +
+            "- Nuclear fuel production\n" +
+            "- Advanced energy systems\n" +
+            "- Quantum technology",
+            1
+        ));
+        
+        uraniumOre.addTag("materials");
+        uraniumOre.addTag("ores");
+        uraniumOre.addTag("dangerous");
+        registerEntry(uraniumOre);
+        
+        // Wrench entry
+        BasicEntry wrench = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "wrench_tool"),
+            Component.translatable("guide.astroexpansion.entry.wrench_tool"),
+            new ItemStack(ModItems.WRENCH.get()),
+            category,
+            5
+        );
+        
+        wrench.addPage(new TextPage(
+            "## Wrench\n\n" +
+            "The **Wrench** is an essential tool for working with machines.\n\n" +
+            "**Functions:**\n" +
+            "- **Right-click**: Rotate machines\n" +
+            "- **Shift + Right-click**: Instantly break machines\n" +
+            "- Preserves machine contents and energy\n" +
+            "- Works on all AstroExpansion machines\n\n" +
+            "**Tip:** Always use a wrench to move machines - breaking " +
+            "them with other tools may cause loss of contents!",
+            1
+        ));
+        
+        wrench.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "wrench"),
+            2
+        ));
+        
+        wrench.addTag("tools");
+        wrench.addTag("basics");
+        registerEntry(wrench);
+        
+        // Circuit Board entry
+        BasicEntry circuitBoard = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "circuit_board"),
+            Component.translatable("guide.astroexpansion.entry.circuit_board"),
+            new ItemStack(ModItems.CIRCUIT_BOARD.get()),
+            category,
+            6
+        );
+        
+        circuitBoard.addPage(new TextPage(
+            "## Circuit Board\n\n" +
+            "**Circuit Boards** are fundamental components for all electronic devices.\n\n" +
+            "**Crafting Tips:**\n" +
+            "- Requires copper, gold, and redstone\n" +
+            "- Base component for processors\n" +
+            "- Used in most machine recipes\n\n" +
+            "**Advanced Uses:**\n" +
+            "- Combine with other materials for specialized circuits\n" +
+            "- Required for control systems\n" +
+            "- Essential for automation",
+            1
+        ));
+        
+        circuitBoard.addTag("components");
+        circuitBoard.addTag("crafting");
+        registerEntry(circuitBoard);
+        
+        // Processor entry
+        BasicEntry processor = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "processor_component"),
+            Component.translatable("guide.astroexpansion.entry.processor_component"),
+            new ItemStack(ModItems.PROCESSOR.get()),
+            category,
+            7
+        );
+        
+        processor.addPage(new TextPage(
+            "## Processor\n\n" +
+            "**Processors** are advanced computing components that control machine operations.\n\n" +
+            "**Creation:**\n" +
+            "- Craft in Component Assembler\n" +
+            "- Requires Circuit Board + materials\n" +
+            "- Takes time and energy to produce\n\n" +
+            "**Uses:**\n" +
+            "- Machine upgrades\n" +
+            "- Computer systems\n" +
+            "- Advanced automation\n\n" +
+            "Higher tier processors enable more complex operations!",
+            1
+        ));
+        
+        processor.addTag("components");
+        processor.addTag("advanced");
+        registerEntry(processor);
+        
+        // Energy Core entry
+        BasicEntry energyCore = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "energy_core"),
+            Component.translatable("guide.astroexpansion.entry.energy_core"),
+            new ItemStack(ModItems.ENERGY_CORE.get()),
+            category,
+            8
+        );
+        
+        energyCore.addPage(new TextPage(
+            "## Energy Core\n\n" +
+            "**Energy Cores** are high-capacity energy storage components.\n\n" +
+            "**Properties:**\n" +
+            "- Stores large amounts of FE\n" +
+            "- Used in battery construction\n" +
+            "- Required for energy-intensive machines\n\n" +
+            "**Crafting:**\n" +
+            "- Combines lithium with redstone\n" +
+            "- Enhanced with gold for conductivity\n" +
+            "- Stabilized with titanium casing\n\n" +
+            "Essential for any serious power infrastructure!",
+            1
+        ));
+        
+        energyCore.addTag("components");
+        energyCore.addTag("energy");
+        registerEntry(energyCore);
     }
     
     private void createMachineEntries(IGuideCategory category) {
@@ -216,6 +424,112 @@ public class AstroGuideBook implements IGuideBook {
         processor.addTag("machines");
         processor.addTag("processing");
         registerEntry(processor);
+        
+        // Ore Washer entry
+        BasicEntry oreWasher = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "ore_washer"),
+            Component.translatable("guide.astroexpansion.entry.ore_washer"),
+            new ItemStack(ModBlocks.ORE_WASHER.get()),
+            category,
+            2
+        );
+        
+        oreWasher.addPage(new TextPage(
+            "## Ore Washer\n\n" +
+            "The **Ore Washer** uses water to clean raw ores, increasing yield.\n\n" +
+            "**Stats:**\n" +
+            "- Power Usage: 20 FE/tick\n" +
+            "- Processing Time: 200 ticks\n" +
+            "- Water Usage: 100 mB per operation\n" +
+            "- Bonus Output: 10-50% chance\n\n" +
+            "**Supported Ores:**\n" +
+            "- Raw Titanium → 2-3 Titanium Dust\n" +
+            "- Raw Lithium → 2-3 Lithium Dust\n" +
+            "- Raw Uranium → 2-3 Uranium Dust\n\n" +
+            "Requires water input via pipes or buckets!",
+            1
+        ));
+        
+        oreWasher.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "ore_washer"),
+            2
+        ));
+        
+        oreWasher.addTag("machines");
+        oreWasher.addTag("processing");
+        oreWasher.addTag("fluids");
+        registerEntry(oreWasher);
+        
+        // Energy Storage entry
+        BasicEntry energyStorage = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "energy_storage"),
+            Component.translatable("guide.astroexpansion.entry.energy_storage"),
+            new ItemStack(ModBlocks.ENERGY_STORAGE.get()),
+            category,
+            3
+        );
+        
+        energyStorage.addPage(new TextPage(
+            "## Energy Storage\n\n" +
+            "The **Energy Storage** block is your first battery for storing excess power.\n\n" +
+            "**Specifications:**\n" +
+            "- Capacity: 100,000 FE\n" +
+            "- Max Input: 1,000 FE/tick\n" +
+            "- Max Output: 1,000 FE/tick\n" +
+            "- Retains energy when broken\n\n" +
+            "**Features:**\n" +
+            "- Visual charge indicator\n" +
+            "- Configurable input/output sides\n" +
+            "- Redstone comparator support\n\n" +
+            "Essential for managing power fluctuations!",
+            1
+        ));
+        
+        energyStorage.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "energy_storage"),
+            2
+        ));
+        
+        energyStorage.addTag("machines");
+        energyStorage.addTag("energy");
+        energyStorage.addTag("storage");
+        registerEntry(energyStorage);
+        
+        // Component Assembler entry (already exists, adding more detail)
+        BasicEntry componentAssembler = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "component_assembler"),
+            Component.translatable("guide.astroexpansion.entry.component_assembler"),
+            new ItemStack(ModBlocks.COMPONENT_ASSEMBLER.get()),
+            category,
+            4
+        );
+        
+        componentAssembler.addPage(new TextPage(
+            "## Component Assembler\n\n" +
+            "The **Component Assembler** crafts advanced components automatically.\n\n" +
+            "**Performance:**\n" +
+            "- Power Usage: 40 FE/tick\n" +
+            "- Base Speed: 200 ticks per craft\n" +
+            "- Can process multiple recipes\n" +
+            "- Upgradeable with speed modules\n\n" +
+            "**Key Recipes:**\n" +
+            "- Processors (all tiers)\n" +
+            "- Advanced circuits\n" +
+            "- Energy components\n" +
+            "- Storage processors\n\n" +
+            "Place ingredients in the grid to see available recipes!",
+            1
+        ));
+        
+        componentAssembler.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "component_assembler"),
+            2
+        ));
+        
+        componentAssembler.addTag("machines");
+        componentAssembler.addTag("crafting");
+        componentAssembler.addTag("automation");
+        registerEntry(componentAssembler);
     }
     
     private void createEnergyEntries(IGuideCategory category) {
@@ -244,6 +558,42 @@ public class AstroGuideBook implements IGuideBook {
         energyBasics.addTag("energy");
         energyBasics.addTag("basics");
         registerEntry(energyBasics);
+        
+        // Energy Conduit entry
+        BasicEntry energyConduit = new BasicEntry(
+            new ResourceLocation(AstroExpansion.MODID, "energy_conduit"),
+            Component.translatable("guide.astroexpansion.entry.energy_conduit"),
+            new ItemStack(ModBlocks.ENERGY_CONDUIT.get()),
+            category,
+            1
+        );
+        
+        energyConduit.addPage(new TextPage(
+            "## Energy Conduit\n\n" +
+            "**Energy Conduits** transfer power between machines and generators.\n\n" +
+            "**Specifications:**\n" +
+            "- Transfer Rate: 5,000 FE/tick\n" +
+            "- No internal storage\n" +
+            "- Instant energy transfer\n" +
+            "- Auto-connects to adjacent blocks\n\n" +
+            "**Network Features:**\n" +
+            "- Forms networks automatically\n" +
+            "- Smart energy distribution\n" +
+            "- Minimal energy loss\n" +
+            "- Supports branching paths\n\n" +
+            "Right-click with empty hand to see connections!",
+            1
+        ));
+        
+        energyConduit.addPage(new RecipePage(
+            new ResourceLocation(AstroExpansion.MODID, "energy_conduit"),
+            2
+        ));
+        
+        energyConduit.addTag("energy");
+        energyConduit.addTag("transfer");
+        energyConduit.addTag("networks");
+        registerEntry(energyConduit);
     }
     
     private void createSpaceEntries(IGuideCategory category) {

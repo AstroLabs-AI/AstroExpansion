@@ -170,5 +170,16 @@
   "guide.astroexpansion.entry.material_processor": "Material Processor",
   "guide.astroexpansion.entry.energy_basics": "Energy Basics",
   "guide.astroexpansion.entry.space_suit": "Space Suit",
-  "guide.astroexpansion.entry.storage_system": "Storage System"
+  "guide.astroexpansion.entry.storage_system": "Storage System",
+  "guide.astroexpansion.entry.titanium_ore": "Titanium Ore",
+  "guide.astroexpansion.entry.lithium_ore": "Lithium Ore",
+  "guide.astroexpansion.entry.uranium_ore": "Uranium Ore",
+  "guide.astroexpansion.entry.wrench_tool": "Wrench",
+  "guide.astroexpansion.entry.circuit_board": "Circuit Board",
+  "guide.astroexpansion.entry.processor_component": "Processor",
+  "guide.astroexpansion.entry.energy_core": "Energy Core",
+  "guide.astroexpansion.entry.ore_washer": "Ore Washer",
+  "guide.astroexpansion.entry.energy_storage": "Energy Storage",
+  "guide.astroexpansion.entry.component_assembler": "Component Assembler",
+  "guide.astroexpansion.entry.energy_conduit": "Energy Conduit"
 }
