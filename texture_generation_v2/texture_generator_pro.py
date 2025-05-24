@@ -709,6 +709,18 @@ class TextureGenerator:
             texture = self.create_waste_texture(material)
         elif item_type == "data":
             texture = self.create_data_texture(material)
+        elif item_type == "book":
+            texture = self.create_book_texture(material)
+        elif item_type == "bucket":
+            texture = self.create_bucket_texture(material)
+        elif item_type == "raw":
+            texture = self.create_raw_ore_texture(material)
+        elif item_type == "crystal":
+            texture = self.create_crystal_item_texture(material)
+        elif item_type == "mask":
+            texture = self.create_mask_texture(material)
+        elif item_type == "plate":
+            texture = self.create_plate_texture(material)
         else:
             # Generic item
             texture = self.create_generic_item_texture(material)
@@ -1223,6 +1235,185 @@ class TextureGenerator:
         # Center detail
         texture[6:10, 6:10] = tuple(int(c * 0.8) for c in base_color) + (255,)
         texture[7:9, 7:9] = tuple(int(c * 1.1) for c in base_color) + (255,)
+        
+        return texture
+    
+    def create_book_texture(self, book_type: str) -> np.ndarray:
+        """Create book texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Book cover
+        cover_color = (139, 69, 19)  # Brown leather
+        texture[1:15, 2:14] = (*cover_color, 255)
+        
+        # Spine
+        spine_color = (100, 50, 10)
+        texture[1:15, 1:3] = (*spine_color, 255)
+        
+        # Pages
+        page_color = (240, 230, 200)
+        texture[2:14, 3:13] = (*page_color, 255)
+        
+        # Title decoration
+        texture[4:6, 5:11] = (200, 150, 0, 255)  # Gold text
+        texture[8:10, 5:11] = (200, 150, 0, 255)
+        
+        return texture
+    
+    def create_bucket_texture(self, content: str) -> np.ndarray:
+        """Create bucket texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Bucket body
+        bucket_color = (140, 140, 140)
+        # Side walls
+        texture[4:14, 2:4] = (*bucket_color, 255)
+        texture[4:14, 12:14] = (*bucket_color, 255)
+        # Bottom
+        texture[12:14, 2:14] = (*bucket_color, 255)
+        
+        # Handle
+        handle_color = (100, 100, 100)
+        texture[2:4, 6:10] = (*handle_color, 255)
+        texture[1, 5:11] = (*handle_color, 255)
+        texture[2, 5] = (*handle_color, 255)
+        texture[2, 10] = (*handle_color, 255)
+        
+        # Content (UU matter - purple)
+        if content:
+            content_color = (150, 0, 255)
+            texture[5:12, 4:12] = (*content_color, 200)
+            # Shine
+            texture[5, 5:11] = (200, 100, 255, 255)
+        
+        return texture
+    
+    def create_raw_ore_texture(self, ore_type: str) -> np.ndarray:
+        """Create raw ore chunk texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Ore colors
+        ore_colors = {
+            "lithium": [(255, 192, 203), (240, 180, 190), (255, 210, 220)],
+            "titanium": [(140, 140, 150), (160, 160, 170), (120, 120, 130)],
+            "uranium": [(80, 200, 80), (100, 220, 100), (60, 180, 60)],
+            "lunar_iron": [(180, 180, 190), (160, 160, 170), (200, 200, 210)]
+        }
+        
+        colors = ore_colors.get(ore_type, [(128, 128, 128), (140, 140, 140), (116, 116, 116)])
+        if len(colors) < 3:
+            colors = colors + [(128, 128, 128)] * (3 - len(colors))
+        base_color = colors[0]
+        
+        # Create chunky ore shape
+        # Main chunk
+        texture[4:13, 5:12] = (*base_color, 255)
+        
+        # Irregular edges
+        texture[3:5, 6:10] = (*colors[1], 255)
+        texture[12:14, 7:11] = (*colors[1], 255)
+        texture[6:10, 3:5] = (*colors[2], 255)
+        texture[7:11, 12:14] = (*colors[2], 255)
+        
+        # Rock matrix
+        rock_color = (90, 90, 90)
+        texture[5, 5] = (*rock_color, 255)
+        texture[11, 10] = (*rock_color, 255)
+        texture[8, 6] = (*rock_color, 255)
+        texture[9, 11] = (*rock_color, 255)
+        
+        return texture
+    
+    def create_crystal_item_texture(self, crystal_type: str) -> np.ndarray:
+        """Create crystal item texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Crystal colors
+        crystal_color = (180, 230, 255)  # Light blue for helium3
+        darker = tuple(int(c * 0.7) for c in crystal_color)
+        
+        # Crystal shape - hexagonal
+        # Top point
+        texture[2, 7:9] = (*crystal_color, 255)
+        texture[3, 6:10] = (*crystal_color, 255)
+        texture[4, 5:11] = (*crystal_color, 255)
+        
+        # Main body
+        for y in range(5, 11):
+            texture[y, 4:12] = (*crystal_color, 255)
+            # Faceting
+            texture[y, 4] = (*darker, 255)
+            texture[y, 11] = (*darker, 255)
+        
+        # Bottom point
+        texture[11, 5:11] = (*crystal_color, 255)
+        texture[12, 6:10] = (*crystal_color, 255)
+        texture[13, 7:9] = (*crystal_color, 255)
+        
+        # Inner glow
+        texture[7:9, 7:9] = (255, 255, 255, 255)
+        
+        return texture
+    
+    def create_mask_texture(self, mask_type: str) -> np.ndarray:
+        """Create mask/helmet texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Mask frame
+        frame_color = (80, 80, 90)
+        # Top
+        texture[2:4, 4:12] = (*frame_color, 255)
+        # Sides
+        texture[4:12, 3:5] = (*frame_color, 255)
+        texture[4:12, 11:13] = (*frame_color, 255)
+        # Bottom
+        texture[11:13, 5:11] = (*frame_color, 255)
+        
+        # Visor
+        visor_color = (150, 200, 255, 180)  # Transparent blue
+        texture[4:11, 5:11] = visor_color
+        
+        # Breathing apparatus
+        texture[10:12, 7:9] = (60, 60, 60, 255)
+        texture[12:14, 7:9] = (100, 100, 100, 255)
+        
+        # Straps
+        strap_color = (40, 40, 40)
+        texture[3, 1:3] = (*strap_color, 255)
+        texture[3, 13:15] = (*strap_color, 255)
+        
+        return texture
+    
+    def create_plate_texture(self, material: str) -> np.ndarray:
+        """Create metal plate texture"""
+        texture = np.zeros((16, 16, 4), dtype=np.uint8)
+        
+        # Material colors
+        material_colors = {
+            "titanium": (160, 160, 170),
+            "iron": (180, 180, 180),
+            "steel": (140, 140, 150)
+        }
+        
+        base_color = material_colors.get(material, (150, 150, 150))
+        
+        # Plate shape - rectangular with rivets
+        texture[3:13, 2:14] = (*base_color, 255)
+        
+        # Edge bevel
+        lighter = tuple(int(min(255, c * 1.1)) for c in base_color)
+        darker = tuple(int(c * 0.8) for c in base_color)
+        
+        texture[3, 2:14] = (*lighter, 255)
+        texture[3:13, 2] = (*lighter, 255)
+        texture[12, 2:14] = (*darker, 255)
+        texture[3:13, 13] = (*darker, 255)
+        
+        # Rivets in corners
+        rivet_color = (100, 100, 100)
+        for x, y in [(3, 4), (12, 4), (3, 11), (12, 11)]:
+            texture[y, x] = (*rivet_color, 255)
+            texture[y-1, x] = (120, 120, 120, 255)  # Highlight
         
         return texture
     

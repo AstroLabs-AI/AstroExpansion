@@ -1,12 +1,12 @@
 {
   "tiers": ["basic", "advanced", "elite"],
   "machines": [
-    "generator",
-    "processor",
-    "washer",
-    "furnace",
+    "power_generator",
+    "material_processor",
+    "ore_washer",
+    "industrial_furnace",
     "recycler",
-    "fabricator"
+    "matter_fabricator"
   ],
   "ores": [
     "titanium",
@@ -28,6 +28,7 @@
     "storage_processor": {"type": "processor", "material": "basic"},
     "advanced_processor": {"type": "processor", "material": "advanced"},
     "quantum_processor": {"type": "processor", "material": "quantum"},
+    "processor": {"type": "processor", "material": "basic"},
     "circuit_board": {"type": "circuit"},
     "plasma_injector": {"type": "component"},
     "fusion_core": {"type": "component"},
@@ -45,7 +46,20 @@
     "research_data_advanced": {"type": "data"},
     "research_data_fusion": {"type": "data"},
     "research_data_quantum": {"type": "data"},
-    "research_data_space": {"type": "data"}
+    "research_data_space": {"type": "data"},
+    "rocket_computer": {"type": "component"},
+    "drone_core": {"type": "component"},
+    "drone_shell": {"type": "component"},
+    "teleporter_frequency_card": {"type": "data"},
+    "astro_guide": {"type": "book"},
+    "uu_matter_bucket": {"type": "bucket"},
+    "raw_lithium": {"type": "raw"},
+    "raw_titanium": {"type": "raw"},
+    "raw_uranium": {"type": "raw"},
+    "raw_lunar_iron": {"type": "raw"},
+    "helium3_crystal": {"type": "crystal"},
+    "oxygen_mask": {"type": "mask"},
+    "titanium_plate": {"type": "plate"}
   },
   "guis": {
     "basic_generator": {"type": "generator"},
