@@ -1,0 +1,72 @@
+{
+  "tiers": ["basic", "advanced", "elite"],
+  "machines": [
+    "generator",
+    "processor",
+    "washer",
+    "furnace",
+    "recycler",
+    "fabricator"
+  ],
+  "ores": [
+    "titanium",
+    "lithium",
+    "uranium",
+    "helium3"
+  ],
+  "items": {
+    "ingot": ["titanium", "lithium", "uranium", "lunar_iron", "rare_earth"],
+    "dust": ["titanium", "lithium", "uranium", "rare_earth"],
+    "circuit": ["basic"],
+    "processor": ["basic", "advanced", "quantum"],
+    "upgrade": ["speed_1", "speed_2", "speed_3", "efficiency_1", "efficiency_2", "efficiency_3", "fortune_1", "fortune_2", "fortune_3"]
+  },
+  "specific_items": {
+    "wrench": {"type": "tool"},
+    "multimeter": {"type": "tool"},
+    "energy_core": {"type": "component"},
+    "storage_processor": {"type": "processor", "material": "basic"},
+    "advanced_processor": {"type": "processor", "material": "advanced"},
+    "quantum_processor": {"type": "processor", "material": "quantum"},
+    "circuit_board": {"type": "circuit"},
+    "plasma_injector": {"type": "component"},
+    "fusion_core": {"type": "component"},
+    "oxygen_tank": {"type": "tank"},
+    "oxygen_canister": {"type": "canister"},
+    "helium3_canister": {"type": "canister"},
+    "deuterium_cell": {"type": "cell"},
+    "tritium_cell": {"type": "cell"},
+    "empty_fuel_cell": {"type": "cell"},
+    "filled_fuel_cell": {"type": "cell"},
+    "rocket_fuel": {"type": "fuel"},
+    "scrap": {"type": "waste"},
+    "moon_dust_item": {"type": "dust", "material": "moon"},
+    "research_data_basic": {"type": "data"},
+    "research_data_advanced": {"type": "data"},
+    "research_data_fusion": {"type": "data"},
+    "research_data_quantum": {"type": "data"},
+    "research_data_space": {"type": "data"}
+  },
+  "guis": {
+    "basic_generator": {"type": "generator"},
+    "advanced_generator": {"type": "generator"},
+    "elite_generator": {"type": "generator"},
+    "material_processor": {"type": "processor"},
+    "ore_washer": {"type": "processor"},
+    "industrial_furnace": {"type": "furnace"},
+    "fusion_reactor": {"type": "generator", "width": 176, "height": 200},
+    "quantum_computer": {"type": "processor", "width": 200, "height": 180},
+    "storage_terminal": {"type": "storage", "width": 200, "height": 224},
+    "storage_core": {"type": "storage"},
+    "research_terminal": {"type": "processor"},
+    "rocket_assembly": {"type": "processor", "width": 256, "height": 200},
+    "component_assembler": {"type": "processor"},
+    "recycler": {"type": "processor"},
+    "matter_fabricator": {"type": "processor"},
+    "matter_duplicator": {"type": "processor"},
+    "energy_storage": {"type": "generator"},
+    "fluid_tank": {"type": "storage"},
+    "fuel_refinery": {"type": "processor", "width": 200, "height": 180},
+    "drone_dock": {"type": "storage"}
+  }
+}
