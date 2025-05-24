@@ -352,6 +352,29 @@ public class ModBlocks {
     public static final RegistryObject<Block> LIFE_SUPPORT_SYSTEM = registerBlock("life_support_system",
         () -> new LifeSupportSystemBlock());
     
+    // New Simplified Space System
+    public static final RegistryObject<Block> LAUNCH_RAIL = registerBlock("launch_rail",
+        () -> new LaunchRailBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(3.0F)
+            .sound(SoundType.METAL)));
+    
+    public static final RegistryObject<Block> ROCKET_WORKBENCH = registerBlock("rocket_workbench",
+        () -> new RocketWorkbenchBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(3.5F)
+            .sound(SoundType.METAL)
+            .noOcclusion()));
+    
+    public static final RegistryObject<Block> LANDING_PAD = registerBlock("landing_pad",
+        () -> new LandingPadBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_GRAY)
+            .requiresCorrectToolForDrops()
+            .strength(5.0F)
+            .sound(SoundType.STONE)));
+    
     // Lunar Blocks
     public static final RegistryObject<Block> MOON_STONE = registerBlock("moon_stone",
         () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(2.0F, 6.0F)));

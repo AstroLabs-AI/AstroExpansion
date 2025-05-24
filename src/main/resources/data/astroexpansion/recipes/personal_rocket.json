@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " T ",
+    "TGT",
+    "TET"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "E": {
+      "item": "astroexpansion:energy_core"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:personal_rocket"
+  }
+}

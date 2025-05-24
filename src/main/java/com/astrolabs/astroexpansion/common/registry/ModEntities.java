@@ -4,6 +4,9 @@ import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.entities.drones.MiningDroneEntity;
 import com.astrolabs.astroexpansion.common.entities.*;
 import com.astrolabs.astroexpansion.common.entities.vehicles.LunarRoverEntity;
+import com.astrolabs.astroexpansion.common.entity.ProbeRocketEntity;
+import com.astrolabs.astroexpansion.common.entity.PersonalRocketEntity;
+import com.astrolabs.astroexpansion.common.entity.CargoShuttleEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -57,6 +60,27 @@ public class ModEntities {
                 .sized(2.0F, 1.5F)
                 .clientTrackingRange(10)
                 .build(new ResourceLocation(AstroExpansion.MODID, "lunar_rover").toString()));
+    
+    public static final RegistryObject<EntityType<ProbeRocketEntity>> PROBE_ROCKET =
+        ENTITY_TYPES.register("probe_rocket",
+            () -> EntityType.Builder.<ProbeRocketEntity>of(ProbeRocketEntity::new, MobCategory.MISC)
+                .sized(1.0F, 2.0F)
+                .clientTrackingRange(10)
+                .build(new ResourceLocation(AstroExpansion.MODID, "probe_rocket").toString()));
+    
+    public static final RegistryObject<EntityType<PersonalRocketEntity>> PERSONAL_ROCKET =
+        ENTITY_TYPES.register("personal_rocket",
+            () -> EntityType.Builder.<PersonalRocketEntity>of(PersonalRocketEntity::new, MobCategory.MISC)
+                .sized(1.5F, 3.0F)
+                .clientTrackingRange(10)
+                .build(new ResourceLocation(AstroExpansion.MODID, "personal_rocket").toString()));
+    
+    public static final RegistryObject<EntityType<CargoShuttleEntity>> CARGO_SHUTTLE =
+        ENTITY_TYPES.register("cargo_shuttle",
+            () -> EntityType.Builder.<CargoShuttleEntity>of(CargoShuttleEntity::new, MobCategory.MISC)
+                .sized(2.0F, 4.0F)
+                .clientTrackingRange(10)
+                .build(new ResourceLocation(AstroExpansion.MODID, "cargo_shuttle").toString()));
     
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

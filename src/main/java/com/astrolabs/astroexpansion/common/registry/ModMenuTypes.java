@@ -84,6 +84,10 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<AdvancedTeleporterMenu>> ADVANCED_TELEPORTER =
         registerMenuType(AdvancedTeleporterMenu::new, "advanced_teleporter_menu");
     
+    // Rocket Workbench
+    public static final RegistryObject<MenuType<RocketWorkbenchMenu>> ROCKET_WORKBENCH =
+        registerMenuType(RocketWorkbenchMenu::new, "rocket_workbench_menu");
+    
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

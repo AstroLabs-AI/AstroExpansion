@@ -2,6 +2,7 @@ package com.astrolabs.astroexpansion.common.network;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.network.packets.*;
+import com.astrolabs.astroexpansion.common.network.packet.LaunchRocketPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -57,6 +58,13 @@ public class ModPacketHandler {
             .decoder(SyncFavoritesPacket::new)
             .encoder(SyncFavoritesPacket::toBytes)
             .consumerMainThread(SyncFavoritesPacket::handle)
+            .add();
+            
+        // Rocket launch packet
+        net.messageBuilder(LaunchRocketPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+            .decoder(LaunchRocketPacket::new)
+            .encoder(LaunchRocketPacket::encode)
+            .consumerMainThread(LaunchRocketPacket::handle)
             .add();
     }
     

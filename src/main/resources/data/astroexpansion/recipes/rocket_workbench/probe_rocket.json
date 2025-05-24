@@ -1,0 +1,18 @@
+{
+  "type": "astroexpansion:rocket_workbench",
+  "ingredients": [
+    { "item": "minecraft:iron_ingot" },
+    { "item": "astroexpansion:processor" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:coal" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:redstone" },
+    { "item": "minecraft:iron_ingot" }
+  ],
+  "output": {
+    "item": "astroexpansion:probe_rocket",
+    "count": 1
+  }
+}

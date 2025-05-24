@@ -5,6 +5,7 @@ import com.astrolabs.astroexpansion.common.blockentities.*;
 import com.astrolabs.astroexpansion.common.block.entity.machine.RecyclerBlockEntity;
 import com.astrolabs.astroexpansion.common.block.entity.MatterFabricatorBlockEntity;
 import com.astrolabs.astroexpansion.common.block.entity.MatterDuplicatorBlockEntity;
+import com.astrolabs.astroexpansion.common.blockentities.RocketWorkbenchBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -194,6 +195,12 @@ public class ModBlockEntities {
         BLOCK_ENTITIES.register("advanced_teleporter",
             () -> BlockEntityType.Builder.of(AdvancedTeleporterBlockEntity::new,
                 ModBlocks.ADVANCED_TELEPORTER.get()).build(null));
+    
+    // Rocket Workbench
+    public static final RegistryObject<BlockEntityType<RocketWorkbenchBlockEntity>> ROCKET_WORKBENCH =
+        BLOCK_ENTITIES.register("rocket_workbench",
+            () -> BlockEntityType.Builder.of(RocketWorkbenchBlockEntity::new,
+                ModBlocks.ROCKET_WORKBENCH.get()).build(null));
     
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

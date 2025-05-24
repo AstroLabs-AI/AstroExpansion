@@ -2,7 +2,9 @@ package com.astrolabs.astroexpansion.client;
 
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.client.gui.screens.*;
+import com.astrolabs.astroexpansion.client.screen.RocketWorkbenchScreen;
 import com.astrolabs.astroexpansion.client.renderer.DroneRenderer;
+import com.astrolabs.astroexpansion.client.renderer.RocketRenderer;
 import com.astrolabs.astroexpansion.common.registry.ModEntities;
 import com.astrolabs.astroexpansion.common.registry.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -38,6 +40,7 @@ public class ClientEvents {
             MenuScreens.register(ModMenuTypes.MATTER_FABRICATOR_MENU.get(), MatterFabricatorScreen::new);
             MenuScreens.register(ModMenuTypes.MATTER_DUPLICATOR_MENU.get(), MatterDuplicatorScreen::new);
             MenuScreens.register(ModMenuTypes.ADVANCED_TELEPORTER.get(), AdvancedTeleporterScreen::new);
+            MenuScreens.register(ModMenuTypes.ROCKET_WORKBENCH.get(), RocketWorkbenchScreen::new);
         });
     }
     
@@ -54,10 +57,19 @@ public class ClientEvents {
             context -> new DroneRenderer<>(context, "combat"));
         event.registerEntityRenderer(ModEntities.LOGISTICS_DRONE.get(), 
             context -> new DroneRenderer<>(context, "logistics"));
+        
+        // Register rocket renderers
+        event.registerEntityRenderer(ModEntities.PROBE_ROCKET.get(), 
+            context -> new RocketRenderer<>(context, "probe"));
+        event.registerEntityRenderer(ModEntities.PERSONAL_ROCKET.get(), 
+            context -> new RocketRenderer<>(context, "personal"));
+        event.registerEntityRenderer(ModEntities.CARGO_SHUTTLE.get(), 
+            context -> new RocketRenderer<>(context, "cargo"));
     }
     
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(DroneRenderer.MODEL_LAYER, DroneRenderer::createBodyLayer);
+        event.registerLayerDefinition(RocketRenderer.ROCKET_LAYER, RocketRenderer::createBodyLayer);
     }
 }

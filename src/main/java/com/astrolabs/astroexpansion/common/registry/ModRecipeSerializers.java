@@ -3,6 +3,7 @@ package com.astrolabs.astroexpansion.common.registry;
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.recipes.ProcessingRecipe;
 import com.astrolabs.astroexpansion.common.recipes.WashingRecipe;
+import com.astrolabs.astroexpansion.common.recipe.RocketWorkbenchRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +19,9 @@ public class ModRecipeSerializers {
     
     public static final RegistryObject<RecipeSerializer<WashingRecipe>> WASHING =
         RECIPE_SERIALIZERS.register("washing", WashingRecipe.Serializer::new);
+    
+    public static final RegistryObject<RecipeSerializer<RocketWorkbenchRecipe>> ROCKET_WORKBENCH =
+        RECIPE_SERIALIZERS.register("rocket_workbench", RocketWorkbenchRecipe.Serializer::new);
     
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZERS.register(eventBus);

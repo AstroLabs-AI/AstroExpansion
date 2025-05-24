@@ -1,9 +1,11 @@
 package com.astrolabs.astroexpansion.common.world.dimension;
 
+import com.astrolabs.astroexpansion.common.world.structure.SpaceStationStructure;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -49,7 +51,18 @@ public class SpaceChunkGenerator extends ChunkGenerator {
     }
     
     public void applyBiomeDecoration(WorldGenRegion level, ChunkAccess chunk, StructureManager structureManager) {
-        // No decorations in space
+        // Generate space stations rarely
+        ChunkPos chunkPos = chunk.getPos();
+        
+        // Only generate at specific coordinates for predictability
+        if (chunkPos.x % 32 == 0 && chunkPos.z % 32 == 0) {
+            // 10% chance for a space station at valid coordinates
+            if (level.getRandom().nextFloat() < 0.1f) {
+                BlockPos stationPos = new BlockPos(chunkPos.getMiddleBlockX(), 100, chunkPos.getMiddleBlockZ());
+                // Space stations will be generated separately, not during chunk generation
+                // to avoid the WorldGenRegion vs ServerLevel issue
+            }
+        }
     }
     
     public CompletableFuture<ChunkAccess> fillFromNoise(Executor executor, Blender blender, RandomState random, StructureManager structureManager, ChunkAccess chunk) {

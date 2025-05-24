@@ -481,5 +481,21 @@
   "tooltip.astroexpansion.max_input": "Max Input: %s/t",
   "tooltip.astroexpansion.max_output": "Max Output: %s/t",
   "tooltip.astroexpansion.storage_types": "Types: %d / %d",
-  "tooltip.astroexpansion.storage_items": "Items: %s / %s"
+  "tooltip.astroexpansion.storage_items": "Items: %s / %s",
+  
+  "item.astroexpansion.probe_rocket": "Probe Rocket",
+  "item.astroexpansion.personal_rocket": "Personal Rocket",
+  "item.astroexpansion.cargo_shuttle": "Cargo Shuttle",
+  "item.astroexpansion.alien_artifact": "Alien Artifact",
+  "item.astroexpansion.meteor_fragment": "Meteor Fragment",
+  "item.astroexpansion.cosmic_dust": "Cosmic Dust",
+  "item.astroexpansion.space_station_key": "Space Station Key",
+  
+  "block.astroexpansion.launch_rail": "Launch Rail",
+  "block.astroexpansion.rocket_workbench": "Rocket Workbench",
+  "block.astroexpansion.landing_pad": "Landing Pad",
+  
+  "entity.astroexpansion.probe_rocket": "Probe Rocket",
+  "entity.astroexpansion.personal_rocket": "Personal Rocket",
+  "entity.astroexpansion.cargo_shuttle": "Cargo Shuttle"
 }

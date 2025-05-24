@@ -1,0 +1,18 @@
+{
+  "type": "astroexpansion:rocket_workbench",
+  "ingredients": [
+    { "item": "astroexpansion:titanium_block" },
+    { "item": "astroexpansion:advanced_processor" },
+    { "item": "astroexpansion:titanium_block" },
+    { "item": "astroexpansion:titanium_block" },
+    { "item": "astroexpansion:energy_core" },
+    { "item": "astroexpansion:titanium_block" },
+    { "item": "astroexpansion:plasma_injector" },
+    { "item": "minecraft:chest" },
+    { "item": "astroexpansion:plasma_injector" }
+  ],
+  "output": {
+    "item": "astroexpansion:cargo_shuttle",
+    "count": 1
+  }
+}

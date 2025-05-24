@@ -3,6 +3,7 @@ package com.astrolabs.astroexpansion.common.registry;
 import com.astrolabs.astroexpansion.AstroExpansion;
 import com.astrolabs.astroexpansion.common.recipes.ProcessingRecipe;
 import com.astrolabs.astroexpansion.common.recipes.WashingRecipe;
+import com.astrolabs.astroexpansion.common.recipe.RocketWorkbenchRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,6 +27,14 @@ public class ModRecipeTypes {
             @Override
             public String toString() {
                 return "washing";
+            }
+        });
+    
+    public static final RegistryObject<RecipeType<RocketWorkbenchRecipe>> ROCKET_WORKBENCH =
+        RECIPE_TYPES.register("rocket_workbench", () -> new RecipeType<RocketWorkbenchRecipe>() {
+            @Override
+            public String toString() {
+                return "rocket_workbench";
             }
         });
     

@@ -12,6 +12,9 @@ import com.astrolabs.astroexpansion.common.items.MultimeterItem;
 import com.astrolabs.astroexpansion.common.items.upgrades.SpeedUpgrade;
 import com.astrolabs.astroexpansion.common.items.upgrades.EfficiencyUpgrade;
 import com.astrolabs.astroexpansion.common.items.upgrades.FortuneUpgrade;
+import com.astrolabs.astroexpansion.common.items.rockets.ProbeRocketItem;
+import com.astrolabs.astroexpansion.common.items.rockets.PersonalRocketItem;
+import com.astrolabs.astroexpansion.common.items.rockets.CargoShuttleItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -185,6 +188,29 @@ public class ModItems {
     // Vehicles
     public static final RegistryObject<Item> LUNAR_ROVER = ITEMS.register("lunar_rover",
         () -> new LunarRoverItem());
+    
+    // New Simplified Rockets
+    public static final RegistryObject<Item> PROBE_ROCKET = ITEMS.register("probe_rocket",
+        () -> new ProbeRocketItem(new Item.Properties()));
+    
+    public static final RegistryObject<Item> PERSONAL_ROCKET = ITEMS.register("personal_rocket",
+        () -> new PersonalRocketItem(new Item.Properties()));
+    
+    public static final RegistryObject<Item> CARGO_SHUTTLE = ITEMS.register("cargo_shuttle",
+        () -> new CargoShuttleItem(new Item.Properties()));
+    
+    // Space Loot Items
+    public static final RegistryObject<Item> ALIEN_ARTIFACT = ITEMS.register("alien_artifact",
+        () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    
+    public static final RegistryObject<Item> METEOR_FRAGMENT = ITEMS.register("meteor_fragment",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> COSMIC_DUST = ITEMS.register("cosmic_dust",
+        () -> new Item(new Item.Properties()));
+    
+    public static final RegistryObject<Item> SPACE_STATION_KEY = ITEMS.register("space_station_key",
+        () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
     
     // Lunar Resources
     public static final RegistryObject<Item> HELIUM3_CRYSTAL = ITEMS.register("helium3_crystal",

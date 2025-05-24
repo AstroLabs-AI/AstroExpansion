@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TCT",
+    "IWI",
+    "III"
+  ],
+  "key": {
+    "T": {
+      "item": "astroexpansion:titanium_ingot"
+    },
+    "C": {
+      "item": "astroexpansion:circuit_board"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "W": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "astroexpansion:rocket_workbench"
+  }
+}
