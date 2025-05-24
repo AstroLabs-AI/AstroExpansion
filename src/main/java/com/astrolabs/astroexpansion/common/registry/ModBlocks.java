@@ -196,9 +196,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> QUANTUM_CASING = registerBlock("quantum_casing",
         () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     
-    public static final RegistryObject<Block> QUANTUM_PROCESSOR = registerBlock("quantum_processor",
-        () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).lightLevel(state -> 7)));
-    
     public static final RegistryObject<Block> QUANTUM_CORE = registerBlock("quantum_core",
         () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).lightLevel(state -> 12)));
     
