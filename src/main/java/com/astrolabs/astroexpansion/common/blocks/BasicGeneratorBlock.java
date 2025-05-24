@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,6 +58,24 @@ public class BasicGeneratorBlock extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+    
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(LIT)) {
+            // Energy generation particles
+            com.astrolabs.astroexpansion.client.particle.MachineParticles.spawnEnergyParticles(level, pos, random);
+            
+            // Smoke from top
+            com.astrolabs.astroexpansion.client.particle.MachineParticles.spawnSmokeParticles(level, pos, random);
+            
+            // Generator rumble sound
+            if (random.nextDouble() < 0.1) {
+                level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    net.minecraft.sounds.SoundEvents.BLAZE_BURN, net.minecraft.sounds.SoundSource.BLOCKS,
+                    0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            }
+        }
     }
     
     @Override

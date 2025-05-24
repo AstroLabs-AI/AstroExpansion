@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,6 +58,21 @@ public class OreWasherBlock extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+    
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(LIT)) {
+            // Water washing particles
+            com.astrolabs.astroexpansion.client.particle.MachineParticles.spawnWashingParticles(level, pos, random);
+            
+            // Water flow sound
+            if (random.nextDouble() < 0.2) {
+                level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    net.minecraft.sounds.SoundEvents.WATER_AMBIENT, net.minecraft.sounds.SoundSource.BLOCKS,
+                    0.3F + random.nextFloat() * 0.1F, 0.9F + random.nextFloat() * 0.15F, false);
+            }
+        }
     }
     
     @Override

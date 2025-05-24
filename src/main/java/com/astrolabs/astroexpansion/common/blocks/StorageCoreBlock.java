@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +42,21 @@ public class StorageCoreBlock extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+    
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(FORMED) && state.getValue(POWERED)) {
+            // Storage network particles
+            com.astrolabs.astroexpansion.client.particle.MachineParticles.spawnStorageParticles(level, pos, random);
+            
+            // Digital hum sound
+            if (random.nextDouble() < 0.05) {
+                level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    net.minecraft.sounds.SoundEvents.BEACON_AMBIENT, net.minecraft.sounds.SoundSource.BLOCKS,
+                    0.1F, 1.5F, false);
+            }
+        }
     }
     
     @Override

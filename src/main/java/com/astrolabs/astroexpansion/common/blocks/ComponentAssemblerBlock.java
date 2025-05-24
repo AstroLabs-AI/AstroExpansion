@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,6 +34,27 @@ public class ComponentAssemblerBlock extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+    
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof ComponentAssemblerBlockEntity assembler) {
+            // Check if machine is processing (simplified check)
+            boolean isActive = assembler.getEnergyStorage().getEnergyStored() > 0;
+            
+            if (isActive) {
+                // Crafting particles
+                com.astrolabs.astroexpansion.client.particle.MachineParticles.spawnCraftingParticles(level, pos, random);
+                
+                // Mechanical sound
+                if (random.nextDouble() < 0.15) {
+                    level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                        net.minecraft.sounds.SoundEvents.PISTON_EXTEND, net.minecraft.sounds.SoundSource.BLOCKS,
+                        0.3F, 1.0F + random.nextFloat() * 0.1F, false);
+                }
+            }
+        }
     }
     
     @Override
