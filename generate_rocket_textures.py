@@ -72,12 +72,13 @@ def create_rocket_texture(rocket_type, size=64):
 def main():
     # Generate textures for all rocket types
     rocket_types = ['probe', 'personal', 'cargo']
+    item_names = ['probe_rocket', 'personal_rocket', 'cargo_shuttle']
     
-    for rocket_type in rocket_types:
+    for rocket_type, item_name in zip(rocket_types, item_names):
         texture = create_rocket_texture(rocket_type)
-        output_path = f'src/main/resources/assets/astroexpansion/textures/entity/rocket_{rocket_type}.png'
+        output_path = f'src/main/resources/assets/astroexpansion/textures/item/{item_name}.png'
         texture.save(output_path)
-        print(f"Created {rocket_type} rocket texture at: {output_path}")
+        print(f"Created {item_name} texture at: {output_path}")
 
 if __name__ == "__main__":
     main()
