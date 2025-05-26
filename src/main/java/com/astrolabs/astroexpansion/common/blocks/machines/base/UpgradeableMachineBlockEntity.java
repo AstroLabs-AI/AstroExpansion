@@ -29,23 +29,30 @@ public abstract class UpgradeableMachineBlockEntity extends BlockEntity implemen
     public UpgradeableMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int maxUpgradeSlots) {
         super(type, pos, state);
         this.maxUpgradeSlots = maxUpgradeSlots;
-        this.upgradeHandler = new ItemStackHandler(maxUpgradeSlots) {
-            @Override
-            protected void onContentsChanged(int slot) {
-                UpgradeableMachineBlockEntity.this.onUpgradesChanged();
-                UpgradeableMachineBlockEntity.this.setChanged();
-            }
-            
-            @Override
-            public boolean isItemValid(int slot, ItemStack stack) {
-                return UpgradeableMachineBlockEntity.this.isValidUpgrade(stack);
-            }
-            
-            @Override
-            public int getSlotLimit(int slot) {
-                return 1; // Only one upgrade per slot
-            }
-        };
+        this.upgradeHandler = new UpgradeItemStackHandler(maxUpgradeSlots);
+    }
+    
+    // Named inner class instead of anonymous class to avoid class loading issues
+    public class UpgradeItemStackHandler extends ItemStackHandler {
+        public UpgradeItemStackHandler(int size) {
+            super(size);
+        }
+        
+        @Override
+        protected void onContentsChanged(int slot) {
+            UpgradeableMachineBlockEntity.this.onUpgradesChanged();
+            UpgradeableMachineBlockEntity.this.setChanged();
+        }
+        
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            return UpgradeableMachineBlockEntity.this.isValidUpgrade(stack);
+        }
+        
+        @Override
+        public int getSlotLimit(int slot) {
+            return 1; // Only one upgrade per slot
+        }
     }
     
     @Override

@@ -1,0 +1,28 @@
+{
+  "name": "Personal Rockets",
+  "icon": "astroexpansion:personal_rocket",
+  "category": "astroexpansion:space_travel",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Personal Rockets",
+      "text": "Personal rockets are the first manned spacecraft you'll build. They allow a single player to travel to space, though they are one-way vessels.$(br2)Before launching a personal rocket, ensure you are wearing a complete Space Suit to survive the harsh vacuum of space."
+    },
+    {
+      "type": "crafting",
+      "recipe": "astroexpansion:personal_rocket",
+      "title": "Crafting"
+    },
+    {
+      "type": "text",
+      "title": "Using Personal Rockets",
+      "text": "1. Craft a single $(thing)Landing Pad$() and place it$(br)2. Right-click the Landing Pad with a Personal Rocket$(br)3. Right-click the Personal Rocket to board it$(br)4. Hold SPACE to launch$(br2)$(warning)Important: Personal rockets require Landing Pads, not Launch Rails!"
+    },
+    {
+      "type": "text",
+      "title": "Space Survival",
+      "text": "Once in space, you'll need to:$(br)1. Establish a space station with Life Support$(br)2. Setup power generation$(br)3. Build a return method (Teleporter)$(br2)Remember that personal rockets are disposable and cannot be used to return to Earth. Plan your journey carefully!"
+    }
+  ]
+}

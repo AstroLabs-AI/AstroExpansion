@@ -40,7 +40,20 @@ public class ProbeRocketEntity extends Entity {
     
     public ProbeRocketEntity(Level level, BlockPos pos) {
         this(ModEntities.PROBE_ROCKET.get(), level);
-        this.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+        // Position adjustments - centered horizontally, slightly higher vertically for better alignment
+        this.setPos(pos.getX() + 0.5, pos.getY() + 1.6, pos.getZ() + 0.5);
+        this.noPhysics = true; // Prevent clipping with blocks
+        if (level.isClientSide) {
+            // Add spawn effect particles
+            for (int i = 0; i < 10; i++) {
+                level.addParticle(ParticleTypes.CLOUD, 
+                    pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.5,
+                    pos.getY() + 0.2 + random.nextDouble() * 0.3,
+                    pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.5,
+                    0, 0.05, 0);
+            }
+        }
+        System.out.println("Probe Rocket entity spawned at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
     }
     
     @Override

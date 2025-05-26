@@ -2,7 +2,7 @@
   "parent": "astroexpansion:astroexpansion/root",
   "display": {
     "icon": {
-      "item": "astroexpansion:basic_generator"
+      "item": "astroexpansion:power_generator_basic"
     },
     "title": {
       "translate": "advancement.astroexpansion.first_machine"
@@ -19,7 +19,7 @@
     "place_machine": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "block": "astroexpansion:basic_generator"
+        "block": "astroexpansion:power_generator_basic"
       }
     }
   }

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "astroexpansion:block/launch_rail",
+    "north": "astroexpansion:block/launch_rail",
+    "south": "astroexpansion:block/launch_rail",
+    "east": "astroexpansion:block/launch_rail",
+    "west": "astroexpansion:block/launch_rail",
+    "up": "astroexpansion:block/launch_rail",
+    "down": "astroexpansion:block/launch_rail"
+  }
+}

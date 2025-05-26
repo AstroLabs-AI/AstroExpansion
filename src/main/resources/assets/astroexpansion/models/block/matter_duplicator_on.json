@@ -3,6 +3,7 @@
   "textures": {
     "top": "astroexpansion:block/matter_duplicator_top",
     "front": "astroexpansion:block/matter_duplicator_front_on",
-    "side": "astroexpansion:block/matter_duplicator_side"
+    "side": "astroexpansion:block/matter_duplicator_side",
+    "bottom": "astroexpansion:block/matter_duplicator_side"
   }
 }

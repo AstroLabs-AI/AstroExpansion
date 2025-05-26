@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "astroexpansion:block/rocket_workbench",
+    "north": "astroexpansion:block/rocket_workbench",
+    "south": "astroexpansion:block/rocket_workbench",
+    "east": "astroexpansion:block/rocket_workbench",
+    "west": "astroexpansion:block/rocket_workbench",
+    "up": "astroexpansion:block/rocket_workbench",
+    "down": "astroexpansion:block/rocket_workbench"
+  }
+}

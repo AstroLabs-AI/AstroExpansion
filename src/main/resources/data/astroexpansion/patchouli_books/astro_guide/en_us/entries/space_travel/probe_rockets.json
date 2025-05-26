@@ -1,0 +1,28 @@
+{
+  "name": "Probe Rockets",
+  "icon": "astroexpansion:probe_rocket",
+  "category": "astroexpansion:space_travel",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Probe Rockets",
+      "text": "Probe rockets are your first step into space exploration. These unmanned vessels collect samples and data from space, returning with valuable resources.$(br2)While limited in capability, they are essential for gathering the initial resources needed for more advanced spacecraft."
+    },
+    {
+      "type": "crafting",
+      "recipe": "astroexpansion:probe_rocket",
+      "title": "Crafting a Probe Rocket"
+    },
+    {
+      "type": "text",
+      "title": "Using Probe Rockets",
+      "text": "1. Craft a $(thing)Launch Rail$() and place it$(br)2. Right-click the Launch Rail with a Probe Rocket$(br)3. Right-click the Launch Rail again to launch$(br)4. Wait 60 seconds for the probe to return$(br)5. Collect your rewards$(br2)$(warning)Ensure there is clear space above the launch rail!"
+    },
+    {
+      "type": "text",
+      "title": "Troubleshooting",
+      "text": "If you get a \"No rocket in launch rail\" message:$(br)1. Make sure you're using a $(thing)Launch Rail$(), not a Landing Pad$(br)2. Try placing the rocket again$(br)3. Ensure the rocket is positioned correctly$(br)4. Check that there are no blocks obstructing placement$(br)5. Verify you're using a Probe Rocket, not another type"
+    }
+  ]
+}

@@ -3,6 +3,7 @@
   "textures": {
     "top": "astroexpansion:block/recycler_top",
     "front": "astroexpansion:block/recycler_front",
-    "side": "astroexpansion:block/recycler_side"
+    "side": "astroexpansion:block/recycler_side",
+    "bottom": "astroexpansion:block/recycler_side"
   }
 }

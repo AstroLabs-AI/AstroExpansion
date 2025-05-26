@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astroexpansion:block/landing_pad"
+    }
+  }
+}

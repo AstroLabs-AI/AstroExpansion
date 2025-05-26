@@ -494,8 +494,9 @@
   "block.astroexpansion.launch_rail": "Launch Rail",
   "block.astroexpansion.rocket_workbench": "Rocket Workbench",
   "block.astroexpansion.landing_pad": "Landing Pad",
-  
-  "entity.astroexpansion.probe_rocket": "Probe Rocket",
+    "entity.astroexpansion.probe_rocket": "Probe Rocket",
   "entity.astroexpansion.personal_rocket": "Personal Rocket",
-  "entity.astroexpansion.cargo_shuttle": "Cargo Shuttle"
+  "entity.astroexpansion.cargo_shuttle": "Cargo Shuttle",
+  
+  "message.astroexpansion.guide_book_wip": "The AstroExpansion Guide is still under construction. Coming soon!"
 }

@@ -1,3 +1,6 @@
 {
-  "parent": "astroexpansion:block/ore_washer"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "astroexpansion:item/ore_washer"
+  }
 }

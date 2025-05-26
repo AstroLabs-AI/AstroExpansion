@@ -1,0 +1,31 @@
+{
+  "name": "Rocket Types",
+  "icon": "astroexpansion:probe_rocket",
+  "category": "astroexpansion:space_travel",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Rocket Types",
+      "text": "AstroExpansion offers three main types of rockets for space travel, each with different capabilities and purposes.$(br2)As you progress through the mod, you'll unlock more advanced spacecraft with improved features, capacity, and fuel efficiency."
+    },
+    {
+      "type": "spotlight",
+      "item": "astroexpansion:probe_rocket",
+      "title": "Probe Rocket",
+      "text": "The basic unmanned exploration vessel. Probe rockets are single-use devices that collect samples and return with discoveries after 60 seconds. They require a $(thing)Launch Rail$(). Perfect for early-game resource gathering."
+    },
+    {
+      "type": "spotlight",
+      "item": "astroexpansion:personal_rocket",
+      "title": "Personal Rocket",
+      "text": "A one-way transport vessel for a single astronaut. Personal rockets require a $(thing)Landing Pad$(). You'll need a full $(thing)Space Suit$() to survive the journey. Personal rockets are disposable but essential for your first trip to space."
+    },
+    {
+      "type": "spotlight",
+      "item": "astroexpansion:cargo_shuttle",
+      "title": "Cargo Shuttle",
+      "text": "An advanced reusable spacecraft. Cargo shuttles can transport multiple players and items. They require a 3x3 $(thing)Landing Pad$() configuration, and can travel between dimensions. Perfect for establishing supply chains to space stations."
+    }
+  ]
+}

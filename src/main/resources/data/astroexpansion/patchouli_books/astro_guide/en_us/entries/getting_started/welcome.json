@@ -1,0 +1,32 @@
+{
+  "name": "Welcome to AstroExpansion",
+  "icon": "astroexpansion:astro_guide",
+  "category": "astroexpansion:getting_started",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Welcome!",
+      "text": "Welcome to AstroExpansion, a mod that adds space exploration, advanced technology, and new worlds to discover!$(br2)This guide book will help you navigate through the mod's features, from your first basic machines to complex space stations and beyond."
+    },
+    {
+      "type": "text",
+      "title": "Getting Started",
+      "text": "To begin your journey to the stars:$(br)1. Collect basic resources$(br)2. Build your first machines$(br)3. Generate power$(br)4. Craft a Probe Rocket$(br)5. Establish a Launch Rail$(br)6. Start exploring space!$(br2)Each step is detailed in the relevant sections of this guide."
+    },
+    {
+      "type": "text",
+      "title": "Progression Path",
+      "text": "AstroExpansion follows a progression path:$(br)• Early Game: Basic machines, probe rockets$(br)• Mid Game: Personal rockets, space suits, first space visit$(br)• Late Game: Cargo shuttles, space stations, advanced tech$(br)• End Game: Interplanetary travel, fusion power, matter fabrication"
+    },
+    {
+      "type": "relations",
+      "title": "Where to Begin",
+      "entries": [
+        "space_travel/rocket_types",
+        "space_travel/launch_systems",
+        "space_travel/probe_rockets"
+      ]
+    }
+  ]
+}

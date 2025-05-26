@@ -71,7 +71,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<PersonalRocketEntity>> PERSONAL_ROCKET =
         ENTITY_TYPES.register("personal_rocket",
             () -> EntityType.Builder.<PersonalRocketEntity>of(PersonalRocketEntity::new, MobCategory.MISC)
-                .sized(1.5F, 3.0F)
+                .sized(0.7F, 3.5F)
                 .clientTrackingRange(10)
                 .build(new ResourceLocation(AstroExpansion.MODID, "personal_rocket").toString()));
     

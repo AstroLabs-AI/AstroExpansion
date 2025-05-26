@@ -327,7 +327,7 @@ public class ModBlocks {
         () -> new LifeSupportSystemBlock());
     
     // New Simplified Space System
-    public static final RegistryObject<Block> LAUNCH_RAIL = registerBlock("launch_rail",
+    public static final RegistryObject<Block> LAUNCH_RAIL = registerBlockOnly("launch_rail",
         () -> new LaunchRailBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.METAL)
             .requiresCorrectToolForDrops()
@@ -342,7 +342,7 @@ public class ModBlocks {
             .sound(SoundType.METAL)
             .noOcclusion()));
     
-    public static final RegistryObject<Block> LANDING_PAD = registerBlock("landing_pad",
+    public static final RegistryObject<Block> LANDING_PAD = registerBlockOnly("landing_pad",
         () -> new LandingPadBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.COLOR_GRAY)
             .requiresCorrectToolForDrops()
@@ -436,6 +436,11 @@ public class ModBlocks {
         return toReturn;
     }
     
+    // Register block without item
+    private static <T extends Block> RegistryObject<T> registerBlockOnly(String name, Supplier<T> block) {
+        return BLOCKS.register(name, block);
+    }
+
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }

@@ -33,10 +33,13 @@ public class ProbeRocketItem extends Item {
         if (!level.isClientSide) {
             // Check if placed on a launch rail
             Block block = level.getBlockState(pos).getBlock();
-            if (block.getDescriptionId().contains("launch_rail")) {
-                // Spawn probe rocket entity
+            if (block.getDescriptionId().contains("block.astroexpansion.launch_rail")) {
+                // Spawn probe rocket entity - position updated to ensure it's properly detected
                 ProbeRocketEntity probe = new ProbeRocketEntity(level, pos.above());
-                level.addFreshEntity(probe);
+                boolean added = level.addFreshEntity(probe);
+                
+                // Log placement for debugging
+                System.out.println("Placing probe rocket at " + pos.above() + " at Y+" + (pos.getY()+1.6) + " - Entity added: " + added);
                 
                 // Consume item
                 context.getItemInHand().shrink(1);

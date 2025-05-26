@@ -15,7 +15,9 @@ import com.astrolabs.astroexpansion.common.items.upgrades.FortuneUpgrade;
 import com.astrolabs.astroexpansion.common.items.rockets.ProbeRocketItem;
 import com.astrolabs.astroexpansion.common.items.rockets.PersonalRocketItem;
 import com.astrolabs.astroexpansion.common.items.rockets.CargoShuttleItem;
+import com.astrolabs.astroexpansion.common.registry.ModBlocks;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -198,6 +200,14 @@ public class ModItems {
     
     public static final RegistryObject<Item> CARGO_SHUTTLE = ITEMS.register("cargo_shuttle",
         () -> new CargoShuttleItem(new Item.Properties()));
+    
+    // Block items that need explicit registration
+    public static final RegistryObject<Item> LAUNCH_RAIL = ITEMS.register("launch_rail", 
+        () -> new BlockItem(ModBlocks.LAUNCH_RAIL.get(), new Item.Properties()));
+        
+    public static final RegistryObject<Item> LANDING_PAD = ITEMS.register("landing_pad", 
+        () -> new BlockItem(ModBlocks.LANDING_PAD.get(), new Item.Properties()));
+    
     
     // Space Loot Items
     public static final RegistryObject<Item> ALIEN_ARTIFACT = ITEMS.register("alien_artifact",

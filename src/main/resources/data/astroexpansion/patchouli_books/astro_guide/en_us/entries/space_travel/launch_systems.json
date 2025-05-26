@@ -1,0 +1,30 @@
+{
+  "name": "Launch Systems",
+  "icon": "astroexpansion:launch_rail",
+  "category": "astroexpansion:space_travel",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Launch Systems",
+      "text": "Different rockets require different launch systems. Using the correct launch platform is crucial for a successful takeoff.$(br2)AstroExpansion provides two main launch systems: Launch Rails and Landing Pads."
+    },
+    {
+      "type": "spotlight",
+      "item": "astroexpansion:launch_rail",
+      "title": "Launch Rail",
+      "text": "A simple launch system designed exclusively for $(thing)Probe Rockets$().$(br2)To use: Place the Launch Rail, right-click with a Probe Rocket to place it on the rail, then right-click the rail again to launch the probe."
+    },
+    {
+      "type": "spotlight", 
+      "item": "astroexpansion:landing_pad",
+      "title": "Landing Pad",
+      "text": "A versatile platform for $(thing)Personal Rockets$() and $(thing)Cargo Shuttles$().$(br2)For Personal Rockets: Requires a single block.$(br)For Cargo Shuttles: Must be arranged in a 3x3 pattern."
+    },
+    {
+      "type": "text",
+      "title": "Launch Procedure",
+      "text": "1. Place the appropriate launch system$(br)2. Right-click with your rocket to place it$(br)3. For Probe Rockets: Right-click the launch rail$(br)4. For Personal Rockets: Right-click to board, then hold SPACE to launch$(br)5. For Cargo Shuttles: Enter the GUI and press Launch when fueled$(br2)$(warning)Always wear a space suit before launching player-carrying rockets!"
+    }
+  ]
+}

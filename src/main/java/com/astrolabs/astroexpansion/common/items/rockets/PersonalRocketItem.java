@@ -28,15 +28,14 @@ public class PersonalRocketItem extends Item {
     }
     
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn(@javax.annotation.Nonnull UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
         
         if (!level.isClientSide && player != null) {
-            // Check if placed on a launch rail
-            Block block = level.getBlockState(pos).getBlock();
-            if (block.getDescriptionId().contains("launch_rail")) {
+            // Check if placed on a landing pad
+            if (isValidLandingPad(level, pos)) {
                 // Check if player has space suit
                 if (!hasSpaceSuit(player)) {
                     player.displayClientMessage(
@@ -64,9 +63,9 @@ public class PersonalRocketItem extends Item {
                 
                 return InteractionResult.SUCCESS;
             } else {
-                // Inform player they need a launch rail
+                // Inform player they need a landing pad
                 player.displayClientMessage(
-                    Component.literal("Place on a Launch Rail to prepare for launch").withStyle(ChatFormatting.RED), 
+                    Component.literal("Personal rockets require a landing pad (3x3 configuration)").withStyle(ChatFormatting.RED), 
                     true
                 );
             }
@@ -81,13 +80,26 @@ public class PersonalRocketItem extends Item {
             .anyMatch(stack -> !stack.isEmpty() && stack.getItem().getDescriptionId().contains("space_"));
     }
     
+    private boolean isValidLandingPad(Level level, BlockPos center) {
+        // Check for 3x3 area of landing pad blocks
+        for (int x = -1; x <= 1; x++) {
+            for (int z = -1; z <= 1; z++) {
+                BlockPos checkPos = center.offset(x, 0, z);
+                if (!level.getBlockState(checkPos).getBlock().getDescriptionId().contains("landing_pad")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.literal("One-way transport to space").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal("Cheap and disposable").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.empty());
         tooltip.add(Component.literal("Requirements:").withStyle(ChatFormatting.YELLOW));
-        tooltip.add(Component.literal("• Launch Rail").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("• Landing Pad (3x3)").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal("• Space Suit").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal("• Water fuel (1 bucket)").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.empty());

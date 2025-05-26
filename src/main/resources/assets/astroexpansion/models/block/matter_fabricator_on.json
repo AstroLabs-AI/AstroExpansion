@@ -3,6 +3,7 @@
   "textures": {
     "top": "astroexpansion:block/matter_fabricator_top",
     "front": "astroexpansion:block/matter_fabricator_front_on",
-    "side": "astroexpansion:block/matter_fabricator_side"
+    "side": "astroexpansion:block/matter_fabricator_side",
+    "bottom": "astroexpansion:block/matter_fabricator_side"
   }
 }

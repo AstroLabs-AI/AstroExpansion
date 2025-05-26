@@ -6,7 +6,6 @@ import com.astrolabs.astroexpansion.common.items.TeleporterFrequencyCardItem;
 import com.astrolabs.astroexpansion.common.menu.AdvancedTeleporterMenu;
 import com.astrolabs.astroexpansion.common.registry.ModBlockEntities;
 import com.astrolabs.astroexpansion.common.registry.ModBlocks;
-import com.astrolabs.astroexpansion.common.registry.ModItems;
 import com.astrolabs.astroexpansion.common.util.TeleporterNetwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -41,7 +39,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class AdvancedTeleporterBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
@@ -137,7 +134,7 @@ public class AdvancedTeleporterBlockEntity extends BlockEntity implements MenuPr
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         lazyEnergyHandler = LazyOptional.of(() -> energyStorage);
         
-        if (!level.isClientSide) {
+        if (this.level != null && !this.level.isClientSide) {
             checkMultiblockStructure();
             updateFrequency();
             if (!frequency.isEmpty()) {
@@ -201,7 +198,7 @@ public class AdvancedTeleporterBlockEntity extends BlockEntity implements MenuPr
             frequency = "";
         }
         
-        if (!level.isClientSide && !oldFrequency.equals(frequency)) {
+        if (this.level != null && !this.level.isClientSide && !oldFrequency.equals(frequency)) {
             if (!oldFrequency.isEmpty()) {
                 TeleporterNetwork.unregisterTeleporter(oldFrequency, worldPosition, level);
             }

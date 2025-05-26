@@ -2,7 +2,7 @@
   "parent": "astroexpansion:astroexpansion/first_machine",
   "display": {
     "icon": {
-      "item": "astroexpansion:material_processor"
+      "item": "astroexpansion:material_processor_basic"
     },
     "title": {
       "translate": "advancement.astroexpansion.ore_processing"

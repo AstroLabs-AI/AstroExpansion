@@ -1,8 +1,6 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "block/cube_all",
   "textures": {
-    "top": "astroexpansion:block/machine_top",
-    "front": "astroexpansion:block/basic_generator",
-    "side": "astroexpansion:block/basic_generator"
+    "all": "astroexpansion:block/basic_generator"
   }
 }

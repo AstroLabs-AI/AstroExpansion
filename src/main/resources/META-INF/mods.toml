@@ -6,6 +6,7 @@ license="MIT"
 modId="astroexpansion"
 version="${mod_version}"
 displayName="Astro Expansion"
+className="com.astrolabs.astroexpansion.AstroExpansion"
 updateJSONURL=""
 displayURL=""
 logoFile="astroexpansion.png"
@@ -37,4 +38,11 @@ Features:
     mandatory=true
     versionRange="[1.20.1,1.21)"
     ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.astroexpansion]]
+    modId="patchouli"
+    mandatory=false
+    versionRange="[1.20.1-81,)"
+    ordering="AFTER"
     side="BOTH"

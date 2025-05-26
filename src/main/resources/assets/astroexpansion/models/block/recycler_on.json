@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "astroexpansion:block/recycler_top",
+    "front": "astroexpansion:block/recycler_front_on",
+    "side": "astroexpansion:block/recycler_side",
+    "bottom": "astroexpansion:block/recycler_side"
+  }
+}

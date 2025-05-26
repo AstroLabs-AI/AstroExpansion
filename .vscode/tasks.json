@@ -1,0 +1,44 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build AstroExpansion Mod",
+			"type": "shell",
+			"command": ".\\gradlew",
+			"args": ["build"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"isBackground": false,
+			"problemMatcher": ["$java"]
+		},
+		{
+			"label": "Run AstroExpansion Client",
+			"type": "shell",
+			"command": ".\\gradlew",
+			"args": ["runClient"],
+			"group": "none",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Clean AstroExpansion",
+			"type": "shell",
+			"command": ".\\gradlew",
+			"args": ["clean"],
+			"group": "none",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Clean and Build AstroExpansion",
+			"type": "shell",
+			"command": ".\\gradlew",
+			"args": ["clean", "build"],
+			"group": "build",
+			"isBackground": false,
+			"problemMatcher": ["$java"]
+		}
+	]
+}

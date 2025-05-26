@@ -1,3 +1,6 @@
 {
-  "parent": "astroexpansion:block/quantum_processor"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "astroexpansion:item/quantum_processor"
+  }
 }

@@ -1,8 +1,7 @@
 {
   "variants": {
-    "facing=north": { "model": "astroexpansion:block/component_assembler" },
-    "facing=south": { "model": "astroexpansion:block/component_assembler", "y": 180 },
-    "facing=west": { "model": "astroexpansion:block/component_assembler", "y": 270 },
-    "facing=east": { "model": "astroexpansion:block/component_assembler", "y": 90 }
+    "": {
+      "model": "astroexpansion:block/component_assembler"
+    }
   }
 }

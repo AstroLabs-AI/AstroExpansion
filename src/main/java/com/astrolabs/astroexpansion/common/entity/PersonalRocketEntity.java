@@ -24,9 +24,10 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
-import net.minecraft.ChatFormatting;
+import net.minecraft.world.entity.Pose; // Added import
 
 public class PersonalRocketEntity extends Entity {
     private static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(PersonalRocketEntity.class, EntityDataSerializers.INT);
@@ -44,7 +45,28 @@ public class PersonalRocketEntity extends Entity {
     
     public PersonalRocketEntity(Level level, BlockPos pos) {
         this(ModEntities.PERSONAL_ROCKET.get(), level);
-        this.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        // Position adjustments - centered horizontally, slightly higher vertically for better alignment
+        this.setPos(pos.getX() + 0.5, pos.getY() + 1.6, pos.getZ() + 0.5);
+        this.noPhysics = true; // Prevent clipping with blocks
+        if (level.isClientSide) {
+            // Add spawn effect particles
+            for (int i = 0; i < 12; i++) {
+                level.addParticle(ParticleTypes.CLOUD, 
+                    pos.getX() + 0.5 + (Math.random() - 0.5) * 0.5,
+                    pos.getY() + 0.2 + Math.random() * 0.3,
+                    pos.getZ() + 0.5 + (Math.random() - 0.5) * 0.5,
+                    0, 0.05, 0);
+            }
+            // Add a few spark particles for added effect
+            for (int i = 0; i < 5; i++) {
+                level.addParticle(ParticleTypes.CRIT, 
+                    pos.getX() + 0.5 + (Math.random() - 0.5) * 0.3,
+                    pos.getY() + 0.5 + Math.random() * 0.5,
+                    pos.getZ() + 0.5 + (Math.random() - 0.5) * 0.3,
+                    0, 0, 0);
+            }
+        }
+        System.out.println("Personal Rocket entity spawned at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
     }
     
     @Override
@@ -57,6 +79,28 @@ public class PersonalRocketEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
+        
+        // Position any passengers in the rocket (normally just the player)
+        // Y offset is 0.48 to align player's eyes with the window
+        if (!this.getPassengers().isEmpty()) {
+            Entity passenger = this.getPassengers().get(0);
+            if (passenger != null) {
+                // Calculate the position for the passenger relative to this rocket
+                double yOffset = 0.48D; // The magic offset that positions the player eyes at window level
+                passenger.setPos(
+                    this.getX(),  // No X offset - centered
+                    this.getY() + yOffset,  // Y offset to see through window
+                    this.getZ()  // No Z offset - centered
+                );
+                
+                // Do NOT sync rotation - prevents screen flipping
+                // Set player to standing pose if it's a player
+                if (passenger instanceof Player) {
+                    // Set player to standing pose directly
+                    ((Player) passenger).setPose(Pose.STANDING);
+                }
+            }
+        }
         
         if (!level().isClientSide) {
             boolean launched = entityData.get(LAUNCHED);
@@ -117,38 +161,56 @@ public class PersonalRocketEntity extends Entity {
     }
     
     @Override
-    public InteractionResult interact(Player player, InteractionHand hand) {
-        if (!level().isClientSide && !entityData.get(LAUNCHED)) {
-            ItemStack heldItem = player.getItemInHand(hand);
-            
-            // Check if player is trying to fuel the rocket
-            if (heldItem.getItem() == net.minecraft.world.item.Items.WATER_BUCKET && !entityData.get(HAS_FUEL)) {
-                entityData.set(HAS_FUEL, true);
-                entityData.set(FUEL, MAX_FUEL);
-                if (!player.isCreative()) {
-                    player.setItemInHand(hand, new ItemStack(net.minecraft.world.item.Items.BUCKET));
-                }
-                player.displayClientMessage(
-                    net.minecraft.network.chat.Component.literal("Rocket fueled with water!").withStyle(net.minecraft.ChatFormatting.GREEN), 
-                    true
-                );
-                level().playSound(null, getX(), getY(), getZ(), 
-                    SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-                return InteractionResult.SUCCESS;
-            }
-            
-            if (pilot == null && entityData.get(HAS_FUEL)) {
-                // Mount the rocket
-                player.startRiding(this);
-                pilot = player;
-                return InteractionResult.SUCCESS;
-            } else if (!entityData.get(HAS_FUEL)) {
-                player.displayClientMessage(
-                    net.minecraft.network.chat.Component.literal("Rocket needs water fuel!").withStyle(net.minecraft.ChatFormatting.RED), 
-                    true
-                );
-            }
+    public InteractionResult interact(@javax.annotation.Nonnull Player player, @javax.annotation.Nonnull InteractionHand hand) {
+        // Prevent interaction when already launched
+        if (level().isClientSide || entityData.get(LAUNCHED)) {
+            return InteractionResult.PASS;
         }
+        
+        ItemStack heldItem = player.getItemInHand(hand);
+        
+        // Check if player is trying to fuel the rocket
+        if (heldItem.getItem() == net.minecraft.world.item.Items.WATER_BUCKET && !entityData.get(HAS_FUEL)) {
+            entityData.set(HAS_FUEL, true);
+            entityData.set(FUEL, MAX_FUEL);
+            if (!player.isCreative()) {
+                player.setItemInHand(hand, new ItemStack(net.minecraft.world.item.Items.BUCKET));
+            }
+            player.displayClientMessage(
+                net.minecraft.network.chat.Component.literal("Rocket fueled with water!").withStyle(net.minecraft.ChatFormatting.GREEN), 
+                true
+            );
+            level().playSound(null, getX(), getY(), getZ(), 
+                SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+            return InteractionResult.SUCCESS;
+        }
+        
+        // Try to mount the rocket if it's fueled and empty
+        if (this.getPassengers().isEmpty() && entityData.get(HAS_FUEL)) {
+            // Print a debug message
+            System.out.println("Player attempting to mount rocket");
+            
+            // Mount the rocket - this calls canAddPassenger internally
+            boolean mounted = player.startRiding(this);
+            System.out.println("Mounting result: " + mounted);
+            
+            if (mounted) {
+                pilot = player;
+                
+                // Set player's rotation immediately after mounting to prevent screen flip
+                // and ensure they are looking forward relative to the rocket.
+                player.setXRot(0F); // Set pitch to 0 (looking straight ahead)
+                player.setYRot(this.getYRot()); // Align yaw with the rocket
+                
+                return InteractionResult.SUCCESS;
+            }
+        } else if (!entityData.get(HAS_FUEL)) {
+            player.displayClientMessage(
+                net.minecraft.network.chat.Component.literal("Rocket needs water fuel!").withStyle(net.minecraft.ChatFormatting.RED), 
+                true
+            );
+        }
+        
         return InteractionResult.PASS;
     }
     
@@ -171,7 +233,7 @@ public class PersonalRocketEntity extends Entity {
     }
     
     @Override
-    public void remove(RemovalReason reason) {
+    public void remove(@javax.annotation.Nonnull RemovalReason reason) {
         if (pilot != null) {
             pilot.stopRiding();
         }
@@ -179,14 +241,14 @@ public class PersonalRocketEntity extends Entity {
     }
     
     @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
+    protected void readAdditionalSaveData(@javax.annotation.Nonnull CompoundTag compound) {
         entityData.set(FUEL, compound.getInt("Fuel"));
         entityData.set(LAUNCHED, compound.getBoolean("Launched"));
         launchTimer = compound.getInt("LaunchTimer");
     }
     
     @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
+    protected void addAdditionalSaveData(@javax.annotation.Nonnull CompoundTag compound) {
         compound.putInt("Fuel", entityData.get(FUEL));
         compound.putBoolean("Launched", entityData.get(LAUNCHED));
         compound.putInt("LaunchTimer", launchTimer);
@@ -198,9 +260,11 @@ public class PersonalRocketEntity extends Entity {
     }
     
     @Override
-    public boolean hurt(DamageSource source, float amount) {
-        if (!level().isClientSide && !entityData.get(LAUNCHED)) {
-            this.spawnAtLocation(new ItemStack(ModItems.PERSONAL_ROCKET.get()));
+    public boolean hurt(@javax.annotation.Nonnull DamageSource source, float amount) {
+        if (!entityData.get(LAUNCHED) && !level().isClientSide) {
+            // Drop as item if not launched
+            ItemStack drop = new ItemStack(ModItems.PERSONAL_ROCKET.get());
+            Block.popResource(level(), blockPosition(), drop);
             this.discard();
             return true;
         }
@@ -212,12 +276,41 @@ public class PersonalRocketEntity extends Entity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
     
-    public Vec3 getPassengerAttachmentPoint(Entity entity) {
-        return new Vec3(0, this.getBbHeight() * 0.75, 0);
-    }
+    // We don't override any positioning methods as they may be final in different Forge versions
     
     @Override
-    protected boolean canAddPassenger(Entity passenger) {
-        return this.getPassengers().size() < 1 && passenger instanceof Player;
+    public boolean canAddPassenger(@javax.annotation.Nonnull Entity passenger) {
+        // Debug message to verify this is being called
+        System.out.println("canAddPassenger called with: " + passenger.getName().getString());
+        
+        // Allow only one player passenger and only if not launched
+        return this.getPassengers().isEmpty() && 
+               passenger instanceof Player && 
+               !entityData.get(LAUNCHED);
+    }
+
+    @Override
+    public Vec3 getDismountLocationForPassenger(@javax.annotation.Nonnull net.minecraft.world.entity.LivingEntity passenger) {
+        // Try to find a safe spot around the rocket, prioritizing air blocks above solid ground
+        for (int i = 0; i < 8; ++i) {
+            double angle = (Math.PI * 2.0 / 8.0) * i;
+            double xOffset = Math.cos(angle) * 1.5; // Check 1.5 blocks away
+            double zOffset = Math.sin(angle) * 1.5;
+            BlockPos dismountPos = BlockPos.containing(this.getX() + xOffset, this.getY(), this.getZ() + zOffset);
+
+            // Check if the block at head level is air and block at foot level is air, and block below foot level is solid
+            BlockPos headPos = dismountPos.above(); // Approximate head position
+            if (this.level().getBlockState(dismountPos).isAir() && 
+                this.level().getBlockState(headPos).isAir() && 
+                this.level().getBlockState(dismountPos.below()).isSolidRender(this.level(), dismountPos.below())) {
+                return new Vec3(dismountPos.getX() + 0.5, dismountPos.getY(), dismountPos.getZ() + 0.5);
+            }
+        }
+        // Fallback to default if no suitable spot found nearby, or slightly above the rocket
+        BlockPos aboveRocket = this.blockPosition().above((int)Math.ceil(this.getBbHeight()));
+        if (this.level().getBlockState(aboveRocket).isAir() && this.level().getBlockState(aboveRocket.above()).isAir()) {
+            return new Vec3(aboveRocket.getX() + 0.5, aboveRocket.getY(), aboveRocket.getZ() + 0.5);
+        }
+        return super.getDismountLocationForPassenger(passenger);
     }
 }

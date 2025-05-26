@@ -1,3 +1,6 @@
 {
-  "parent": "astroexpansion:block/material_processor"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "astroexpansion:item/material_processor"
+  }
 }
